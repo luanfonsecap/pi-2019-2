@@ -6,6 +6,6 @@ Estrutura do desenvolvimento:
 
 ```
   |- app
-    |- src
+    |- MercadoVerde
   '- README.md
 ```
