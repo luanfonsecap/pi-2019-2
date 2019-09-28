@@ -2,8 +2,15 @@
 
 Desenvolvimento de um Aplicativo Mobile
 
-<!-- nome e descrição do app -->
-d
+## Mercado Verde
+
+![Logotipo do aplicativo](https://github.com/luanfonsecap/pi-2019-2/blob/master/App/MercadoVerde/src/img/logo.png?raw=true)
+
+App de agricultura familiar com objetivo de conectar e aproximar produtores   rurais com clientes diretos, facilitando a compra de produtos frescos e livres de agrotóxicos.
+
+Projeto desenvolvido com:
+ - React Native
+
 Integrantes: 
 > Luan Fonseca - RA 61820949
 
