@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Image
+  Image,
 } from 'react-native';
 
 const Home = () => {
@@ -12,20 +12,21 @@ const Home = () => {
   return(
     <View style={styles.home}>
 
-      <View style={styles.shadow}>
-        <Image source={require('../src/img/logo.png')}
+      <View >
+        <Image source={require('../src/img/logo2.png')}
           style={styles.logo}
         />
       </View>
 
-      <Text style={styles.subtitulo}>
-        Comer bem faz bem!
-      </Text>
+          <Text style={styles.subtitulo}>
+            Comer bem, faz bem!
+          </Text>
 
-      <TouchableOpacity style={styles.botao}>
+
+      <TouchableOpacity style={[styles.botao, styles.shadow]}>
         <Text style={styles.botaoTexto}>Entrar</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.botao}>
+      <TouchableOpacity style={[styles.botao, styles.shadow]}>
         <Text style={styles.botaoTexto}>Cadastrar</Text>
       </TouchableOpacity>
 
@@ -33,7 +34,6 @@ const Home = () => {
   );
   
 }
-
 
 const styles = StyleSheet.create({
   home: {
@@ -58,13 +58,15 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   logo: {
-    width: 350,
+    width: 300,
+    height: 240,
     alignSelf: 'center',
     marginBottom: 100,
     borderRadius: 15,
   },
   shadow: {
-    elevation: 5
+    elevation: 5,
+
   },
   subtitulo: {
     color: '#fff',

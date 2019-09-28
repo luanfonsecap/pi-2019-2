@@ -8,7 +8,7 @@
 
 import React from 'react';
 
-import Home from './Components/Home';
+import Home from './src/Pages/Home';
 
 const App = () => {
   return (
