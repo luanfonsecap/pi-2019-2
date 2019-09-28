@@ -3,7 +3,7 @@
 Desenvolvimento de um Aplicativo Mobile
 
 <!-- nome e descrição do app -->
-d
+
 Integrantes: 
 > Luan Fonseca - RA 61820949
 
