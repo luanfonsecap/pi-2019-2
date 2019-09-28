@@ -13,7 +13,7 @@ const Home = () => {
     <View style={styles.home}>
 
       <View >
-        <Image source={require('../src/img/logo2.png')}
+        <Image source={require('../img/logo2.png')}
           style={styles.logo}
         />
       </View>
