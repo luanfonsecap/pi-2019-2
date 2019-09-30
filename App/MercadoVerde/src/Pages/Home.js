@@ -13,14 +13,15 @@ const Home = () => {
     <View style={styles.home}>
 
       <View >
-        <Image source={require('../img/logo2.png')}
+        <Image source={require('../img/logo.png')}
           style={styles.logo}
         />
       </View>
 
-          <Text style={styles.subtitulo}>
-            Comer bem, faz bem!
-          </Text>
+      {/* Esse componente precisa animar o texto fazendo alteração de frases */}
+      <Text style={styles.subtitulo}>
+        Comer bem, faz bem!
+      </Text>
 
 
       <TouchableOpacity style={[styles.botao, styles.shadow]}>
