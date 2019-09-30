@@ -9,6 +9,8 @@ import {
   ImageBackground
 } from 'react-native';
 import Header from '../Components/Header';
+import Button from '../Components/ButtonRed';
+import ButtonRed from '../Components/ButtonRed';
 
 class Login extends Component {
 
@@ -20,9 +22,21 @@ class Login extends Component {
     }
   }
 
+  validacao(user, password) {
+
+    if(user === '' || password === '')
+      return;
+
+
+
+  }
+
   render() {
+
+    const { user, password } = this.state;
+
     return(
-      <ImageBackground source={require('../img/bg-fruits.jpg')}
+      <ImageBackground source={require('../img/bg-fruits-blur.png')}
         style={{width: '100%', height: '100%'}}
       >
       <View style={styles.login}>
@@ -35,8 +49,8 @@ class Login extends Component {
             <TextInput 
               style={styles.input}
               placeholder="Seu nome de usuário"
-              onChangeText={input => this.setState({user: input})}
-              value={this.state.user}
+              onChangeText={input => this.state.user = input}
+              ref={input => this.inputUser = input}
             />
           </View>
 
@@ -45,15 +59,15 @@ class Login extends Component {
             <TextInput 
               style={styles.input}
               placeholder="Insira sua senha"
-              onChangeText={input => this.setState({password: input})}
-              value={this.state.password}
+              onChangeText={input => this.state.password = input}
+              ref={input => this.inputPassword = input}
               secureTextEntry={true} 
             />  
           </View>
         </View>
 
         <View style={styles.areaBotao}>
-          <TouchableOpacity style={styles.botao}>
+          <TouchableOpacity onPress={() => {this.validacao(user,password)}} style={styles.botao}>
             <Text style={styles.botaoTexto}>Entrar</Text>
           </TouchableOpacity>
         </View>
@@ -78,12 +92,11 @@ const styles = StyleSheet.create({
     width: 70
   }, 
   input: {
+    backgroundColor: '#fff',
+    borderRadius: 3,
     borderColor: '#fff',
-    borderWidth: 3,
-    borderRadius: 10,
-    backgroundColor: '#dadada',
-    margin: 15,
-    margin: 10,
+    borderWidth: 1,
+    elevation: 1,
     width: 250
   },
   botao: {
@@ -108,10 +121,11 @@ const styles = StyleSheet.create({
   },
   botaoGrupo: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    margin: 5
   }, 
   form: {
-    backgroundColor: '#007A35',
+    backgroundColor: '#00BA51',
     padding: 15,
     borderRadius: 10
   }
