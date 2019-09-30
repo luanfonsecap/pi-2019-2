@@ -3,8 +3,6 @@ import {
   Text,
   View,
   StyleSheet,
-  Image,
-  TouchableOpacity
 } from 'react-native';
 
 import ArrowBack from './ArrowBack';
