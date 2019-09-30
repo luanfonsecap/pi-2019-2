@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import Header from '../Components/Header';
 
-
 class Login extends Component {
 
   constructor(props) {
