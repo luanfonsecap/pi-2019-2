@@ -9,11 +9,13 @@ class Input extends Component {
 
   render() {
 
+    const { placeholder, width } = this.props;
+
     return (
       <View>
         <TextInput
-          placeholder={this.props.placeholder}
-          style={styles.input}
+          placeholder={placeholder}
+          style={styles.input, {width: width}}
         />
       </View>
     );
