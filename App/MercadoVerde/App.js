@@ -8,11 +8,11 @@
 
 import React from 'react';
 
-import Home from './src/Pages/Home'
+import Login from './src/Pages/Login'
 
 const App = () => {
   return (
-    <Home />
+    <Login />
   );
 };
 
