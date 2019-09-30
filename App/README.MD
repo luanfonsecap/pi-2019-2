@@ -7,5 +7,10 @@ Estrutura do desenvolvimento:
 ```
   |- app
     |- MercadoVerde
+    |- src
+      |- Components
+      |- img
+      |- Pages
+    |-App.js
   '- README.md
 ```
