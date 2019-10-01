@@ -10,10 +10,11 @@ import React from 'react';
 
 import Login from './src/Pages/Login';
 import Home from './src/Pages/Home';
+import CadProdutor from './src/Pages/CadProdutor';
 
 const App = () => {
   return (
-    <Login />
+    <CadProdutor />
   );
 };
 

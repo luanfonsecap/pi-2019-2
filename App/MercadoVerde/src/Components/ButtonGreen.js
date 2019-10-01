@@ -3,8 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
 } from 'react-native';
+
 
 class ButtonGreen extends Component {
 

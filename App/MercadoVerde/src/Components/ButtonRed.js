@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
-  View,
-  Text,
   StyleSheet,
-  TouchableOpacity
+  View,
+  Text
 } from 'react-native';
+
 
 class ButtonRed extends Component {
 
