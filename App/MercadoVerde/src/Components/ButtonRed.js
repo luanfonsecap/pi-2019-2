@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 
 class ButtonRed extends Component {
 
   render() {
     return (
-      <View style={styles.botao}>
-        <Text style={styles.texto}>{this.props.title}</Text>
-      </View>
+      <TouchableOpacity>
+        <View style={styles.botao}>
+          <Text style={styles.texto}>{this.props.title}</Text>
+        </View>
+      </TouchableOpacity>
     );
   }
 

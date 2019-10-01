@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {
   View,
   Text,
@@ -10,7 +9,6 @@ import {
 } from 'react-native';
 import Header from '../Components/Header';
 import Button from '../Components/ButtonRed';
-import ButtonRed from '../Components/ButtonRed';
 
 class Login extends Component {
 
@@ -115,9 +113,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   areaBotao: {
-    position: 'absolute',
     width: 600, 
-    bottom: 30,
+    marginTop: 15
   },
   botaoGrupo: {
     flexDirection: 'row',
