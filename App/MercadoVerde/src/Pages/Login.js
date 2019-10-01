@@ -8,7 +8,7 @@ import {
   ImageBackground
 } from 'react-native';
 import Header from '../Components/Header';
-import style from '../Components/Input';
+import styleInput from '../Components/Input';
 
 class Login extends Component {
 
@@ -53,7 +53,7 @@ class Login extends Component {
           <View style={styles.botaoGrupo}>
             <Text style={styles.label}>Usuário:</Text>
             <TextInput 
-              style={style.input}
+              style={styleInput}
               placeholder="Seu nome de usuário"
               onChangeText={input => this.state.user = input}
               ref={input => this.inputUser = input}
@@ -63,7 +63,7 @@ class Login extends Component {
           <View style={styles.botaoGrupo}>
             <Text style={styles.label}>Senha:</Text>
             <TextInput 
-              style={style.input}
+              style={styleInput}
               placeholder="Insira sua senha"
               onChangeText={input => this.state.password = input}
               ref={input => this.inputPassword = input}
@@ -127,6 +127,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#00BA51',
     padding: 15,
     borderRadius: 10
+  },
+  input: {
+    backgroundColor: '#fff',
+    borderRadius: 3,
+    borderColor: '#707070',
+    borderWidth: 1,
+    elevation: 1,
+    width: 250,
+    height: 15
   }
 });
 

@@ -10,11 +10,9 @@ class ButtonRed extends Component {
 
   render() {
     return (
-      <TouchableOpacity>
         <View style={styles.botao}>
           <Text style={styles.texto}>{this.props.title}</Text>
         </View>
-      </TouchableOpacity>
     );
   }
 
