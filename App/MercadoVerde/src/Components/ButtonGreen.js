@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {
+  
   StyleSheet} from 'react-native';
 
 import Button from './Button'
 
-class ButtonRed extends Component {
+class ButtonGreen extends Component {
 
   render() {
     return (
@@ -16,7 +17,7 @@ class ButtonRed extends Component {
 
 const styles = StyleSheet.create({
   botao: {
-    backgroundColor: '#EB5B65',
+    backgroundColor: '#66be76',
     padding: 2,
     borderRadius: 3,
     width: 100,
@@ -30,4 +31,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ButtonRed;
+export default ButtonGreen;
