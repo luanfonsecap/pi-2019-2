@@ -1,28 +1,6 @@
-import React, { Component } from 'react';
 import {
-  TextInput,
-  View,
   StyleSheet
 } from 'react-native';
-
-class Input extends Component {
-
-  render() {
-
-    const { placeholder, secureTextEntry } = this.props;
-
-    return (
-      <View>
-        <TextInput
-          placeholder={placeholder}
-          style={styles.input}
-          secureTextEntry={secureTextEntry}
-        />
-      </View>
-    );
-  }
-
-}
 
 const styles = StyleSheet.create({
   input: {
@@ -35,4 +13,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Input;
+/* Componente de exportação de estilo padrão a ser utilizado em componentes
+do tipo InputText */
+
+export default styles;

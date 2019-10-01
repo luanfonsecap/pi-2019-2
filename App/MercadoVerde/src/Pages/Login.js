@@ -8,7 +8,7 @@ import {
   ImageBackground
 } from 'react-native';
 import Header from '../Components/Header';
-import Button from '../Components/ButtonRed';
+import style from '../Components/Input';
 
 class Login extends Component {
 
@@ -25,13 +25,21 @@ class Login extends Component {
     if(user === '' || password === '')
       return;
 
-
+    /* Request para validar usuário */
+    fetch('url', {
+      method: 'POST',
+      body: JSON.stringify({user, password}),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    /* Response do servidor com validação true or false */
+    .then(res => console.log(res)); 
 
   }
 
   render() {
-
-    const { user, password } = this.state;
 
     return(
       <ImageBackground source={require('../img/bg-fruits-blur.png')}
@@ -45,7 +53,7 @@ class Login extends Component {
           <View style={styles.botaoGrupo}>
             <Text style={styles.label}>Usuário:</Text>
             <TextInput 
-              style={styles.input}
+              style={style.input}
               placeholder="Seu nome de usuário"
               onChangeText={input => this.state.user = input}
               ref={input => this.inputUser = input}
@@ -55,7 +63,7 @@ class Login extends Component {
           <View style={styles.botaoGrupo}>
             <Text style={styles.label}>Senha:</Text>
             <TextInput 
-              style={styles.input}
+              style={style.input}
               placeholder="Insira sua senha"
               onChangeText={input => this.state.password = input}
               ref={input => this.inputPassword = input}
@@ -65,7 +73,9 @@ class Login extends Component {
         </View>
 
         <View style={styles.areaBotao}>
-          <TouchableOpacity onPress={() => {this.validacao(user,password)}} style={styles.botao}>
+          <TouchableOpacity onPress={() => {this.validacao(
+            this.state.user, this.state.password
+            )}} style={styles.botao}>
             <Text style={styles.botaoTexto}>Entrar</Text>
           </TouchableOpacity>
         </View>
@@ -89,14 +99,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     width: 70
   }, 
-  input: {
-    backgroundColor: '#fff',
-    borderRadius: 3,
-    borderColor: '#fff',
-    borderWidth: 1,
-    elevation: 1,
-    width: 250
-  },
   botao: {
     alignSelf: 'center',
     backgroundColor: '#fff',
