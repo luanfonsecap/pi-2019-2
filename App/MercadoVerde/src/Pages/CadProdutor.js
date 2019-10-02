@@ -8,9 +8,10 @@ import {
   ImageBackground,
   ScrollView,
   Picker,
-  Button
+  TouchableHighlight
 } from 'react-native';
 
+import Modal from 'react-native-modal';
 import Header from '../Components/Header';
 import styleInput from '../Components/Input';
 import ButtonRed from '../Components/ButtonRed';
@@ -27,21 +28,31 @@ class CadProdutor extends Component {
       telefone: '',
       sexo: '',
       cep: '',
+      uf: '',
       cidade: '',
       rua: '',
       numero: '',
       bairro: '',
       senha: '',
-      senhaC: ''
+      senhaC: '',
+      isVisible: false
     }
   }
 
   enviaDados(that) {
 
     /* Lógica validação e envio de dados */
-    for(var key in that.state) {
-      console.warn(that.state[key].value)
-    }
+
+  }
+
+  validaCep(cep) {
+
+    fetch(`http://viacep.com.br/ws/${cep}/json/`)
+      .then(res => res.json())
+      .then(res => {
+        if(res.erro)
+          this.setState({isVisible: true});
+      })
 
   }
 
@@ -53,6 +64,18 @@ class CadProdutor extends Component {
       <ImageBackground source={require('../img/bg-fruits-blur.png')}
         style={{ width: '100%', height: '100%' }}
       >
+
+        <Modal isVisible={this.state.isVisible} hasBackdrop={true} backdropColor='black' onBackdropPress={() => {this.setState({isVisible: false})}}>
+          <View style={{ flex: 1, justifyContent: 'center' }}>
+            <Text style={styles.modal}>
+              O CEP digitado é inválido!
+            </Text>
+            <TouchableHighlight style={{alignSelf: 'center', marginTop: 15}}
+              onPress={() => {this.setState({isVisible: false})}}>
+              <ButtonRed title="Voltar" />
+            </TouchableHighlight>
+          </View>
+        </Modal>
 
       <ScrollView>      
       <Header />
@@ -66,6 +89,7 @@ class CadProdutor extends Component {
             style={styleInput}
             onChangeText={input => this.state.feira = input}
             ref={input => this.inputFeira = input}
+            editable={true}
           />
         </View>
 
@@ -121,7 +145,18 @@ class CadProdutor extends Component {
             placeholder="Seu CEP"
             style={styleInput}
             onChangeText={input => this.state.cep = input}
+            onBlur={() => {this.validaCep(this.state.cep)}}
             ref={input => this.inputCep = input}
+          />
+        </View>
+
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>UF:</Text>
+          <TextInput
+            placeholder="Seu estado"
+            style={styleInput}
+            onChangeText={input => this.state.uf = input}
+            ref={input => this.inputUF = input}
           />
         </View>
 
@@ -236,6 +271,13 @@ const styles = StyleSheet.create({
     height: 35,
     padding: 0,
     paddingLeft: 5
+  },
+  modal: {
+    padding: 50,
+    borderRadius: 10,
+    alignSelf: 'center',
+    backgroundColor: 'white',
+    color: 'red'
   }
 });
 
