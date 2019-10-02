@@ -8,7 +8,8 @@ import {
   ImageBackground,
   ScrollView,
   Picker,
-  TouchableHighlight
+  TouchableHighlight,
+  Alert
 } from 'react-native';
 
 import Modal from 'react-native-modal';
@@ -39,10 +40,28 @@ class CadProdutor extends Component {
     }
   }
 
-  enviaDados(that) {
+  validaDados() {
 
-    /* Lógica validação e envio de dados */
+    const obj = this.state;
 
+    const dadosPreenchidos = Object.keys(obj).filter( item => {
+      if(obj[item] === '') {
+        Alert.alert('Erro',`Preencha o campo ${item} corretamente`);
+
+      } else if (obj[item] != '' && obj[item] != undefined) {
+        return obj[item];
+      }
+    });
+
+    if (dadosPreenchidos.length != 13)  
+      return;
+
+    console.log('Chama função de envio');
+
+  }
+
+  teste() {
+    console.warn('teste');
   }
 
   validaCep(cep) {
@@ -57,8 +76,6 @@ class CadProdutor extends Component {
   }
 
   render() {
-
-    const that = this;
 
     return (
       <ImageBackground source={require('../img/bg-fruits-blur.png')}
@@ -207,6 +224,7 @@ class CadProdutor extends Component {
             style={styleInput}
             onChangeText={input => this.state.senha = input}
             ref={input => this.inputSenha = input}
+            secureTextEntry={true}
           />
         </View>
 
@@ -217,6 +235,7 @@ class CadProdutor extends Component {
             style={styleInput}
             onChangeText={input => this.state.senhaC = input}
             ref={input => this.inputSenhaC = input}
+            secureTextEntry={true}
           />
         </View>
 
@@ -224,7 +243,7 @@ class CadProdutor extends Component {
           <TouchableOpacity>
             <ButtonRed title="Cancelar"/>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => {this.enviaDados(that)}}>
+          <TouchableOpacity onPress={() => {this.validaDados()}}>
             <ButtonGreen title="Concluir"/>
           </TouchableOpacity>
         </View>
