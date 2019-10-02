@@ -5,7 +5,6 @@ import {
   StyleSheet,
 } from 'react-native';
 
-
 class ButtonGreen extends Component {
 
   render() {
@@ -15,7 +14,6 @@ class ButtonGreen extends Component {
         </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({

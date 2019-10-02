@@ -5,7 +5,6 @@ import {
   Text
 } from 'react-native';
 
-
 class ButtonRed extends Component {
 
   render() {
