@@ -53,6 +53,11 @@ class CadProdutor extends Component {
       dadosPreenchidos.push(obj[key]);
     }
 
+    if(this.state.senha !== this.state.senhaC) {
+      Alert.alert('Campo senha', 'Confirme novamente a sua senha.')
+      return;
+    }
+
     if (dadosPreenchidos.length != 14)  
       return;
 
@@ -72,8 +77,8 @@ class CadProdutor extends Component {
     })
     .then(res => console.log(res.json()))
     .catch(e => {
-      console.log(e.json());
-    });'' 
+      console.log(e);
+    });
   }
 
   validaCep(cep) {
@@ -118,7 +123,6 @@ class CadProdutor extends Component {
             placeholder="Nome da sua feira"
             style={styleInput}
             onChangeText={input => this.state.feira = input}
-            ref={input => this.inputFeira = input}
             editable={true}
           />
         </View>
@@ -129,7 +133,6 @@ class CadProdutor extends Component {
             placeholder="Seu nome de usuário"
             style={styleInput}
             onChangeText={input => this.state.usuario = input}
-            ref={input => this.inputUsuario = input}
           />
         </View>
 
@@ -139,7 +142,6 @@ class CadProdutor extends Component {
             placeholder="Seu e-mail"
             style={styleInput}
             onChangeText={input => this.state.email = input}
-            ref={input => this.inputEmail = input}
           />
         </View>
 
@@ -149,7 +151,6 @@ class CadProdutor extends Component {
             placeholder="Seu telefone"
             style={styleInput}
             onChangeText={input => this.state.telefone = input}
-            ref={input => this.inputTelefone = input}
           />
         </View>
 
@@ -176,7 +177,6 @@ class CadProdutor extends Component {
             style={styleInput}
             onChangeText={input => this.state.cep = input}
             onBlur={() => {this.validaCep(this.state.cep)}}
-            ref={input => this.inputCep = input}
           />
         </View>
 
@@ -186,7 +186,6 @@ class CadProdutor extends Component {
             placeholder="Seu estado"
             style={styleInput}
             onChangeText={input => this.state.uf = input}
-            ref={input => this.inputUF = input}
           />
         </View>
 
@@ -196,7 +195,6 @@ class CadProdutor extends Component {
             placeholder="Sua cidade"
             style={styleInput}
             onChangeText={input => this.state.cidade = input}
-            ref={input => this.inputCidade = input}
           />
         </View>
 
@@ -206,7 +204,6 @@ class CadProdutor extends Component {
             placeholder="Sua rua"
             style={styleInput}
             onChangeText={input => this.state.rua = input}
-            ref={input => this.inputRua = input}
           />
         </View>
 
@@ -216,7 +213,6 @@ class CadProdutor extends Component {
             placeholder="Número da casa"
             style={styleInput}
             onChangeText={input => this.state.numero = input}
-            ref={input => this.inputNumero = input}
           />
         </View>
 
@@ -226,7 +222,6 @@ class CadProdutor extends Component {
             placeholder="Seu bairro"
             style={styleInput}
             onChangeText={input => this.state.bairro = input}
-            ref={input => this.inputBairro = input}
           />
         </View>
 
@@ -236,7 +231,6 @@ class CadProdutor extends Component {
             placeholder="Sua senha"
             style={styleInput}
             onChangeText={input => this.state.senha = input}
-            ref={input => this.inputSenha = input}
             secureTextEntry={true}
           />
         </View>
@@ -247,7 +241,6 @@ class CadProdutor extends Component {
             placeholder="Confirme sua senha"
             style={styleInput}
             onChangeText={input => this.state.senhaC = input}
-            ref={input => this.inputSenhaC = input}
             secureTextEntry={true}
           />
         </View>
