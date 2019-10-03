@@ -37,7 +37,9 @@ class Login extends Component {
     
   fetch(uri, requestInfo)
     .then(res => res.json())
-    .then(res => console.log(res)); 
+    /* Lógica do token */
+    .then(res => console.log(res))
+    .catch(e => console.log(e));  
 
   }
 
@@ -53,20 +55,18 @@ class Login extends Component {
 
         <View style={styles.form}>
           <View style={styles.botaoGrupo}>
-            <Text style={styles.label}>Usuário:</Text>
             <TextInput 
               style={styleInput}
-              placeholder="Seu nome de usuário"
+              placeholder="Usuário..."
               onChangeText={input => this.state.user = input}
               ref={input => this.inputUser = input}
             />
           </View>
 
           <View style={styles.botaoGrupo}>
-            <Text style={styles.label}>Senha:</Text>
             <TextInput 
               style={styleInput}
-              placeholder="Insira sua senha"
+              placeholder="Senha..."
               onChangeText={input => this.state.password = input}
               ref={input => this.inputPassword = input}
               secureTextEntry={true} 
@@ -95,11 +95,6 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  label: {
-    color: '#fff',
-    fontSize: 18,
-    width: 70
   }, 
   botao: {
     alignSelf: 'center',
@@ -126,9 +121,10 @@ const styles = StyleSheet.create({
     margin: 5
   }, 
   form: {
-    backgroundColor: '#00BA51',
-    padding: 15,
-    borderRadius: 10
+    backgroundColor: '#fff',
+    padding: 25,
+    borderRadius: 10,
+    elevation: 5
   },
   input: {
     backgroundColor: '#fff',

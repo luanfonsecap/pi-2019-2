@@ -62,11 +62,11 @@ class CadProdutor extends Component {
 
   enviaDados(data) {
 
-    let dados = this.state;
-
+    const dados = this.state;
     delete dados['isVisible'];
 
-    fetch('url', {
+    const uri = '';
+    fetch(uri, {
       method: 'POST',
       body: JSON.stringify(dados)
     })
