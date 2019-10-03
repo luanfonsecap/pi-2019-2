@@ -3,18 +3,25 @@ import {
   Text,
   View,
   StyleSheet,
+  TouchableOpacity,
+  Image
 } from 'react-native';
-
-import ArrowBack from './ArrowBack';
 
 const Header = () => {
 
-  return(
+  return (
     <View style={styles.header}>
-      <ArrowBack />
+      <TouchableOpacity style={{
+        position: 'absolute',
+        left: 15,
+      }}>
+        <Image
+          source={require('../img/arrow-back.png')}
+        />
+      </TouchableOpacity>
       <Text style={styles.text}>Mercado Verde</Text>
     </View>
-  ); 
+  );
 
 }
 
@@ -30,7 +37,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     elevation: 5
-  }, 
+  },
   text: {
     color: '#fff',
     fontSize: 20,
