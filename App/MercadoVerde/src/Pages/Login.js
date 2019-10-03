@@ -5,7 +5,8 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
+  Alert
 } from 'react-native';
 import Header from '../Components/Header';
 import styleInput from '../Components/Input';
@@ -16,31 +17,32 @@ class Login extends Component {
     super(props);
     this.state = {
       user: '',
-      password: ''
+      password: '',
+      erro: null
     }
   }
 
   validacao(user, password) {
 
-    if(user === '' || password === '')
+    if(user === '' || password === '') {
+      Alert.alert('Erro', 'Preencha corretamente os campos.');
       return;
+    }
 
     const uri = '';
-
-      const requestInfo = {
-        method: 'POST',
-        body: JSON.stringify({user, password}),
-        headers: new Headers({
-          'Content-type': 'application/json'
-        })
-      }
+    const requestInfo = {
+      method: 'POST',
+      body: JSON.stringify({user, password}),
+      headers: new Headers({
+        'Content-type': 'application/json'
+      })
+    }
     
   fetch(uri, requestInfo)
     .then(res => res.json())
     /* Lógica do token */
     .then(res => console.log(res))
-    .catch(e => console.log(e));  
-
+    .catch(e => this.setState({erro: 'Não foi possível fazer login.'}));  
   }
 
   render() {
@@ -82,12 +84,16 @@ class Login extends Component {
           </TouchableOpacity>
         </View>
 
+        <View>
+          <Text style={styles.erro}>
+            {this.state.erro}
+          </Text>
+        </View>
+
       </View>
       </ImageBackground> 
-
     );
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -134,6 +140,11 @@ const styles = StyleSheet.create({
     elevation: 1,
     width: 250,
     height: 15
+  },
+  erro:{
+    marginTop: 15,
+    color: '#e74c3c',
+    fontWeight: 'bold'
   }
 });
 
