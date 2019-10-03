@@ -71,8 +71,9 @@ class CadProdutor extends Component {
       body: JSON.stringify(dados)
     })
     .then(res => console.log(res.json()))
-    .catch(e => console.log(e.json()));
-
+    .catch(e => {
+      console.log(e.json());
+    });'' 
   }
 
   validaCep(cep) {
@@ -162,8 +163,8 @@ class CadProdutor extends Component {
             }}>
             
             <Picker.Item label="Selecione" value="" />
-            <Picker.Item label="M" value="M" />
-            <Picker.Item label="F" value="F" />
+            <Picker.Item label="Masculino" value="M" />
+            <Picker.Item label="Femenino" value="F" />
 
           </Picker>
         </View>
