@@ -25,16 +25,18 @@ class Login extends Component {
     if(user === '' || password === '')
       return;
 
-    /* Request para validar usuário */
-    fetch('url', {
-      method: 'POST',
-      body: JSON.stringify({user, password}),
-      headers: {
-        'content-type': 'application/json'
+    const uri = '';
+
+      const requestInfo = {
+        method: 'POST',
+        body: JSON.stringify({user, password}),
+        headers: new Headers({
+          'Content-type': 'application/json'
+        })
       }
-    })
+    
+  fetch(uri, requestInfo)
     .then(res => res.json())
-    /* Response do servidor com validação true or false */
     .then(res => console.log(res)); 
 
   }

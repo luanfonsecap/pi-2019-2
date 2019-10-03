@@ -56,19 +56,22 @@ class CadProdutor extends Component {
     if (dadosPreenchidos.length != 14)  
       return;
 
-    this.enviaDados(dadosPreenchidos) 
+    this.enviaDados(dadosPreenchidos);
 
   }
 
   enviaDados(data) {
 
     let dados = this.state;
-    
+
     delete dados['isVisible'];
 
     fetch('url', {
-
+      method: 'POST',
+      body: JSON.stringify(dados)
     })
+    .then(res => console.log(res.json()))
+    .catch(e => console.log(e.json()));
 
   }
 
