@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
+    elevation: 5
   }, 
   text: {
     color: '#fff',
