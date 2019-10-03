@@ -49,6 +49,7 @@ class CadProdutor extends Component {
     for(var key in obj) {
       if(obj[key] === '') {
         Alert.alert('Erro', `Preencha o campo ${key}.`);
+        return;
       }
       dadosPreenchidos.push(obj[key]);
     }
@@ -75,10 +76,8 @@ class CadProdutor extends Component {
       method: 'POST',
       body: JSON.stringify(dados)
     })
-    .then(res => console.log(res.json()))
-    .catch(e => {
-      console.log(e);
-    });
+    .then(res => console.log(res))
+    .catch(e => console.log(e));
   }
 
   validaCep(cep) {
@@ -87,7 +86,7 @@ class CadProdutor extends Component {
       .then(res => res.json())
       .then(res => {
         if(res.erro)
-          this.setState({isVisible: true});
+          this.setState({isVisible: true, cep: ''});
       })
       .catch(e => console.log(e));
 
