@@ -43,7 +43,6 @@ class CadProdutor extends Component {
   validaDados() {
 
     const obj = this.state;
-
     let dadosPreenchidos = [];
 
     for(var key in obj) {
@@ -62,14 +61,15 @@ class CadProdutor extends Component {
     if (dadosPreenchidos.length != 14)  
       return;
 
-    this.enviaDados(dadosPreenchidos);
+    this.enviaDados();
 
   }
 
-  enviaDados(data) {
+  enviaDados() {
 
     const dados = this.state;
     delete dados['isVisible'];
+    delete dados['senhaC'];
 
     const uri = '';
     fetch(uri, {

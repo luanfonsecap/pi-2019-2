@@ -14,7 +14,7 @@ import CadProdutor from './src/Pages/CadProdutor';
 
 const App = () => {
   return (
-    <CadProdutor />
+    <Login />
   );
 };
 
