@@ -44,24 +44,32 @@ class CadProdutor extends Component {
 
     const obj = this.state;
 
-    const dadosPreenchidos = Object.keys(obj).filter( item => {
-      if(obj[item] === '') {
-        Alert.alert('Erro',`Preencha o campo ${item} corretamente`);
+    let dadosPreenchidos = [];
 
-      } else if (obj[item] != '' && obj[item] != undefined) {
-        return obj[item];
+    for(var key in obj) {
+      if(obj[key] === '') {
+        Alert.alert('Erro', `Preencha o campo ${key}.`);
       }
-    });
+      dadosPreenchidos.push(obj[key]);
+    }
 
-    if (dadosPreenchidos.length != 13)  
+    if (dadosPreenchidos.length != 14)  
       return;
 
-    console.log('Chama função de envio');
+    this.enviaDados(dadosPreenchidos) 
 
   }
 
-  teste() {
-    console.warn('teste');
+  enviaDados(data) {
+
+    let dados = this.state;
+    
+    delete dados['isVisible'];
+
+    fetch('url', {
+
+    })
+
   }
 
   validaCep(cep) {
@@ -72,6 +80,7 @@ class CadProdutor extends Component {
         if(res.erro)
           this.setState({isVisible: true});
       })
+      .catch(e => console.log(e));
 
   }
 
