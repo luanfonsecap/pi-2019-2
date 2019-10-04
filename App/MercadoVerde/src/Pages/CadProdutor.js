@@ -36,7 +36,7 @@ class CadProdutor extends Component {
       bairro: '',
       senha: '',
       senhaC: '',
-      tipo: 'produtor',
+      tipo: 'P',
       isVisible: false
     }
   }
@@ -72,10 +72,11 @@ class CadProdutor extends Component {
     delete dados['isVisible'];
     delete dados['senhaC'];
 
-    const uri = '';
+    const uri = 'http://10.0.2.21:1337/cadastro';
     fetch(uri, {
       method: 'POST',
-      body: JSON.stringify(dados)
+      body: JSON.stringify(dados),
+      headers: JSON.stringify({'Content-type': 'application/json'})
     })
     .then(res => console.log(res))
     .catch(e => console.log(e));
