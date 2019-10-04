@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
-  Alert
+  Alert,
 } from 'react-native';
 import Header from '../Components/Header';
 import styleInput from '../Components/Input';
@@ -29,20 +29,22 @@ class Login extends Component {
       return;
     }
 
-    const uri = '';
+    const uri = 'http://10.0.2.21:1337/login';
     const requestInfo = {
       method: 'POST',
       body: JSON.stringify({user, password}),
-      headers: new Headers({
-        'Content-type': 'application/json'
-      })
+      headers: {'Content-type': 'application/json'}
     }
     
   fetch(uri, requestInfo)
     .then(res => res.json())
-    /* Lógica do token */
-    .then(res => console.log(res))
-    .catch(e => this.setState({erro: 'Não foi possível fazer login.'}));  
+    .then(res => {
+      console.log(res);      
+    })
+    .catch(e => {
+      this.setState({erro: 'Não foi possível fazer login.'})
+      console.log(e);
+    });  
   }
 
   render() {
@@ -62,6 +64,8 @@ class Login extends Component {
               placeholder="Usuário..."
               onChangeText={input => this.state.user = input}
               ref={input => this.inputUser = input}
+              autoCorrect={false}
+              autoCapitalize="none"
             />
           </View>
 
@@ -72,7 +76,9 @@ class Login extends Component {
               onChangeText={input => this.state.password = input}
               ref={input => this.inputPassword = input}
               secureTextEntry={true} 
-            />  
+              autoCorrect={false}
+              autoCapitalize="none"
+              />  
           </View>
         </View>
 
@@ -144,7 +150,8 @@ const styles = StyleSheet.create({
   erro:{
     marginTop: 15,
     color: '#e74c3c',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 19
   }
 });
 

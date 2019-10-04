@@ -72,7 +72,7 @@ class CadProdutor extends Component {
     delete dados['isVisible'];
     delete dados['senhaC'];
 
-    const uri = 'http://10.0.2.21:1337/cadastro';
+    const uri = 'http://localhost:1337/cadastro';
     fetch(uri, {
       method: 'POST',
       body: JSON.stringify(dados),
