@@ -36,6 +36,7 @@ class CadProdutor extends Component {
       bairro: '',
       senha: '',
       senhaC: '',
+      tipo: 'produtor',
       isVisible: false
     }
   }
