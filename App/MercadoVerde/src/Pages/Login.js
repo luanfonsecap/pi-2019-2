@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Alert,
+  AsyncStorage
 } from 'react-native';
 import Header from '../Components/Header';
 import styleInput from '../Components/Input';
@@ -39,7 +40,10 @@ class Login extends Component {
     fetch(uri, requestInfo)
       .then(res => res.json())
       .then(res => {
-        console.log(res);      
+        AsyncStorage.setItem('tipo', res.tipo);
+        AsyncStorage.setItem('nome', res.nome);
+
+        /* Lógica de roteamento */
       })
       .catch(e => {
         this.setState({erro: 'Não foi possível fazer login.'})
