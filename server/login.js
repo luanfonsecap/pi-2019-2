@@ -24,6 +24,10 @@ app.post('/login', (req, res) => {
     console.log(res);
 })
 
+app.get('/teste', (req, res) => {
+    res.send({teste: 'testado'});
+})
+
 
 //inicia o servidor
 app.listen(port);

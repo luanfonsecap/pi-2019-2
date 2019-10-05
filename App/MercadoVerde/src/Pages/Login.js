@@ -22,29 +22,29 @@ class Login extends Component {
     }
   }
 
-  validacao(user, password) {
+  validacao(usuario, senha) {
 
-    if(user === '' || password === '') {
+    if(usuario === '' || senha === '') {
       Alert.alert('Erro', 'Preencha corretamente os campos.');
       return;
     }
 
-    const uri = 'http://10.0.2.21:1337/login';
+    const uri = "http://192.168.1.6:1337/login";
     const requestInfo = {
       method: 'POST',
-      body: JSON.stringify({user, password}),
+      body: JSON.stringify({usuario, senha}),
       headers: {'Content-type': 'application/json'}
     }
     
-  fetch(uri, requestInfo)
-    .then(res => res.json())
-    .then(res => {
-      console.log(res);      
-    })
-    .catch(e => {
-      this.setState({erro: 'Não foi possível fazer login.'})
-      console.log(e);
-    });  
+    fetch(uri, requestInfo)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);      
+      })
+      .catch(e => {
+        this.setState({erro: 'Não foi possível fazer login.'})
+        console.log(e);
+      });  
   }
 
   render() {
