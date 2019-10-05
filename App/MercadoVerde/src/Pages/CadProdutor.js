@@ -23,7 +23,8 @@ class CadProdutor extends Component {
   constructor() {
     super();
     this.state = {
-      feira: '',
+      tipo: 'P',      
+      nome: '',
       usuario: '',
       email: '',
       telefone: '',
@@ -36,7 +37,6 @@ class CadProdutor extends Component {
       bairro: '',
       senha: '',
       senhaC: '',
-      tipo: 'P',
       isVisible: false
     }
   }
@@ -59,7 +59,7 @@ class CadProdutor extends Component {
       return;
     }
 
-    if (dadosPreenchidos.length != 14)  
+    if (dadosPreenchidos.length != 15)  
       return;
 
     this.enviaDados();
@@ -72,13 +72,15 @@ class CadProdutor extends Component {
     delete dados['isVisible'];
     delete dados['senhaC'];
 
-    const uri = 'http://localhost:1337/cadastro';
+    console.log(dados);
+
+    const uri = 'http://192.168.1.6:1337/cadastro';
     fetch(uri, {
       method: 'POST',
       body: JSON.stringify(dados),
-      headers: JSON.stringify({'Content-type': 'application/json'})
+      headers: {'Content-type': 'application/json'}
     })
-    .then(res => console.log(res))
+    .then(res => console.log('ok'))
     .catch(e => console.log(e));
   }
 
@@ -123,7 +125,7 @@ class CadProdutor extends Component {
           <TextInput
             placeholder="Nome da sua feira"
             style={styleInput}
-            onChangeText={input => this.state.feira = input}
+            onChangeText={input => this.state.nome = input}
             editable={true}
           />
         </View>

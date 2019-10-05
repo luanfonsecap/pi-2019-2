@@ -26,30 +26,31 @@ app.post('/login', (req, res) => {
 })
 
 app.post('/cadastro', (req, res) => {
-    var type = req.body.tipo;
-    var user = req.body.usuario;
-    var name = req.body.nome;
-    var mail = req.body.email;
-    var phone = req.body.telefone;
-    var sex = req.body.sexo;
-    var postal = req.body.cep;
-    var state = req.body.uf;
-    var city = req.body.cidade;
-    var street = req.body.rua;
-    var number = req.body.numero;
-    var neighbor = req.body.bairro;
-    var pass = req.body.senha;
-    // console.log(user, pass);
+
+    const { tipo, usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha } = req.body;
+
+    console.log(req.body);
+
+    console.log(tipo, usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha);
+
+    const type = tipo;
+    const user = usuario;
+    const name = nome;
+    const mail = email;
+    const phone = telefone;
+    const sex = sexo;
+    const postal = cep;
+    const state = uf;
+    const city = cidade;
+    const street = rua;
+    const number = numero;
+    const neighbor = bairro;
+    const pass = senha;
+
     execSQLQuery(`INSERT INTO cadastro (tipo,usuario,nome,email,telefone,sexo,cep,uf,cidade,rua,numero,bairro,senha) VALUES 
     ('${type}','${user}','${name}','${mail}','${phone}','${sex}','${postal}','${state}','${city}','${street}','${number}','${neighbor}','${pass}')`, res);
     console.log('Cadastrado');
 })
-
-app.get('/teste', (req, res) => {
-    res.send({teste: 'testado'});
-})
-
-
 
 //inicia o servidor
 app.listen(port);

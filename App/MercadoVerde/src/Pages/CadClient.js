@@ -36,7 +36,7 @@ class CadClient extends Component {
       bairro: '',
       senha: '',
       senhaC: '',
-      tipo: 'P',
+      tipo: 'C',
       isVisible: false
     }
   }
