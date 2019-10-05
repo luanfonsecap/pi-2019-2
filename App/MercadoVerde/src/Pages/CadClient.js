@@ -123,7 +123,7 @@ class CadClient extends Component {
           <TextInput
             placeholder="Seu nome"
             style={styleInput}
-            onChangeText={input => this.state.feira = input}
+            onChangeText={input => this.state.nome = input}
             editable={true}
           />
         </View>
