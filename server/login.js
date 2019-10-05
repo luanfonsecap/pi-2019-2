@@ -16,12 +16,33 @@ const router = express.Router();
 router.get('/', (req, res) => res.json({ message: 'Funcionando!' }));
 app.use('/', router);
 
+// Trata as requisições de login. Retorna o nome e o tipo de usuário.
 app.post('/login', (req, res) => {
     var user = req.body.usuario;
     var pass = req.body.senha;
     console.log(user, pass);
     execSQLQuery(`SELECT nome,tipo FROM cadastro WHERE usuario = "${user}" AND senha = "${pass}"`, res);
     console.log(res);
+})
+
+app.post('/cadastro', (req, res) => {
+    var type = req.body.tipo;
+    var user = req.body.usuario;
+    var name = req.body.nome;
+    var mail = req.body.email;
+    var phone = req.body.telefone;
+    var sex = req.body.sexo;
+    var postal = req.body.cep;
+    var state = req.body.uf;
+    var city = req.body.cidade;
+    var street = req.body.rua;
+    var number = req.body.numero;
+    var neighbor = req.body.bairro;
+    var pass = req.body.senha;
+    // console.log(user, pass);
+    execSQLQuery(`INSERT INTO cadastro (tipo,usuario,nome,email,telefone,sexo,cep,uf,cidade,rua,numero,bairro,senha) VALUES 
+    ('${type}','${user}','${name}','${mail}','${phone}','${sex}','${postal}','${state}','${city}','${street}','${number}','${neighbor}','${pass}')`, res);
+    console.log('Cadastrado');
 })
 
 app.get('/teste', (req, res) => {
