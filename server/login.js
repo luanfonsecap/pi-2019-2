@@ -29,10 +29,6 @@ app.post('/cadastro', (req, res) => {
 
     const { tipo, usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha } = req.body;
 
-    console.log(req.body);
-
-    console.log(tipo, usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha);
-
     const type = tipo;
     const user = usuario;
     const name = nome;
@@ -71,6 +67,7 @@ function execSQLQuery(sqlQry, res) {
         else
             res.json(results);
         connection.end();
+        console.log(results);
         console.log('OK');
     });
 }
