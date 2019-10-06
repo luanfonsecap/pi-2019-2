@@ -9,6 +9,8 @@ import {
   Alert,
   AsyncStorage
 } from 'react-native';
+/* importa a funão de navegação em class component */
+import { withNavigation } from 'react-navigation'; 
 
 import Header from '../Components/Header';
 import styleInput from '../Components/Input';
@@ -26,7 +28,7 @@ class Login extends Component {
 
   validacao(usuario, senha) {
 
-    if(usuario === '' || senha === '') {
+    if (usuario === '' || senha === '') {
       Alert.alert('Erro', 'Preencha corretamente os campos.');
       return;
     }
@@ -34,75 +36,86 @@ class Login extends Component {
     const uri = "http://192.168.1.6:1337/login";
     const requestInfo = {
       method: 'POST',
-      body: JSON.stringify({usuario, senha}),
-      headers: {'Content-type': 'application/json'}
+      body: JSON.stringify({ usuario, senha }),
+      headers: { 'Content-type': 'application/json' }
     }
-    
+
     fetch(uri, requestInfo)
       .then(res => res.json())
       .then(res => {
+        if(res[0].status){ /* Se o status for true o usuário foi confirmado */
+
           AsyncStorage.setItem('tipo', res[0].tipo)
             .then(resp => console.log('Tipo gravado!'));
           AsyncStorage.setItem('nome', res[0].nome)
             .then(resp => console.log('Nome gravado!'));
+
+          /* Navgea o usuário para tela correta de acordo com o tipo */
+          res[0].tipo === 'C' ? navigation.navigate('IndexC') :  navigation.navigate('IndexP');
+        } else {
+          /* Caso não confirmado, exibe mensagem de erro */
+          this.setState({ erro: 'Dados de usuário não conferem.' });
+        } 
       })
       .catch(e => {
-        this.setState({erro: 'Não foi possível fazer login.'})
+        this.setState({ erro: 'Não foi possível fazer login.' });
         console.log(e);
-      });  
+      });
   }
 
   render() {
 
-    return(
+    return (
       <ImageBackground source={require('../img/bg-fruits-blur.png')}
-        style={{width: '100%', height: '100%'}}
+        style={{ width: '100%', height: '100%' }}
       >
-      <View style={styles.login}>
+        <View style={styles.login}>
 
-        <Header />  
+          <Header />
 
-        <View style={styles.form}>
-          <View style={styles.botaoGrupo}>
-            <TextInput 
-              style={styleInput}
-              placeholder="Usuário..."
-              onChangeText={input => this.state.user = input}
-              ref={input => this.inputUser = input}
-              autoCorrect={false}
-              autoCapitalize="none"
-            />
+          <View style={styles.form}>
+            <View style={styles.botaoGrupo}>
+              <TextInput
+                style={styleInput}
+                placeholder="Usuário..."
+                onChangeText={input => this.state.user = input}
+                ref={input => this.inputUser = input}
+                autoCorrect={false}
+                autoCapitalize="none"
+              />
+            </View>
+
+            <View style={styles.botaoGrupo}>
+              <TextInput
+                style={styleInput}
+                placeholder="Senha..."
+                onChangeText={input => this.state.password = input}
+                ref={input => this.inputPassword = input}
+                secureTextEntry={true}
+                autoCorrect={false}
+                autoCapitalize="none"
+              />
+            </View>
           </View>
 
-          <View style={styles.botaoGrupo}>
-            <TextInput 
-              style={styleInput}
-              placeholder="Senha..."
-              onChangeText={input => this.state.password = input}
-              ref={input => this.inputPassword = input}
-              secureTextEntry={true} 
-              autoCorrect={false}
-              autoCapitalize="none"
-              />  
+          <View style={styles.areaBotao}>
+            <TouchableOpacity onPress={() => {
+              this.validacao(
+                this.state.user, this.state.password
+              )
+            }} style={styles.botao}>
+              <Text style={styles.botaoTexto}>Entrar</Text>
+            </TouchableOpacity>
           </View>
-        </View>
 
-        <View style={styles.areaBotao}>
-          <TouchableOpacity onPress={() => {this.validacao(
-            this.state.user, this.state.password
-            )}} style={styles.botao}>
-            <Text style={styles.botaoTexto}>Entrar</Text>
-          </TouchableOpacity>
-        </View>
+          <View>
+            <Text style={styles.erro}>
+              {this.state.erro}
+            </Text>
+          </View>
 
-        <View>
-          <Text style={styles.erro}>
-            {this.state.erro}
-          </Text>
         </View>
-
-      </View>
-      </ImageBackground> 
+      </ImageBackground>
     );
   }
 }
@@ -112,7 +125,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-  }, 
+  },
   botao: {
     alignSelf: 'center',
     backgroundColor: '#fff',
@@ -129,14 +142,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   areaBotao: {
-    width: 600, 
+    width: 600,
     marginTop: 15
   },
   botaoGrupo: {
     flexDirection: 'row',
     alignItems: 'center',
     margin: 5
-  }, 
+  },
   form: {
     backgroundColor: '#fff',
     padding: 25,
@@ -152,7 +165,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 15
   },
-  erro:{
+  erro: {
     marginTop: 15,
     color: '#e74c3c',
     fontWeight: 'bold',
@@ -160,4 +173,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
+export default withNavigation(Login);

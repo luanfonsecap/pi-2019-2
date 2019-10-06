@@ -20,9 +20,9 @@ app.use('/', router);
 app.post('/login', (req, res) => {
     var user = req.body.usuario;
     var pass = req.body.senha;
-    console.log(user, pass);
+    // A resposta dessa rota é necessária conter além de TIPO e NOME, status de confirmação (true).
+    // Caso seja informado senha e usuário errado deve retornar o status como false.
     execSQLQuery(`SELECT nome,tipo FROM cadastro WHERE usuario = "${user}" AND senha = "${pass}"`, res);
-    console.log(res);
 })
 
 app.post('/cadastro', (req, res) => {
@@ -43,14 +43,14 @@ app.post('/cadastro', (req, res) => {
     const neighbor = bairro;
     const pass = senha;
 
+    // É necessário antes de fazer a inserção do usuário no banco, verificar se já
+    // não existe outro usuário com o mesmo username.
     execSQLQuery(`INSERT INTO cadastro (tipo,usuario,nome,email,telefone,sexo,cep,uf,cidade,rua,numero,bairro,senha) VALUES 
     ('${type}','${user}','${name}','${mail}','${phone}','${sex}','${postal}','${state}','${city}','${street}','${number}','${neighbor}','${pass}')`, res);
-    console.log('Cadastrado');
 })
 
 //inicia o servidor
-app.listen(port);
-console.log('API funcionando!');
+app.listen(port, () => console.log('API funcionando!'));
 
 function execSQLQuery(sqlQry, res) {
     const connection = mysql.createConnection({
@@ -67,7 +67,6 @@ function execSQLQuery(sqlQry, res) {
         else
             res.json(results);
         connection.end();
-        console.log(results);
         console.log('OK');
     });
 }
