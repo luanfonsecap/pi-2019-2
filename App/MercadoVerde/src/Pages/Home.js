@@ -7,7 +7,7 @@ import {
   Image,
 } from 'react-native';
 
-const Home = () => {
+function Home({navigation}) {
 
   return(
     <View style={styles.home}>
@@ -24,16 +24,17 @@ const Home = () => {
       </Text>
 
 
-      <TouchableOpacity style={[styles.botao, styles.shadow]}>
+      <TouchableOpacity onPress={() => {navigation.navigate('Login')}}
+        style={[styles.botao, styles.shadow]}>
         <Text style={styles.botaoTexto}>Entrar</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.botao, styles.shadow]}>
+      <TouchableOpacity onPress={() => {navigation.navigate('Presentation')}}
+        style={[styles.botao, styles.shadow]}>
         <Text style={styles.botaoTexto}>Cadastrar</Text>
       </TouchableOpacity>
 
     </View>
   );
-  
 }
 
 const styles = StyleSheet.create({

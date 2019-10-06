@@ -11,14 +11,6 @@ const Header = () => {
 
   return (
     <View style={styles.header}>
-      <TouchableOpacity style={{
-        position: 'absolute',
-        left: 15,
-      }}>
-        <Image
-          source={require('../img/arrow-back.png')}
-        />
-      </TouchableOpacity>
       <Text style={styles.text}>Mercado Verde</Text>
     </View>
   );
@@ -35,7 +27,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     elevation: 5
   },
   text: {
