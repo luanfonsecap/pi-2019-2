@@ -20,14 +20,15 @@ app.use('/', router);
 app.post('/login', (req, res) => {
     var user = req.body.usuario;
     var pass = req.body.senha;
-    // A resposta dessa rota é necessária conter além de TIPO e NOME, status de confirmação (true).
-    // Caso seja informado senha e usuário errado deve retornar o status como false.
+    console.log(user, pass);
     execSQLQuery(`SELECT nome,tipo FROM cadastro WHERE usuario = "${user}" AND senha = "${pass}"`, res);
+    console.log(res);
 })
 
-app.post('/cadastro', (req, res) => {
+//rota para cadastro de cliente
+app.post('/cadastroCliente', (req, res) => {
 
-    const { tipo, usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha } = req.body;
+    const { tipo = 'C', usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha } = req.body;
 
     const type = tipo;
     const user = usuario;
@@ -43,14 +44,38 @@ app.post('/cadastro', (req, res) => {
     const neighbor = bairro;
     const pass = senha;
 
-    // É necessário antes de fazer a inserção do usuário no banco, verificar se já
-    // não existe outro usuário com o mesmo username.
     execSQLQuery(`INSERT INTO cadastro (tipo,usuario,nome,email,telefone,sexo,cep,uf,cidade,rua,numero,bairro,senha) VALUES 
     ('${type}','${user}','${name}','${mail}','${phone}','${sex}','${postal}','${state}','${city}','${street}','${number}','${neighbor}','${pass}')`, res);
+    console.log('Cliente Cadastrado');
+})
+
+//rota para cadastro de produtor
+app.post('/cadastroProdutor', (req, res) => {
+
+    const { usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha } = req.body;
+
+    const type = 'P';
+    const user = usuario;
+    const name = nome;
+    const mail = email;
+    const phone = telefone;
+    const sex = sexo;
+    const postal = cep;
+    const state = uf;
+    const city = cidade;
+    const street = rua;
+    const number = numero;
+    const neighbor = bairro;
+    const pass = senha;
+
+    execSQLQuery(`INSERT INTO cadastro (tipo,usuario,nome,email,telefone,sexo,cep,uf,cidade,rua,numero,bairro,senha) VALUES 
+    ('${type}','${user}','${name}','${mail}','${phone}','${sex}','${postal}','${state}','${city}','${street}','${number}','${neighbor}','${pass}')`, res);
+    console.log('Produtor Cadastrado');
 })
 
 //inicia o servidor
-app.listen(port, () => console.log('API funcionando!'));
+app.listen(port);
+console.log('API funcionando!');
 
 function execSQLQuery(sqlQry, res) {
     const connection = mysql.createConnection({
@@ -67,6 +92,8 @@ function execSQLQuery(sqlQry, res) {
         else
             res.json(results);
         connection.end();
+        console.log(results);
         console.log('OK');
     });
+  
 }

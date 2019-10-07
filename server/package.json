@@ -5,7 +5,9 @@
   "main": "server.js",
   "author": "hellolusca",
   "scripts": {
-    "start": "node login.js"
+    "start": "node login.js",
+    "dev": "nodemon login.js"
+
   },
   "license": "ISC",
   "dependencies": {
@@ -14,5 +16,8 @@
     "express": "^4.17.1",
     "mysql": "^2.17.1",
     "mysql2": "^1.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.3"
   }
 }
