@@ -74,7 +74,7 @@ class CadProdutor extends Component {
 
     console.log(dados);
 
-    const uri = 'http://192.168.1.6:1337/cadastro';
+    const uri = 'http://192.168.1.6:1337/cadastroProdutor';
     fetch(uri, {
       method: 'POST',
       body: JSON.stringify(dados),
