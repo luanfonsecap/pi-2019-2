@@ -70,8 +70,11 @@ class CadClient extends Component {
     const dados = this.state;
     delete dados['isVisible'];
     delete dados['senhaC'];
+    
+    dados.urlImage = `https://api.adorable.io/avatars/150/${this.state.usuario}`;
 
-    const uri = 'http://localhost:1337/cadastroCliente';
+    const uri = 'http://10.59.128.133:1337/cadastro';
+
     fetch(uri, {
       method: 'POST',
       body: JSON.stringify(dados),
