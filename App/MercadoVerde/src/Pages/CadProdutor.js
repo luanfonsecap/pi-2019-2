@@ -72,7 +72,7 @@ class CadProdutor extends Component {
     delete dados['isVisible'];
     delete dados['senhaC'];
 
-    console.log(dados);
+    dados.urlImage = `https://api.adorable.io/avatars/150/${this.state.usuario}`;    
 
     const uri = 'http://192.168.1.6:1337/cadastro';
     fetch(uri, {
