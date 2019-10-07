@@ -4,12 +4,12 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = 1337 //porta padr�o
 const mysql = require('mysql');
-const cors = require('cors')
+const cors = require('cors');
 
 //configurando o body parser para pegar POSTS
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors());
 
 //definindo as rotas
 const router = express.Router();
@@ -20,17 +20,16 @@ app.use('/', router);
 app.post('/login', (req, res) => {
     var user = req.body.usuario;
     var pass = req.body.senha;
-    console.log(user, pass);
+
     execSQLQuery(`SELECT nome,tipo FROM cadastro WHERE usuario = "${user}" AND senha = "${pass}"`, res);
-    console.log(res);
 })
 
 //rota para cadastro de cliente
 app.post('/cadastroCliente', (req, res) => {
 
-    const { tipo = 'C', usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha } = req.body;
+    const { usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha } = req.body;
 
-    const type = tipo;
+    const type = 'C';
     const user = usuario;
     const name = nome;
     const mail = email;
@@ -90,6 +89,7 @@ function execSQLQuery(sqlQry, res) {
         if (error)
             res.json(error);
         else
+            results.status = 200;
             res.json(results);
         connection.end();
         console.log(results);

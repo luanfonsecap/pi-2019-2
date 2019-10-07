@@ -7,7 +7,6 @@
   "scripts": {
     "start": "node login.js",
     "dev": "nodemon login.js"
-
   },
   "license": "ISC",
   "dependencies": {

@@ -36,7 +36,6 @@ class CadClient extends Component {
       bairro: '',
       senha: '',
       senhaC: '',
-      tipo: 'C',
       isVisible: false
     }
   }
@@ -72,7 +71,7 @@ class CadClient extends Component {
     delete dados['isVisible'];
     delete dados['senhaC'];
 
-    const uri = 'http://localhost:1337/cadastro';
+    const uri = 'http://localhost:1337/cadastroCliente';
     fetch(uri, {
       method: 'POST',
       body: JSON.stringify(dados),
