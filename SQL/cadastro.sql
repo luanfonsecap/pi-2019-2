@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `cadastro` (
   `numero` int(10) NOT NULL,
   `bairro` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `usuario_UNIQUE` (`usuario`),
   UNIQUE KEY `email_UNIQUE` (`email`)
