@@ -16,11 +16,11 @@ function login(req, res) {
                 }
                 console.log(error);
                 res.json(error);
-            }
+            } 
+            res.json(error);
             /* Outras lógicas de tratamento de erro. */
         } else {
             res.json(results);
-            connection.end();
         }
     });
 }

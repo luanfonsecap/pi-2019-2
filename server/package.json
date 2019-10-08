@@ -5,7 +5,7 @@
   "main": "server.js",
   "author": "hellolusca",
   "scripts": {
-    "start": "node login.js",
+    "start": "nodemon server.js",
     "dev": "nodemon login.js"
   },
   "license": "ISC",

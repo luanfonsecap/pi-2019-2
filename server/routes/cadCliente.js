@@ -32,7 +32,6 @@ function cadCliente(req, res) {
             /* Lógica de tratamento da resposta */
             res.json(results);
         }
-        connection.end();
     });
 }
 
