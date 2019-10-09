@@ -58,6 +58,11 @@ class CadProdutor extends Component {
       return;
     }
 
+    if(this.state.uf.length > 2) {
+      Alert.alert('Campo UF', 'Digite apenas as iniciais do seu estado.')
+      return;
+    }
+
     if (dadosPreenchidos.length != 15)  
       return;
 
@@ -144,15 +149,17 @@ class CadProdutor extends Component {
             placeholder="Seu e-mail"
             style={styleInput}
             onChangeText={input => this.state.email = input}
+            keyboardType="email-address"
           />
         </View>
 
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Telefone:</Text>
           <TextInput
-            placeholder="Seu telefone"
+            placeholder="9 digitos sem ífen"
             style={styleInput}
             onChangeText={input => this.state.telefone = input}
+            keyboardType="numeric"
           />
         </View>
 
@@ -179,13 +186,14 @@ class CadProdutor extends Component {
             style={styleInput}
             onChangeText={input => this.state.cep = input}
             onBlur={() => {this.validaCep(this.state.cep)}}
+            keyboardType="numeric"
           />
         </View>
 
         <View style={styles.inputGroup}>
           <Text style={styles.label}>UF:</Text>
           <TextInput
-            placeholder="Seu estado"
+            placeholder="Seu estado. Ex: MG, SP, RJ"
             style={styleInput}
             onChangeText={input => this.state.uf = input}
           />
@@ -215,6 +223,7 @@ class CadProdutor extends Component {
             placeholder="Número da casa"
             style={styleInput}
             onChangeText={input => this.state.numero = input}
+            keyboardType="numeric"
           />
         </View>
 

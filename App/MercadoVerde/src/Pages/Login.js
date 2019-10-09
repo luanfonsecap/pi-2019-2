@@ -10,7 +10,7 @@ import {
   AsyncStorage
 } from 'react-native';
 /* importa a funão de navegação em class component */
-import { withNavigation } from 'react-navigation'; 
+import { withNavigation } from 'react-navigation';
 
 import Header from '../Components/Header';
 import styleInput from '../Components/Input';
@@ -43,19 +43,21 @@ class Login extends Component {
     fetch(uri, requestInfo)
       .then(res => res.json())
       .then(res => {
-        if(res[0].status){ /* Se o status for true o usuário foi confirmado */
+        if (res[0].status) {
 
-          AsyncStorage.setItem('tipo', res[0].tipo)
-            .then(resp => console.log('Tipo gravado!'));
-          AsyncStorage.setItem('nome', res[0].nome)
-            .then(resp => console.log('Nome gravado!'));
+          console.log(res[0].status);
 
-          /* Navgea o usuário para tela correta de acordo com o tipo */
-          res[0].tipo === 'C' ? navigation.navigate('IndexC') :  navigation.navigate('IndexP');
+          Promise.all([
+            AsyncStorage.setItem('tipo', res[0].tipo),
+            AsyncStorage.setItem('nome', res[0].nome),
+            AsyncStorage.setItem('id', res[0].id),
+            AsyncStorage.setItem('url', res[0].url),
+          ]);
+
+         /*  res[0].tipo === 'C' ? navigation.navigate('IndexC') : navigation.navigate('IndexP'); */
         } else {
-          /* Caso não confirmado, exibe mensagem de erro */
-          this.setState({ erro: 'Dados de usuário não conferem.' });
-        } 
+          this.setState({ erro: res[0].msg });
+        }
       })
       .catch(e => {
         this.setState({ erro: 'Não foi possível fazer login.' });

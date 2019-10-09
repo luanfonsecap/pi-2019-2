@@ -58,6 +58,11 @@ class CadClient extends Component {
       return;
     }
 
+    if(this.state.uf.length > 2) {
+      Alert.alert('Campo UF', 'Digite apenas as iniciais do seu estado.')
+      return;
+    }
+
     if (dadosPreenchidos.length != 14)  
       return;
 
@@ -145,15 +150,17 @@ class CadClient extends Component {
             placeholder="Seu e-mail"
             style={styleInput}
             onChangeText={input => this.state.email = input}
+            keyboardType="email-address"
           />
         </View>
 
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Telefone:</Text>
           <TextInput
-            placeholder="Seu telefone"
+            placeholder="9 digitos sem ífen"
             style={styleInput}
             onChangeText={input => this.state.telefone = input}
+            keyboardType="numeric"
           />
         </View>
 
@@ -186,7 +193,7 @@ class CadClient extends Component {
         <View style={styles.inputGroup}>
           <Text style={styles.label}>UF:</Text>
           <TextInput
-            placeholder="Seu estado"
+            placeholder="Seu estado. Ex: MG, SP, RJ"
             style={styleInput}
             onChangeText={input => this.state.uf = input}
           />
@@ -216,6 +223,7 @@ class CadClient extends Component {
             placeholder="Número da casa"
             style={styleInput}
             onChangeText={input => this.state.numero = input}
+            keyboardType="numeric"
           />
         </View>
 
