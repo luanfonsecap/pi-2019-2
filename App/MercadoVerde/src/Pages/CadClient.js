@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 
 import Modal from 'react-native-modal';
-import Header from '../Components/Header';
 import styleInput from '../Components/Input';
 import ButtonRed from '../Components/ButtonRed';
 import ButtonGreen from '../Components/ButtonGreen';
@@ -121,7 +120,6 @@ class CadClient extends Component {
         </Modal>
 
       <ScrollView>      
-      <Header />
 
       <View style={styles.container}>
 

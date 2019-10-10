@@ -9,11 +9,10 @@ import {
   ScrollView,
   Picker,
   TouchableHighlight,
-  Alert
+  Alert,
 } from 'react-native';
 
 import Modal from 'react-native-modal';
-import Header from '../Components/Header';
 import styleInput from '../Components/Input';
 import ButtonRed from '../Components/ButtonRed';
 import ButtonGreen from '../Components/ButtonGreen';
@@ -120,7 +119,6 @@ class CadProdutor extends Component {
         </Modal>
 
       <ScrollView>      
-      <Header />
 
       <View style={styles.container}>
 
@@ -279,7 +277,6 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
     padding: 30
   },
   label: {
@@ -292,10 +289,9 @@ const styles = StyleSheet.create({
   botoes: {
     marginTop: 30,
     flexDirection: 'row',
-    alignContent: 'space-around',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%'
+    width: '100%',
   },
   picker: {
     backgroundColor: '#fff',

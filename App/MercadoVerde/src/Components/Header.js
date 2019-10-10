@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    elevation: 5
+    elevation: 5,
+    height: '100%'
   },
   text: {
     color: '#fff',

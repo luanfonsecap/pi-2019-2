@@ -7,7 +7,7 @@ function login(req, res) {
     var user = req.body.usuario;
     var pass = req.body.senha;
 
-    connection.query(`SELECT nome,tipo FROM cadastro WHERE usuario = "${user}" AND senha = "${pass}"`, function (error, results, fields) {
+    connection.query(`SELECT nome,tipo,urlImagem,id FROM cadastro WHERE usuario = "${user}" AND senha = "${pass}"`, function (error, results, fields) {
         if (error){
             if(error.errno == 'ECONNREFUSED') {
                 error = {
@@ -16,11 +16,21 @@ function login(req, res) {
                 }
                 console.log(error);
                 res.json(error);
-            } 
-            res.json(error);
+            } else {
+                res.json(error);
+            }
             /* Outras lógicas de tratamento de erro. */
         } else {
-            res.json(results);
+            if(results.length === 0) {
+                results = [{
+                    status: false,
+                    msg: 'Dados de usuário não conferem.'
+                }]
+                res.json(results);
+            } else {
+                results[0].status = true;
+                res.json(results);
+            }
         }
     });
 }

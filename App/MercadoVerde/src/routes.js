@@ -1,18 +1,23 @@
-import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import React from 'react';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
 import Home from './Pages/Home';
 import Presentation from './Pages/Presentation';
 import Login from './Pages/Login';
 import CadProdutor from './Pages/CadProdutor';
 import CadClient from './Pages/CadClient';
+import Header from './Components/Header';
+
+let options = {headerTitle: <Header />, headerLeft: null};
 
 const Routes = createAppContainer(
-  createSwitchNavigator({
-    Home,
-    Presentation,
-    Login,
-    CadProdutor,
-    CadClient,
+  createStackNavigator({
+    Home: {screen: Home, navigationOptions: {header: null}}, 
+    Presentation: {screen: Presentation, navigationOptions: options},
+    Login: {screen: Login, navigationOptions: options},
+    CadProdutor: {screen: CadProdutor, navigationOptions: options},
+    CadClient: {screen: CadClient, navigationOptions: options},
   })
 );
 

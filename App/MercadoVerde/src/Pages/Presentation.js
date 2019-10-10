@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
-import Header from '../Components/Header';
 import Frutas from '../img/fruits-presentation.png';
 import ButtonGreen from '../Components/ButtonGreen';
 
@@ -11,7 +10,6 @@ function Presentation({navigation}) {
     <ScrollView>
 
       <View style={styles.container}>
-        <Header />
 
 
         <View style={styles.cardPresentation}>

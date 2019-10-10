@@ -12,7 +12,6 @@ import {
 /* importa a funão de navegação em class component */
 import { withNavigation } from 'react-navigation';
 
-import Header from '../Components/Header';
 import styleInput from '../Components/Input';
 
 class Login extends Component {
@@ -73,7 +72,6 @@ class Login extends Component {
       >
         <View style={styles.login}>
 
-          <Header />
 
           <View style={styles.form}>
             <View style={styles.botaoGrupo}>
