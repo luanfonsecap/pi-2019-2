@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,6 @@ import {
   Alert,
   AsyncStorage
 } from 'react-native';
-/* importa a funão de navegação em class component */
 import { withNavigation } from 'react-navigation';
 
 import styleInput from '../Components/Input';
@@ -23,16 +22,36 @@ class Login extends Component {
       password: '',
       erro: null
     }
+    this.verificaLogin();
+  }
+
+  verificaLogin() {
+
+    AsyncStorage.getItem('tipo')
+      .then(storage => {
+        switch (storage) {
+          case 'C':
+            this.props.navigation.navigate('IndexC');
+            break;
+
+          case 'P':
+            this.props.navigation.navigate('IndexP');
+            break;
+        
+          default:
+            break;
+        }
+      })
   }
 
   validacao(usuario, senha) {
 
-    if (usuario === '' || senha === '') {
+      if(usuario === '' || senha === '') {
       Alert.alert('Erro', 'Preencha corretamente os campos.');
       return;
     }
 
-    const uri = "http://192.168.1.6:1337/login";
+    const uri = "http://192.168.100.19:1337/login";
     const requestInfo = {
       method: 'POST',
       body: JSON.stringify({ usuario, senha }),
@@ -44,8 +63,6 @@ class Login extends Component {
       .then(res => {
         if (res[0].status) {
 
-          console.log(res[0].status);
-
           Promise.all([
             AsyncStorage.setItem('tipo', res[0].tipo),
             AsyncStorage.setItem('nome', res[0].nome),
@@ -53,7 +70,7 @@ class Login extends Component {
             AsyncStorage.setItem('url', res[0].url),
           ]);
 
-         /*  res[0].tipo === 'C' ? navigation.navigate('IndexC') : navigation.navigate('IndexP'); */
+          res[0].tipo === 'C' ? this.props.navigation.navigate('IndexC') : this.props.navigation.navigate('IndexP');
         } else {
           this.setState({ erro: res[0].msg });
         }
