@@ -14,7 +14,6 @@ function login(req, res) {
                     status: 500,
                     msg: 'Não foi possível conectar com a base de dados.'
                 }
-                console.log(error);
                 res.json(error);
             } else {
                 res.json(error);

@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const port = 1337 //porta padr�o
-const mysql = require('mysql');
 const cors = require('cors')
 
 //configurando o body parser

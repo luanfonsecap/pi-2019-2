@@ -7,6 +7,10 @@ import Presentation from './Pages/Presentation';
 import Login from './Pages/Login';
 import CadProdutor from './Pages/CadProdutor';
 import CadClient from './Pages/CadClient';
+import IndexP from './Pages/Produtor/Index';
+import IndexC from './Pages/Cliente/Index';
+
+
 import Header from './Components/Header';
 
 let options = {headerTitle: <Header />, headerLeft: null};
@@ -18,6 +22,8 @@ const Routes = createAppContainer(
     Login: {screen: Login, navigationOptions: options},
     CadProdutor: {screen: CadProdutor, navigationOptions: options},
     CadClient: {screen: CadClient, navigationOptions: options},
+    IndexP: {screen: IndexP, navigationOptions: {header: null}},
+    IndexC: {screen: IndexC, navigationOptions: {header: null}}
   })
 );
 
