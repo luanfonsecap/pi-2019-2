@@ -7,22 +7,8 @@ function cadCliente(req, res) {
 
     const { usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha } = req.body;
 
-    const type = 'C';
-    const user = usuario;
-    const name = nome;
-    const mail = email;
-    const phone = telefone;
-    const sex = sexo;
-    const postal = cep;
-    const state = uf;
-    const city = cidade;
-    const street = rua;
-    const number = numero;
-    const neighbor = bairro;
-    const pass = senha;
-
     const sqlQry = `INSERT INTO cadastro (tipo,usuario,nome,email,telefone,sexo,cep,uf,cidade,rua,numero,bairro,senha) VALUES 
-    ('${type}','${user}','${name}','${mail}','${phone}','${sex}','${postal}','${state}','${city}','${street}','${number}','${neighbor}','${pass}')`;
+    ('C','${usuario}','${nome}','${email}','${telefone}','${sexo}','${cep}','${uf}','${cidade}','${rua}','${numero}','${bairro}','${senha}')`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
