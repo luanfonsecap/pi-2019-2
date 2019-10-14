@@ -9,13 +9,15 @@ class Index extends Component {
 
   badge() {
 
-    /*     AsyncStorage.getItem('id').then(id => {
+    /*AsyncStorage.getItem('id').then(id => {
           
           fetch('url', {
             method: 'POST',
+            //envia o id do usuário logado
             body: JSON.stringify({id}),
             headers: {'Content-Type':'application/json'}
           })
+          //devolve a quantidade de pedidos atrelados ao id enviado
           .then(res => res.json())
           .then(res => {
             if(res >= 1) {

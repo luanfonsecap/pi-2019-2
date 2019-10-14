@@ -5,11 +5,28 @@ import { Button } from 'react-native-elements';
 
 import HeaderLogged from '../../Components/HeaderLogged';
 
+//simulção de dados vindos do servidor
 const pedidos = [
-  { id: 1, user: 'Luiz Inácio', value: '26,00', local: 'Curitiba' },
-  { id: 2, user: 'Sérgio Moro', value: '12,00', local: 'Brasilia' },
-  { id: 3, user: 'Dilma Roussef', value: '36,00', local: 'São Paulo' },
-  { id: 4, user: 'Michel Temer', value: '50,00', local: 'Brasilia' },
+  { id: 1, user: 'Luiz Inácio', value: '26,00', local: 'Curitiba', produtos: [
+    {nome: 'Alface Americana', und: 3, kg: null},
+    {nome: 'Abacaxi', und: 1, kg: null},
+    {nome: 'Tomate', und: null, kg: 2},
+  ]},
+  { id: 2, user: 'Sérgio Moro', value: '12,00', local: 'Brasilia', produtos: [
+    {nome: 'Alface Americana', und: 4, kg: null},
+    {nome: 'Abacaxi', und: 2, kg: null},
+    {nome: 'Tomate', und: null, kg: 1},
+  ]},
+  { id: 3, user: 'Dilma Roussef', value: '36,00', local: 'São Paulo', produtos:[
+    {nome: 'Alface Americana', und: 4, kg: null},
+    {nome: 'Abacaxi', und: 2, kg: null},
+    {nome: 'Tomate', und: null, kg: 1},
+  ]},
+  { id: 4, user: 'Michel Temer', value: '50,00', local: 'Brasilia', produtos: [
+    {nome: 'Alface Americana', und: 4, kg: null},
+    {nome: 'Abacaxi', und: 2, kg: null},
+    {nome: 'Tomate', und: null, kg: 1},
+  ]},
 ];
 
 class PedidosRecebidos extends Component {
@@ -51,10 +68,9 @@ class PedidosRecebidos extends Component {
 
   }
 
-  gerenciaPedido(id, user, value, local) {
-
-    this.props.navigation.navigate('GerenciaPedido',
-    { id, user, value, local });
+  gerenciaPedido(id, cliente, valor, local, produtos) {
+    this.props.navigation.navigate('GerenciaPedidos',
+    { id, cliente, valor, local, produtos });
   }
 
   render() {
@@ -78,7 +94,7 @@ class PedidosRecebidos extends Component {
                     <Button
                       title="Gerenciar"
                       buttonStyle={{ backgroundColor: '#EB5B65', marginTop: 10 }}
-                      onPress={() => this.gerenciaPedido(item.id, item.user, item.value, item.local)}
+                      onPress={() => this.gerenciaPedido(item.id, item.user, item.value, item.local, item.produtos)}
                     />
                   </View>
                 );
