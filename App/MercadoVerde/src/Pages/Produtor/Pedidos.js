@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, AsyncStorage, FlatList, ScrollView } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, AsyncStorage, FlatList, ScrollView, Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { Button, Overlay } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 
 import HeaderLogged from '../../Components/HeaderLogged';
 
-const array = [
+const pedidos = [
   { id: 1, user: 'Luiz Inácio', value: '26,00', local: 'Curitiba' },
   { id: 2, user: 'Sérgio Moro', value: '12,00', local: 'Brasilia' },
   { id: 3, user: 'Dilma Roussef', value: '36,00', local: 'São Paulo' },
@@ -17,8 +17,38 @@ class PedidosRecebidos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isVisible: false
+      isVisible: false,
+      pedidos: []
     }
+    this.buscaDados();
+  }
+
+  buscaDados() {
+
+    AsyncStorage.getItem('id')
+      .then( id => {
+
+        fetch('url', {
+          method: 'GET',
+          //envia id do usuário para buscar pedido relacionados a esse id
+          headers: {'Content-Type':'application/json','User-Id':id}
+        })
+        .then(res => res.json)
+        //atualiza o array de pedidos dentro do estado do componente com os 
+        //dados vindos dos servidor
+        .then(res => {
+          this.setState({pedidos: res});
+        })
+        .catch(e => {
+          console.log(e)
+          Alert.alert('Erro', 'Não foi possível receber dados do servidor.');
+        });
+      })
+      .catch(e => {
+        console.log(e);
+        Alert.alert('Erro', 'Dados de usuário não encontrados, favor reiniciar aplicativo.')
+      })
+
   }
 
   gerenciaPedido(id, user, value, local) {
@@ -35,8 +65,10 @@ class PedidosRecebidos extends Component {
           <ImageBackground style={{ width: '100%', height: '100%' }}
             source={require('../../img/bg.png')}>
             <FlatList
-              data={array}
-              keyExtractor={array.id}
+              //recebe os dados de pedidos pelo estado do componente para
+              //renderizar os cards
+              data={pedidos}
+              keyExtractor={pedidos.id}
               renderItem={({ item }) => {
                 return (
                   <View style={styles.card}>
