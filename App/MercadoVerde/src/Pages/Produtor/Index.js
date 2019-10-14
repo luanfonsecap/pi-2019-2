@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { Badge } from 'react-native-elements';
+import { Badge, Button } from 'react-native-elements';
 
 import HeaderLogged from '../../Components/HeaderLogged';
 
@@ -9,34 +9,34 @@ class Index extends Component {
 
   badge() {
 
-/*     AsyncStorage.getItem('id').then(id => {
-      
-      fetch('url', {
-        method: 'POST',
-        body: JSON.stringify({id}),
-        headers: {'Content-Type':'application/json'}
-      })
-      .then(res => res.json())
-      .then(res => {
-        if(res >= 1) {
-          return (
-            <Badge value={res} status="success"
-              badgeStyle={{ height: 20, width: 40 }}
-              containerStyle={{ position: 'absolute', top: -4, right: -4 }}
-            />
-          );
-        } else {
-          return;
-        }
-      })
-    }).catch(e => console.log(e)); */    
+    /*     AsyncStorage.getItem('id').then(id => {
+          
+          fetch('url', {
+            method: 'POST',
+            body: JSON.stringify({id}),
+            headers: {'Content-Type':'application/json'}
+          })
+          .then(res => res.json())
+          .then(res => {
+            if(res >= 1) {
+              return (
+                <Badge value={res} status="success"
+                  badgeStyle={{ height: 20, width: 40 }}
+                  containerStyle={{ position: 'absolute', top: -4, right: -4 }}
+                />
+              );
+            } else {
+              return;
+            }
+          })
+        }).catch(e => console.log(e)); */
 
     if (3 == 3) {
 
       return (
         <Badge value="4" status="success"
           badgeStyle={{ height: 20, width: 40 }}
-          containerStyle={{ position: 'absolute', top: -4, right: -4 }}
+          containerStyle={{ position: 'absolute', top: -7, right: -10 }}
         />
       );
     } else {

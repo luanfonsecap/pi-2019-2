@@ -1,13 +1,6 @@
 import React, { Component, useEffect } from 'react';
 import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  ImageBackground,
-  Alert,
-  AsyncStorage
+  View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground, Alert, AsyncStorage
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 

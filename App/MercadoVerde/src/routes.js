@@ -9,6 +9,7 @@ import CadProdutor from './Pages/CadProdutor';
 import CadClient from './Pages/CadClient';
 import IndexP from './Pages/Produtor/Index';
 import IndexC from './Pages/Cliente/Index';
+import Pedidos from './Pages/Produtor/Pedidos';
 
 
 import Header from './Components/Header';
@@ -23,7 +24,8 @@ const Routes = createAppContainer(
     CadProdutor: {screen: CadProdutor, navigationOptions: options},
     CadClient: {screen: CadClient, navigationOptions: options},
     IndexP: {screen: IndexP, navigationOptions: {header: null}},
-    IndexC: {screen: IndexC, navigationOptions: {header: null}}
+    IndexC: {screen: IndexC, navigationOptions: {header: null}},
+    Pedidos: {screen: Pedidos, navigationOptions: {header: null}},
   })
 );
 
