@@ -21,6 +21,10 @@ function cadCliente(req, res) {
             res.json(error);
         } else {
             /* Lógica de tratamento da resposta */
+            results = [{
+                status: true,
+                msg: 'Cliente cadastrado com sucesso.'
+            }]
             res.json(results);
         }
     });

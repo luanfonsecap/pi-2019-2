@@ -1,11 +1,11 @@
-/* Rota de alteração de cadastro do usuário Cliente */
+/* Rota de alteração de cadastro do usuário Produtor */
 const express = require('express');
 const router = express.Router();
 const connection = require('../services/connection');
 const bcrypt = require('bcrypt');
 var pass = "";
 
-function altCliente(req, res) {
+function altProdutor(req, res) {
     const { usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha, id, urlImagem } = req.body;
     bcrypt.hash(senha, 1, function (err, hash) {
         pass = hash;
@@ -21,12 +21,12 @@ function altCliente(req, res) {
         } else {
             results = [{
                 status: true,
-                msg: 'Cliente alterado com sucesso!'
+                msg: 'Produtor alterado com sucesso.'
             }]
             res.json(results);
         }
     });
 }
 
-router.post('/', altCliente);
+router.post('/', altProdutor);
 module.exports = router;

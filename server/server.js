@@ -19,8 +19,13 @@ const cadCliente = require('./routes/cadCliente');
 const cadProdutor = require('./routes/cadProdutor');
 const cadProduto = require('./routes/cadProduto');
 const altCliente = require('./routes/altCliente');
-//const altProdutor = require('./routes/altProdutor');
-//const altProduto = require('./routes/altProduto');
+const altProdutor = require('./routes/altProdutor');
+const altProduto = require('./routes/altProduto');
+const delCliente = require('./routes/delCliente');
+const delProdutor = require('./routes/delProdutor');
+const delProduto = require('./routes/delProduto');
+const infoUsuario = require('./routes/infoUsuario');
+const infoProduto = require('./routes/infoProduto');
 
 //definindo as rotas
 app.use('/', router);
@@ -29,8 +34,13 @@ app.use('/cadastroCliente', cadCliente);
 app.use('/cadastroProdutor', cadProdutor);
 app.use('/cadastroProduto', cadProduto);
 app.use('/alterarCliente', altCliente);
-//app.use('/alterarProdutor', altProdutor);
-//app.use('/alterarProduto', altProduto);
+app.use('/alterarProdutor', altProdutor);
+app.use('/alterarProduto', altProduto);
+app.use('/deletarCliente', delCliente);
+app.use('/deletarProdutor', delProdutor);
+app.use('/deletarProduto', delProduto);
+app.use('/infoUsuario', infoUsuario);
+app.use('/infoProduto', infoProduto);
 
 
 //inicia o servidor

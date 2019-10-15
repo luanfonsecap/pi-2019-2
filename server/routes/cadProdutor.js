@@ -21,6 +21,10 @@ function cadProdutor(req, res) {
             res.json(error);
         } else {
             /* Lógica de tratamento da resposta */
+            results = [{
+                status: true,
+                msg: 'Produtor alterado com sucesso.'
+            }]
             res.json(results);
         }
     });
