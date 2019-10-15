@@ -19,6 +19,7 @@ function aceitaPedido(id) {
   .then(res => {
     res[0].status ? Alert.alert('Sucesso!', 'O pedido foi confirmado.') : Alert.alert('Falhou!', 'O pedido não foi confirmado.')
   })
+  .cactch(e => console.log(e));
 }
 
 const GerenciaPedido = ({ navigation }) => {
