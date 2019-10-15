@@ -7,13 +7,13 @@ var pass = "";
 
 function cadProdutor(req, res) {
 
-    const { usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha } = req.body;
-    bcrypt.hash(senha, 1, function (err, senha) {
-        pass = senha;
+    const { usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha, urlImagem } = req.body;
+    bcrypt.hash(senha, 1, function (err, hash) {
+        pass = hash;
     })
 
-    const sqlQry = `INSERT INTO cadastro (tipo,usuario,nome,email,telefone,sexo,cep,uf,cidade,rua,numero,bairro,senha) VALUES 
-    ('P','${usuario}','${nome}','${email}','${telefone}','${sexo}','${cep}','${uf},'${cidade}','${rua}','${numero}','${bairro}','${pass}')`;
+    const sqlQry = `INSERT INTO cadastro (tipo,usuario,nome,email,telefone,sexo,cep,uf,cidade,rua,numero,bairro,senha,urlImagem) VALUES 
+    ('P','${usuario}','${nome}','${email}','${telefone}','${sexo}','${cep}','${uf}','${cidade}','${rua}','${numero}','${bairro}','${pass}','${urlImagem}')`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
