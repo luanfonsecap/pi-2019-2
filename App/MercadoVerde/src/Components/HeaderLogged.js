@@ -6,17 +6,17 @@ const HeaderLogged = (props) => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.img} source={require('../img/icon-img.png')} />
-      <Text style={styles.nome}>{props.nome}</Text>
+      <Image style={styles.img} source={{uri: `https://api.adorable.io/avatars/150/${AsyncStorage.getItem('url')}`}} />
+      <Text style={styles.nome}>Mercado Verde</Text>
 
       <TouchableOpacity style={styles.botaoSair}
-       onPress={() =>{
-        Promise.all([
-          AsyncStorage.removeItem('tipo'),
-          AsyncStorage.removeItem('nome'),
-          AsyncStorage.removeItem('id'),
-          AsyncStorage.removeItem('url'),
-        ]).then(res => props.navigation.navigate('Home'));
+        onPress={() => {
+          Promise.all([
+            AsyncStorage.removeItem('tipo'),
+            AsyncStorage.removeItem('nome'),
+            AsyncStorage.removeItem('id'),
+            AsyncStorage.removeItem('url'),
+          ]).then(res => props.navigation.navigate('Home'));
         }}>
         <View>
           <Text style={styles.textoBotao}>Sair</Text>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     padding: 10,
-    margin: 10, 
+    margin: 10,
     borderWidth: 1,
     borderColor: '#000'
   },
