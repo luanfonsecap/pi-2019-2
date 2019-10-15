@@ -1,29 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
-const HeaderLogged = (props) => {
+class HeaderLogged extends Component {
 
-  return (
-    <View style={styles.container}>
-      <Image style={styles.img} source={{uri: `https://api.adorable.io/avatars/150/${AsyncStorage.getItem('url')}`}} />
-      <Text style={styles.nome}>Mercado Verde</Text>
+  constructor(props) {
+    super(props);
+    this.state = {
+      url: null,
+      nome: ''
+    }
+  }
 
-      <TouchableOpacity style={styles.botaoSair}
-        onPress={() => {
-          Promise.all([
-            AsyncStorage.removeItem('tipo'),
-            AsyncStorage.removeItem('nome'),
-            AsyncStorage.removeItem('id'),
-            AsyncStorage.removeItem('url'),
-          ]).then(res => props.navigation.navigate('Home'));
-        }}>
-        <View>
-          <Text style={styles.textoBotao}>Sair</Text>
-        </View>
-      </TouchableOpacity>
-    </View>
-  );
+  componentDidMount() {
+
+    AsyncStorage.getItem('nome')
+      .then(nome => this.setState({ nome: nome }));
+    AsyncStorage.getItem('url')
+      .then(url => this.setState({ url: url }));
+  }
+
+  render() {
+
+    return (
+      <View style={styles.container}>
+        <Image style={styles.img} source={{ uri: this.state.url }} />
+        <Text style={styles.nome}>{this.state.nome}</Text>
+
+        <TouchableOpacity style={styles.botaoSair}
+          onPress={() => {
+            Promise.all([
+              AsyncStorage.removeItem('tipo'),
+              AsyncStorage.removeItem('nome'),
+              AsyncStorage.removeItem('id'),
+              AsyncStorage.removeItem('url'),
+            ]).then(res => props.navigation.navigate('Home'));
+          }}>
+          <View>
+            <Text style={styles.textoBotao}>Sair</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
 }
 
