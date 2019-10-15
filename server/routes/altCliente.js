@@ -8,7 +8,7 @@ function altCliente(req, res) {
     const { usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha, id } = req.body;
 
     const sqlQry = `UPDATE cadastro SET usuario='${usuario}', nome='${nome}', email='${email}', telefone='${telefone}', sexo='${sexo}', cep='${cep}', uf='${uf}',
-    cidade='${cidade}', rua='${rua}', numero='${numero}', bairro='${bairro}', senha='${senha}' WHERE id='${id}'`;
+    cidade='${cidade}', rua='${rua}', numero='${numero}', bairro='${bairro}', senha='${pass}' WHERE id='${id}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
