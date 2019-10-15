@@ -2,12 +2,13 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../services/connection');
+const bcrypt = require('bcrypt');
 
 function login(req, res) {
-    var user = req.body.usuario;
-    var pass = req.body.senha;
 
-    connection.query(`SELECT nome,tipo,urlImagem,id FROM cadastro WHERE usuario = "${user}" AND senha = "${pass}"`, function (error, results, fields) {
+    const { usuario, senha } = req.body;
+
+    connection.query(`SELECT nome,senha,tipo,urlImagem,id FROM cadastro WHERE usuario = "${usuario}"`, function (error, results, fields) {
         if (error){
             if(error.errno == 'ECONNREFUSED') {
                 error = {
@@ -23,12 +24,19 @@ function login(req, res) {
             if(results.length === 0) {
                 results = [{
                     status: false,
-                    msg: 'Dados de usuário não conferem.'
+                    msg: 'Usuário inexistente.'
                 }]
                 res.json(results);
             } else {
-                results[0].status = true;
-                res.json(results);
+                if (bcrypt.compareSync(senha, results[0].senha)) {
+                    res.json(results);
+                } else {
+                    results = [{
+                        status: false,
+                        msg: 'Senha incorreta.'
+                    }]
+                    res.json(results);
+                }
             }
         }
     });

@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const port = 1337 //porta padr�o
+const port = 1337 //porta padrao
 const cors = require('cors')
 
 //configurando o body parser
@@ -21,6 +21,11 @@ const cadProduto = require('./routes/cadProduto');
 const altCliente = require('./routes/altCliente');
 const altProdutor = require('./routes/altProdutor');
 const altProduto = require('./routes/altProduto');
+const delCliente = require('./routes/delCliente');
+const delProdutor = require('./routes/delProdutor');
+const delProduto = require('./routes/delProduto');
+const infoUsuario = require('./routes/infoUsuario');
+const infoProduto = require('./routes/infoProduto');
 
 //definindo as rotas
 app.use('/', router);
@@ -31,6 +36,11 @@ app.use('/cadastroProduto', cadProduto);
 app.use('/alterarCliente', altCliente);
 app.use('/alterarProdutor', altProdutor);
 app.use('/alterarProduto', altProduto);
+app.use('/deletarCliente', delCliente);
+app.use('/deletarProdutor', delProdutor);
+app.use('/deletarProduto', delProduto);
+app.use('/infoUsuario', infoUsuario);
+app.use('/infoProduto', infoProduto);
 
 
 //inicia o servidor

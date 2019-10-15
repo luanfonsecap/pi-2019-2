@@ -1,29 +1,25 @@
+/* Rota de exclusão de cadastro de produtores */
 const express = require('express');
 const router = express.Router();
 const connection = require('../services/connection');
 
-function cadProduto(req, res) {
-
-    const { nome, valor, unidades, kg, id_produtor } = req.body;
-
-    const sqlQry = `INSERT INTO produtos (nome,valor,unidades,kg,id_produtor) VALUES 
-    ('${nome}','${valor}','${unidades}','${kg}','${id_produtor}')`;
+function altProduto(req, res) {
+    const id = req.body.id;
+    const sqlQry = `DELETE FROM cadastro WHERE id='${id}'; DELETE FROM produtos WHERE id_produtor='${id}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
             res.json(error);
         } else {
-            /* Lógica de tratamento da resposta */
             results = [{
                 status: true,
-                msg: 'Produto cadastrado com sucesso.'
+                msg: 'Produtor e seus produtos excluidos com sucesso.'
             }]
             res.json(results);
         }
     });
-
 }
 
-router.post('/', cadProduto);
+router.post('/', altProduto);
 module.exports = router;
