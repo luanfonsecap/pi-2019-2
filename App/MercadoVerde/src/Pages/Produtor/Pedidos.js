@@ -7,26 +7,34 @@ import HeaderLogged from '../../Components/HeaderLogged';
 
 //simulção de dados vindos do servidor
 const pedidos = [
-  { id: 1, user: 'Luiz Inácio', value: '26,00', local: 'Curitiba', produtos: [
-    {nome: 'Alface Americana', und: 3, kg: null},
-    {nome: 'Abacaxi', und: 1, kg: null},
-    {nome: 'Tomate', und: null, kg: 2},
-  ]},
-  { id: 2, user: 'Sérgio Moro', value: '12,00', local: 'Brasilia', produtos: [
-    {nome: 'Alface Americana', und: 4, kg: null},
-    {nome: 'Abacaxi', und: 2, kg: null},
-    {nome: 'Tomate', und: null, kg: 1},
-  ]},
-  { id: 3, user: 'Dilma Roussef', value: '36,00', local: 'São Paulo', produtos:[
-    {nome: 'Alface Americana', und: 4, kg: null},
-    {nome: 'Abacaxi', und: 2, kg: null},
-    {nome: 'Tomate', und: null, kg: 1},
-  ]},
-  { id: 4, user: 'Michel Temer', value: '50,00', local: 'Brasilia', produtos: [
-    {nome: 'Alface Americana', und: 4, kg: null},
-    {nome: 'Abacaxi', und: 2, kg: null},
-    {nome: 'Tomate', und: null, kg: 1},
-  ]},
+  {
+    id: 1, user: 'Luiz Inácio', value: '26,00', local: 'Curitiba', produtos: [
+      { nome: 'Alface Americana', und: 3, kg: null },
+      { nome: 'Abacaxi', und: 1, kg: null },
+      { nome: 'Tomate', und: null, kg: 2 },
+    ]
+  },
+  {
+    id: 2, user: 'Sérgio Moro', value: '12,00', local: 'Brasilia', produtos: [
+      { nome: 'Alface Americana', und: 4, kg: null },
+      { nome: 'Abacaxi', und: 2, kg: null },
+      { nome: 'Tomate', und: null, kg: 1 },
+    ]
+  },
+  {
+    id: 3, user: 'Dilma Roussef', value: '36,00', local: 'São Paulo', produtos: [
+      { nome: 'Alface Americana', und: 4, kg: null },
+      { nome: 'Abacaxi', und: 2, kg: null },
+      { nome: 'Tomate', und: null, kg: 1 },
+    ]
+  },
+  {
+    id: 4, user: 'Michel Temer', value: '50,00', local: 'Brasilia', produtos: [
+      { nome: 'Alface Americana', und: 4, kg: null },
+      { nome: 'Abacaxi', und: 2, kg: null },
+      { nome: 'Tomate', und: null, kg: 1 },
+    ]
+  },
 ];
 
 class PedidosRecebidos extends Component {
@@ -43,23 +51,23 @@ class PedidosRecebidos extends Component {
   buscaDados() {
 
     AsyncStorage.getItem('id')
-      .then( id => {
+      .then(id => {
 
         fetch('url', {
           method: 'GET',
           //envia id do usuário para buscar pedido relacionados a esse id
-          headers: {'Content-Type':'application/json','User-Id':id}
+          headers: { 'Content-Type': 'application/json', 'User-Id': id }
         })
-        .then(res => res.json)
-        //atualiza o array de pedidos dentro do estado do componente com os 
-        //dados vindos dos servidor
-        .then(res => {
-          this.setState({pedidos: res});
-        })
-        .catch(e => {
-          console.log(e)
-          Alert.alert('Erro', 'Não foi possível receber dados do servidor.');
-        });
+          .then(res => res.json)
+          //atualiza o array de pedidos dentro do estado do componente com os 
+          //dados vindos dos servidor
+          .then(res => {
+            this.setState({ pedidos: res });
+          })
+          .catch(e => {
+            console.log(e)
+            Alert.alert('Erro', 'Não foi possível receber dados do servidor.');
+          });
       })
       .catch(e => {
         console.log(e);
@@ -70,7 +78,7 @@ class PedidosRecebidos extends Component {
 
   gerenciaPedido(id, cliente, valor, local, produtos) {
     this.props.navigation.navigate('GerenciaPedidos',
-    { id, cliente, valor, local, produtos });
+      { id, cliente, valor, local, produtos });
   }
 
   render() {
