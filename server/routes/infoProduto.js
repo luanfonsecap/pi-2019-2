@@ -1,4 +1,4 @@
-/* Rota de exclusão de cadastro de clientes */
+/* Rota de informação de cadastro de clientes */
 const express = require('express');
 const router = express.Router();
 const connection = require('../services/connection');
