@@ -62,9 +62,10 @@ class CadProdutor extends Component {
       return;
     }
 
-    if (dadosPreenchidos.length != 15)  
+    if (dadosPreenchidos.length != 14)  
       return;
 
+    console.log('Enviando requisição');
     this.enviaDados();
 
   }
@@ -77,7 +78,7 @@ class CadProdutor extends Component {
 
     dados.urlImage = `https://api.adorable.io/avatars/150/${this.state.usuario}`;    
 
-    const uri = 'http://192.168.1.6:1337/cadastroProdutor';
+    const uri = 'http://192.168.100.19:1337/cadastroProdutor';
     fetch(uri, {
       method: 'POST',
       body: JSON.stringify(dados),
