@@ -10,6 +10,14 @@ App de agricultura familiar com objetivo de conectar e aproximar produtores   ru
 
 Projeto desenvolvido com:
  - React Native
+ - React Native Elements
+ - React Navigation
+ - NodeJS
+ - Express
+ - Nodemon
+ - Bcrypt
+ - Cors
+ - MySQL
 
 Integrantes: 
 > Luan Fonseca - RA 61820949
