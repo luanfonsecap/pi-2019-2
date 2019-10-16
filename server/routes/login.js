@@ -29,8 +29,11 @@ function login(req, res) {
                 res.json(results);
             } else {
                 if (bcrypt.compareSync(senha, results[0].senha)) {
+                    results[0].status = true;
+                    console.log(results);
                     res.json(results);
                 } else {
+                    console.log(results);
                     results = [{
                         status: false,
                         msg: 'Senha incorreta.'
