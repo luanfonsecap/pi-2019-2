@@ -44,7 +44,7 @@ class Login extends Component {
       return;
     }
 
-    const uri = "http://192.168.100.19:1337/login";
+    const uri = "http://192.168.1.6:1337/login";
     const requestInfo = {
       method: 'POST',
       body: JSON.stringify({ usuario, senha }),
@@ -59,7 +59,7 @@ class Login extends Component {
           Promise.all([
             AsyncStorage.setItem('tipo', res[0].tipo),
             AsyncStorage.setItem('nome', res[0].nome),
-            AsyncStorage.setItem('id', res[0].id),
+            AsyncStorage.setItem('id', `${res[0].id}`),
             AsyncStorage.setItem('url', res[0].url),
           ]);
 
@@ -77,7 +77,7 @@ class Login extends Component {
   render() {
 
     return (
-      <ImageBackground source={require('../img/bg-fruits-blur.png')}
+      <ImageBackground source={require('../img/bg.png')}
         style={{ width: '100%', height: '100%' }}
       >
         <View style={styles.login}>

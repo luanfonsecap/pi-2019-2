@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, Alert, } from 'react-native';
 
 import HeaderLogged from '../../Components/HeaderLogged';
@@ -12,14 +12,31 @@ function aceitaPedido(id) {
 
   fetch('url', {
     method: 'POST',
-    body: JSON.stringify({id}),
-    headers: {'Content-Type':'application/json'}
+    body: JSON.stringify({ id }),
+    headers: { 'Content-Type': 'application/json' }
   })
-  .then(res => res.json())
-  .then(res => {
-    res[0].status ? Alert.alert('Sucesso!', 'O pedido foi confirmado.') : Alert.alert('Falhou!', 'O pedido não foi confirmado.')
+    .then(res => res.json())
+    .then(res => {
+      res[0].status ? Alert.alert('Sucesso!', 'O pedido foi confirmado.') : Alert.alert('Falhou!', 'O pedido não foi confirmado.')
+    })
+    .cactch(e => console.log(e));
+}
+
+//função para negar pedido e redirecionar a tela de pedidos
+function recusaPedido(id) {
+
+  fetch('url', {
+    method: 'POST',
+    body: JSON.stringify({ id }),
+    headers: { 'Content-Type': 'application/json' }
   })
-  .cactch(e => console.log(e));
+    .then(res => res.json())
+    .then(res => {
+      res[0].status ? Alert.alert('Sucesso!', 'O pedido foi recusado.') : Alert.alert('Falhou!', 'Falha ao recusar pedido.');
+
+      navigation.navigate('Pedidos');
+    })
+    .cactch(e => console.log(e));
 }
 
 const GerenciaPedido = ({ navigation }) => {
@@ -51,9 +68,9 @@ const GerenciaPedido = ({ navigation }) => {
 
           <View style={styles.produtos}>
             {/*Renderização de produtos vindos pelo params (array de objetos)*/}
-            { 
+            {
               navigation.getParam('produtos').map(produto => {
-                return(
+                return (
                   <View style={styles.relacaoProdutos} key={produto.nome}>
                     <Text style={styles.detalhesProduto}>{produto.nome}</Text>
                     <Text style={styles.detalhesProduto}>{produto.kg || produto.und}</Text>
@@ -64,7 +81,7 @@ const GerenciaPedido = ({ navigation }) => {
           </View>
 
           <View style={styles.botoes}>
-            <TouchableOpacity onPress={() => navigation.navigate('Pedidos')}>
+            <TouchableOpacity onPress={() => recusaPedido(navigation.getParam('id'))}>
               <ButtonRed title="Recusar" />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => aceitaPedido(navigation.getParam('id'))}>
@@ -113,7 +130,7 @@ const styles = StyleSheet.create({
     fontSize: 17
   },
   valorConteudo: {
-    fontSize: 17, 
+    fontSize: 17,
     color: '#EB5B65'
   },
   localConteudo: {
@@ -132,13 +149,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderBottomWidth: 2,
     borderBottomColor: '#ddd'
-  },  
+  },
   relacaoProdutos: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     margin: 10,
     paddingHorizontal: 5
-  }, 
+  },
   detalhesProduto: {
     fontSize: 16
   },
