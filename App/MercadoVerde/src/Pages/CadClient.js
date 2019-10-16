@@ -77,7 +77,7 @@ class CadClient extends Component {
     
     dados.urlImage = `https://api.adorable.io/avatars/150/${this.state.usuario}`;
 
-    const uri = 'http://10.59.128.133:1337/create/cadCliente';
+    const uri = 'http://10.59.128.133:1337/create/cliente';
 
     fetch(uri, {
       method: 'POST',
