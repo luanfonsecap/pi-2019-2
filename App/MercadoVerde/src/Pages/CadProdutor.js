@@ -78,7 +78,7 @@ class CadProdutor extends Component {
 
     dados.urlImage = `https://api.adorable.io/avatars/150/${this.state.usuario}`;    
 
-    const uri = 'http://192.168.100.19:1337/cadastroProdutor';
+    const uri = 'http://192.168.100.19:1337/create/cadProdutor';
     fetch(uri, {
       method: 'POST',
       body: JSON.stringify(dados),

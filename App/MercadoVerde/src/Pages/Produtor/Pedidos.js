@@ -77,7 +77,7 @@ class PedidosRecebidos extends Component {
   }
 
   gerenciaPedido(id, cliente, valor, local, produtos) {
-    this.props.navigation.navigate('GerenciaPedidos',
+    this.props.navigation.navigate('GerenciaPedido',
       { id, cliente, valor, local, produtos });
   }
 
