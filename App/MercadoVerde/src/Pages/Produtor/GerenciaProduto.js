@@ -8,9 +8,9 @@ import InputStyle from '../../Components/Input';
 
 //simulação de dados vindos do servidor
 const produtos = [
-  { id: 1, nome: 'Tomate Cáqui', preco: 2.54, qtde: 27, icon: 'tomate' },
-  { id: 2, nome: 'Alface Americana', preco: 1.40, qtde: 14, icon: 'alface' },
-  { id: 3, nome: 'Abacaxi', preco: 3, qtde: 9, icon: 'abacaxi' },
+  { id: 1, nome: 'Tomate Cáqui', preco: 2.54, kg: 2, und: null, icon: 'tomate' },
+  { id: 2, nome: 'Alface Americana', preco: 1.40, kg: null, und: 14, icon: 'alface' },
+  { id: 3, nome: 'Abacaxi', preco: 3, kg: null, und: 9, icon: 'abacaxi' },
 ];
 
 class GerenciaProduto extends Component {
@@ -140,7 +140,7 @@ class GerenciaProduto extends Component {
                       <Image style={styles.imagem} source={this.carregaIcon(item.icon)} />
                       <Text style={styles.labelCabecalho}>{item.nome}</Text>
                       <Text style={styles.labelCabecalho}>R$ {item.preco}</Text>
-                      <Text style={styles.labelCabecalho}>Qtde: {item.qtde}</Text>
+                      <Text style={styles.labelCabecalho}>Qtde: {item.kg || item.und}</Text>
                     </View>
                     <View style={styles.form}>
                       <Text style={styles.label}>Nome:</Text>
