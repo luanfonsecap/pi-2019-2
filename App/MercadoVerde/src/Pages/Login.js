@@ -44,7 +44,7 @@ class Login extends Component {
       return;
     }
 
-    const uri = "http://192.168.1.6:1337/login";
+    const uri = "http://192.168.100.19:1337/login";
     const requestInfo = {
       method: 'POST',
       body: JSON.stringify({ usuario, senha }),
@@ -60,7 +60,7 @@ class Login extends Component {
             AsyncStorage.setItem('tipo', res[0].tipo),
             AsyncStorage.setItem('nome', res[0].nome),
             AsyncStorage.setItem('id', `${res[0].id}`),
-            AsyncStorage.setItem('url', res[0].url),
+            AsyncStorage.setItem('url', res[0].urlImagem),
           ]);
 
           res[0].tipo === 'C' ? this.props.navigation.navigate('IndexC') : this.props.navigation.navigate('IndexP');
