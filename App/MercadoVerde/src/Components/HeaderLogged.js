@@ -34,7 +34,7 @@ class HeaderLogged extends Component {
               AsyncStorage.removeItem('nome'),
               AsyncStorage.removeItem('id'),
               AsyncStorage.removeItem('url'),
-            ]).then(res => props.navigation.navigate('Home'));
+            ]).then(res => this.props.navigation.navigate('Home'));
           }}>
           <View>
             <Text style={styles.textoBotao}>Sair</Text>
