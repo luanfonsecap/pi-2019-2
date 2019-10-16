@@ -39,6 +39,14 @@ function recusaPedido(id) {
     .cactch(e => console.log(e));
 }
 
+function quantidade(kg, und) { 
+  if(kg) {
+    return `${kg} Kg.`; 
+  } else {
+    return `${und} Und.`; 
+  }
+ }
+
 const GerenciaPedido = ({ navigation }) => {
 
   return (
@@ -73,7 +81,7 @@ const GerenciaPedido = ({ navigation }) => {
                 return (
                   <View style={styles.relacaoProdutos} key={produto.nome}>
                     <Text style={styles.detalhesProduto}>{produto.nome}</Text>
-                    <Text style={styles.detalhesProduto}>{produto.kg || produto.und}</Text>
+                    <Text style={styles.detalhesProduto}>{quantidade(produto.kg, produto.und)}</Text>
                   </View>
                 );
               })
