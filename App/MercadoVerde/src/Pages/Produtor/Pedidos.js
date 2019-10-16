@@ -62,7 +62,7 @@ class PedidosRecebidos extends Component {
           //atualiza o array de pedidos dentro do estado do componente com os 
           //dados vindos dos servidor
           .then(res => {
-            this.setState({ pedidos: res });
+            this.setState({ pedidos: [...res] });
           })
           .catch(e => {
             console.log(e)

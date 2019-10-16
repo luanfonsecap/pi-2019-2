@@ -36,7 +36,9 @@ class GerenciaProduto extends Component {
   //funcao para receber dados dos produtos cadastrados no servidor
   buscaDados(id) {
 
-    fetch('url', {
+    const url = 'http://192.168.100.19:1337/read/produto'
+
+    fetch(url, {
       method: 'POST',
       body: JSON.stringify({ id }),
       headers: { 'Content-Type': 'application/json' }
@@ -71,7 +73,9 @@ class GerenciaProduto extends Component {
 
   removeProduto(id) {
 
-    fetch('url', {
+    const url = 'http://192.168.100.19:1337/delete/produto';
+
+    fetch(url, {
       method: 'POST',
       body: JSON.stringify({ id }),
       headers: {'Content-Type':'application/json'}
@@ -92,7 +96,9 @@ class GerenciaProduto extends Component {
 
   atualizaProduto(id) {
 
-    fetch('url', {
+    const url = 'http://192.168.100.19:1337/update/produto'
+
+    fetch(url, {
       method: 'POST',
       body: JSON.stringify(
         { id, nome: this.state.nome, valor: this.state.valor, qtde: this.state.qtde  }
@@ -133,14 +139,12 @@ class GerenciaProduto extends Component {
                   já disponibilizadas dentro do app em "img", assim facilitando para renderizar a imagem certa
                   no lado do usuário Cliente */
 
-                  /* Também é necessário adicionar uma tela para cadastro de novos produtos */
-
                   <View style={styles.container}>
                     <View>
                       <Image style={styles.imagem} source={this.carregaIcon(item.icon)} />
                       <Text style={styles.labelCabecalho}>{item.nome}</Text>
                       <Text style={styles.labelCabecalho}>R$ {item.preco}</Text>
-                      <Text style={styles.labelCabecalho}>Qtde: {item.kg || item.und}</Text>
+                      <Text style={styles.labelCabecalho}>Qtde: {`${item.kg}Kg` || `${item.und}Und`}</Text>
                     </View>
                     <View style={styles.form}>
                       <Text style={styles.label}>Nome:</Text>
