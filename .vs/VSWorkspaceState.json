@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\server",
-    "\\server\\routes"
+    "\\server\\routes",
+    "\\SQL"
   ],
-  "SelectedNode": "\\server\\package.json",
+  "SelectedNode": "\\server\\routes\\cadPedido.js",
   "PreviewInSolutionExplorer": false
 }
