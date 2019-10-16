@@ -77,7 +77,7 @@ class Login extends Component {
   render() {
 
     return (
-      <ImageBackground source={require('../img/bg-fruits-blur.png')}
+      <ImageBackground source={require('../img/bg.png')}
         style={{ width: '100%', height: '100%' }}
       >
         <View style={styles.login}>
