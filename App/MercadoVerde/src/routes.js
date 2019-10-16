@@ -10,25 +10,27 @@ import CadClient from './Pages/CadClient';
 import IndexP from './Pages/Produtor/Index';
 import IndexC from './Pages/Cliente/Index';
 import Pedidos from './Pages/Produtor/Pedidos';
-import GerenciaPedidos from './Pages/Produtor/GerenciaPedido';
+import GerenciaPedido from './Pages/Produtor/GerenciaPedido';
+import GerenciaProduto from './Pages/Produtor/GerenciaProduto'
 
 
 import Header from './Components/Header';
 
-let options = {headerTitle: <Header />, headerLeft: null};
+const headerComponent = {headerTitle: <Header />, headerLeft: null};
+const noHeader = {header: null};
 
 const Routes = createAppContainer(
   createStackNavigator({
-    Home: {screen: Home, navigationOptions: {header: null}}, 
-    Presentation: {screen: Presentation, navigationOptions: options},
-    Login: {screen: Login, navigationOptions: options},
-    CadProdutor: {screen: CadProdutor, navigationOptions: options},
-    CadClient: {screen: CadClient, navigationOptions: options},
-    IndexP: {screen: IndexP, navigationOptions: {header: null}},
-    IndexC: {screen: IndexC, navigationOptions: {header: null}},
-    Pedidos: {screen: Pedidos, navigationOptions: {header: null}},
-    GerenciaPedidos: {screen: GerenciaPedidos, navigationOptions: {header: null}}
-
+    Home: {screen: Home, navigationOptions: noHeader}, 
+    Presentation: {screen: Presentation, navigationOptions: headerComponent},
+    Login: {screen: Login, navigationOptions: headerComponent},
+    CadProdutor: {screen: CadProdutor, navigationOptions: headerComponent},
+    CadClient: {screen: CadClient, navigationOptions: headerComponent},
+    IndexP: {screen: IndexP, navigationOptions: noHeader},
+    IndexC: {screen: IndexC, navigationOptions: noHeader},
+    Pedidos: {screen: Pedidos, navigationOptions: noHeader},
+    GerenciaPedido: {screen: GerenciaPedido, navigationOptions: noHeader},
+    GerenciaProduto: {screen: GerenciaProduto, navigationOptions: noHeader},
   })
 );
 

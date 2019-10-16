@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { Badge, Button } from 'react-native-elements';
+import { Badge } from 'react-native-elements';
 
 import HeaderLogged from '../../Components/HeaderLogged';
 
@@ -64,7 +64,7 @@ class Index extends Component {
             </View>
 
             <View style={styles.card}>
-              <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Gerenciar')}>
+              <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('GerenciaProduto')}>
                 <Text style={styles.botaoTexto}>Gerenciar Produtos</Text>
               </TouchableWithoutFeedback>
             </View>

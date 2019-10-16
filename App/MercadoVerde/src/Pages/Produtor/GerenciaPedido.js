@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, Alert, } from 'react-native';
 
 import HeaderLogged from '../../Components/HeaderLogged';
