@@ -23,6 +23,7 @@ class GerenciaProduto extends Component {
     this.state = {
       dados: [],
       nome: '',
+      tipo: '',
       qtde: '',
       valor: '',
     }
@@ -37,7 +38,7 @@ class GerenciaProduto extends Component {
       })
   }
 
-  //funcao para receber dados dos produtos cadastrados no servidor
+  //funcao para receber dados dos produtos relacionados ao produtor
   buscaDados(id) {
 
     const url = 'http://192.168.100.19:1337/read/produto'
@@ -55,6 +56,7 @@ class GerenciaProduto extends Component {
   }
 
   //renderiza icone do produto com base no tipo 
+  /* necessário refatorar */
   carregaIcon(icon) {
 
     switch (icon) {
@@ -145,13 +147,11 @@ class GerenciaProduto extends Component {
 
   atualizaProduto(id) {
 
-    const url = 'http://192.168.100.19:1337/update/produto'
+    const url = 'http://10.59.128.133:1337/update/produto'
 
     fetch(url, {
       method: 'POST',
-      body: JSON.stringify(
-        { id, nome: this.state.nome, valor: this.state.valor, qtde: this.state.qtde }
-      ),
+      body: JSON.stringify({ id, nome: this.state.nome, valor: this.state.valor, tipo: this.state.tipo, qtde: this.state.qtde }),
       headers: { 'Content-Type': 'application/json' }
     })
       .then(res => res.json())
@@ -218,6 +218,20 @@ class GerenciaProduto extends Component {
                         onChangeText={input => this.state.valor = input}
                         keyboardType="numeric"
                       />
+
+                      <Picker
+                        selectedValue={this.state.peso}
+                        style={styles.picker}
+                        onValueChange={(itemValue, itemIndex) => {
+                          this.setState({ peso: itemValue })
+                        }}>
+
+                        <Picker.Item label="Selecione o tipo de quantidade" value={null} />
+                        <Picker.Item label="Quilogramas" value="kg" />
+                        <Picker.Item label="Unidades" value="unidades" />
+
+                      </Picker>
+
                       <Text style={styles.label}>Quantidade:</Text>
                       <TextInput
                         placeholder="Qtde do produto"

@@ -52,8 +52,16 @@ function altProdutor(req, res) {
 }
 
 function altProduto(req, res) {
-    const { id, nome, valor, unidades, kg } = req.body;
-    const sqlQry = `UPDATE produtos SET nome='${nome}', valor='${valor}', unidades='${unidades}', kg='${kg}' WHERE id='${id}'`;
+    const { id, nome, valor, tipo, qtde } = req.body;
+    let coluna = "";
+
+    if (tipo === "kg") {
+        coluna = "unidades";
+    } else {
+        coluna = "kg";
+    }
+
+    const sqlQry = `UPDATE produtos SET nome='${nome}', valor='${valor}', ${tipo}='${qtde}', ${coluna}=${null} WHERE id='${id}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
