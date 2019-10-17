@@ -17,9 +17,9 @@ function infoUsuario(req, res) {
     });
 }
 
-function infoProduto(req, res) {
+function produtosProdutor(req, res) {
     const id = req.body.id;
-    const sqlQry = `SELECT * FROM produtos WHERE id='${id}'`;
+    const sqlQry = `SELECT * FROM produtos WHERE id_produtor='${id}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
@@ -32,5 +32,5 @@ function infoProduto(req, res) {
 }
 
 router.post('/usuario', infoUsuario);
-router.post('/produto', infoProduto);
+router.post('/produto', produtosProdutor);
 module.exports = router;

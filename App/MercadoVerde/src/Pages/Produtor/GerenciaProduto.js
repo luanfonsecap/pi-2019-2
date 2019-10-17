@@ -29,7 +29,8 @@ class GerenciaProduto extends Component {
 
     AsyncStorage.getItem('id')
       .then(id => {
-        /*  this.buscaDados(id); */
+        console.log(id);
+        this.buscaDados(id);
       })
   }
 
@@ -45,7 +46,8 @@ class GerenciaProduto extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        this.setState({ dados: [...res] });
+        this.setState({dados: res});
+        console.log(this.state.dados);
       })
   }
 
@@ -119,6 +121,14 @@ class GerenciaProduto extends Component {
     })
   }
 
+  quantidade(kg, und) { 
+    if(kg) {
+      return `${kg} Kg.`; 
+    } else {
+      return `${und} Und.`; 
+    }
+   }
+
   render() {
 
     return (
@@ -129,7 +139,7 @@ class GerenciaProduto extends Component {
             <HeaderLogged />
 
             <FlatList
-              data={produtos}
+              data={this.state.dados}
               keyExtractor={produtos.id}
               renderItem={({ item }) => {
                 return (
@@ -144,7 +154,7 @@ class GerenciaProduto extends Component {
                       <Image style={styles.imagem} source={this.carregaIcon(item.icon)} />
                       <Text style={styles.labelCabecalho}>{item.nome}</Text>
                       <Text style={styles.labelCabecalho}>R$ {item.preco}</Text>
-                      <Text style={styles.labelCabecalho}>Qtde: {`${item.kg}Kg` || `${item.und}Und`}</Text>
+                      <Text style={styles.labelCabecalho}>Qtde: {this.quantidade(item.kg, item.unidades)}</Text>
                     </View>
                     <View style={styles.form}>
                       <Text style={styles.label}>Nome:</Text>
