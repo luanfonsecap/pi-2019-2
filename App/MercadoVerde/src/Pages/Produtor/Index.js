@@ -7,57 +7,46 @@ import HeaderLogged from '../../Components/HeaderLogged';
 
 class Index extends Component {
 
-  badge() {
-
-    /*AsyncStorage.getItem('id').then(id => {
-          
-          fetch('url', {
-            method: 'POST',
-            //envia o id do usuário logado
-            body: JSON.stringify({id}),
-            headers: {'Content-Type':'application/json'}
-          })
-          //devolve a quantidade de pedidos atrelados ao id enviado
-          .then(res => res.json())
-          .then(res => {
-            if(res >= 1) {
-              return (
-                <Badge value={res} status="success"
-                  badgeStyle={{ height: 20, width: 40 }}
-                  containerStyle={{ position: 'absolute', top: -4, right: -4 }}
-                />
-              );
-            } else {
-              return;
-            }
-          })
-        }).catch(e => console.log(e)); */
-
-    if (3 == 3) {
-
-      return (
-        <Badge value="4" status="success"
-          badgeStyle={{ height: 20, width: 40 }}
-          containerStyle={{ position: 'absolute', top: -7, right: -10 }}
-        />
-      );
-    } else {
-      return;
+  constructor() {
+    super();
+    this.state = {
+      nPedidos: 0,
+      status: 'success'
     }
+  }
+
+  componentDidMount() {
+
+    AsyncStorage.getItem('id')
+      .then(id => {
+        //necessário alterar rota para recebeder array de pedidos e não produtos!
+        const url = 'http://192.168.100.19:1337/read/produto';
+        fetch(url, {
+          method: 'POST',
+          body: JSON.stringify({ id }),
+          headers: {'Content-Type':'application/json'}
+        })
+        .then(res => res.json())
+        .then(res => {
+          res.length >= 1 ? this.setState({ nPedidos: res.length, status: 'error'}) : null;
+        })
+      })
   }
 
   render() {
 
     return (
       <View>
-        <HeaderLogged nome="Luan" imagem={null} />
+        <HeaderLogged />
         <ImageBackground style={{ width: '100%', height: '100%' }}
           source={require('../../img/bg.png')}>
 
           <View style={styles.container}>
-
             <View style={styles.card}>
-              {this.badge()}
+              <Badge value={this.state.nPedidos} status={this.state.status}
+                badgeStyle={{ height: 20, width: 30 }}
+                containerStyle={{ position: 'absolute', top: -7, right: -7 }}
+              />
               <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Pedidos')}>
                 <Text style={styles.botaoTexto}>Pedidos Recebidos</Text>
               </TouchableWithoutFeedback>
@@ -70,7 +59,7 @@ class Index extends Component {
             </View>
 
             <View style={styles.card}>
-              <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('AltDados')}>
+              <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('AltDadosProdutor')}>
                 <Text style={styles.botaoTexto}>Alterar Dados</Text>
               </TouchableWithoutFeedback>
             </View>
