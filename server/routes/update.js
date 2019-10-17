@@ -53,7 +53,7 @@ function altProdutor(req, res) {
 
 function altProduto(req, res) {
     const { id, nome, valor, unidades, kg, id_produtor } = req.body;
-    const sqlQry = `UPDATE produtos SET nome='${nome}', valor='${valor}', unidades='${unidades}', kg='${kg}', id_produtor='${id_produtor}' WHERE id='${id}'`;
+    const sqlQry = `UPDATE produtos SET nome='${nome}', valor='${valor}', unidades='${unidades}', kg='${kg}' WHERE id='${id}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
