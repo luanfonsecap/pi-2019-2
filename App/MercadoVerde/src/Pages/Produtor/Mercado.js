@@ -5,7 +5,7 @@ import HeaderLogged from '../../Components/HeaderLogged';
 import ButtonGreen from '../../Components/ButtonGreen';
 import InputStyle from '../../Components/Input';
 
-class AltDados extends Component {
+class Mercado extends Component {
 
   constructor() {
     super(),
@@ -227,4 +227,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AltDados;
+export default Mercado;

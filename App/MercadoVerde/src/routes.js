@@ -12,6 +12,7 @@ import IndexC from './Pages/Cliente/Index';
 import Pedidos from './Pages/Produtor/Pedidos';
 import GerenciaPedido from './Pages/Produtor/GerenciaPedido';
 import GerenciaProduto from './Pages/Produtor/GerenciaProduto'
+import Mercado from './Pages/Produtor/Mercado';
 
 
 import Header from './Components/Header';
@@ -31,6 +32,7 @@ const Routes = createAppContainer(
     Pedidos: {screen: Pedidos, navigationOptions: noHeader},
     GerenciaPedido: {screen: GerenciaPedido, navigationOptions: noHeader},
     GerenciaProduto: {screen: GerenciaProduto, navigationOptions: noHeader},
+    Mercado: {screen: Mercado, navigationOptions: noHeader},
   })
 );
 
