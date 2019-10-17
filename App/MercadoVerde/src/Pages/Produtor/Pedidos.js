@@ -54,15 +54,16 @@ class PedidosRecebidos extends Component {
       .then(id => {
 
         fetch('url', {
-          method: 'GET',
-          //envia id do usuário para buscar pedido relacionados a esse id
-          headers: { 'Content-Type': 'application/json', 'User-Id': id }
+          method: 'POST',
+          //envia id do produtor para buscar pedido relacionados a ele
+          body: JSON.stringify({ id }),
+          headers: { 'Content-Type': 'application/json' }
         })
           .then(res => res.json)
           //atualiza o array de pedidos dentro do estado do componente com os 
           //dados vindos dos servidor
           .then(res => {
-            this.setState({ pedidos: [...res] });
+            this.setState({ pedidos: res });
           })
           .catch(e => {
             console.log(e)

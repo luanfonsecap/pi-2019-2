@@ -173,7 +173,8 @@ class CadProdutor extends Component {
             
             <Picker.Item label="Selecione" value="" />
             <Picker.Item label="Masculino" value="M" />
-            <Picker.Item label="Femenino" value="F" />
+            <Picker.Item label="Feminino" value="F" />
+            <Picker.Item label="Não Declarado" value="N" />
 
           </Picker>
         </View>
