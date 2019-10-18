@@ -59,7 +59,7 @@ class Index extends Component {
             </View>
 
             <View style={styles.card}>
-              <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('AltDadosProdutor')}>
+              <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('AltDados')}>
                 <Text style={styles.botaoTexto}>Alterar Dados</Text>
               </TouchableWithoutFeedback>
             </View>

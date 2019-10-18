@@ -11,7 +11,7 @@ import url from '../../services/url';
 //função para confirmação do pedido
 function aceitaPedido(id) {
 
-  fetch(`${url}${/* url aqui */}`, {
+  fetch(`${url}`, {
     method: 'POST',
     body: JSON.stringify({ id }),
     headers: { 'Content-Type': 'application/json' }
@@ -26,7 +26,7 @@ function aceitaPedido(id) {
 //função para negar pedido e redirecionar a tela de pedidos
 function recusaPedido(id) {
 
-  fetch(`${url}${/* url aqui */}`, {
+  fetch(`${url}`, {
     method: 'POST',
     body: JSON.stringify({ id }),
     headers: { 'Content-Type': 'application/json' }

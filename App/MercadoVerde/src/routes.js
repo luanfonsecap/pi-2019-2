@@ -13,6 +13,7 @@ import Pedidos from './Pages/Produtor/Pedidos';
 import GerenciaPedido from './Pages/Produtor/GerenciaPedido';
 import GerenciaProduto from './Pages/Produtor/GerenciaProduto'
 import Mercado from './Pages/Produtor/Mercado';
+import AltDados from './Pages/Produtor/AltDados';
 
 
 import Header from './Components/Header';
@@ -33,6 +34,7 @@ const Routes = createAppContainer(
     GerenciaPedido: {screen: GerenciaPedido, navigationOptions: noHeader},
     GerenciaProduto: {screen: GerenciaProduto, navigationOptions: noHeader},
     Mercado: {screen: Mercado, navigationOptions: noHeader},
+    AltDados: {screen: AltDados, navigationOptions: noHeader,}
   })
 );
 

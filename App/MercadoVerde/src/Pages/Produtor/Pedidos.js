@@ -54,7 +54,7 @@ class PedidosRecebidos extends Component {
     AsyncStorage.getItem('id')
       .then(id => {
 
-        fetch(`${url}${/* url aqui */}`, {
+        fetch(`${url}`, {
           method: 'POST',
           //envia id do produtor para buscar pedido relacionados a ele
           body: JSON.stringify({ id }),
