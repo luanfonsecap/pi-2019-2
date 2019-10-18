@@ -42,15 +42,17 @@ class GerenciaProduto extends Component {
   //funcao para receber dados dos produtos relacionados ao produtor
   buscaDados(id) {
 
-    fetch(`${url}/read/produto`, {
+    fetch(`${url}read/produto`, {
       method: 'POST',
       body: JSON.stringify({ id }),
       headers: { 'Content-Type': 'application/json' }
     })
       .then(res => res.json())
       .then(res => {
+        if(res.length == 0){  
+          Alert.alert('OPS!', 'Você ainda não possui produtos cadastrados.')
+        }
         this.setState({ dados: res });
-        console.log(this.state.dados);
       })
   }
 

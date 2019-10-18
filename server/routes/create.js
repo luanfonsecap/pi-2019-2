@@ -43,6 +43,7 @@ function cadProdutor(req, res) {
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
+            console.log(error);
             res.json(error);
         } else {
             /* Lógica de tratamento da resposta */
@@ -81,14 +82,17 @@ function cadProduto(req, res) {
 
 function cadPedido(req, res) {
 
+    console.log('Recebendo requisição.');
     const { status, id_produtor, id_cliente } = req.body;
 
     const sqlQry = `INSERT INTO pedidos (status, id_produtor, id_cliente) VALUES ('${status}','${id_produtor}','${id_cliente}');`
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
+            console.log('Erro na requisição.');
             res.json(error);
         } else {
+            console.log('Usuário criado.');
             res.json(results);
         }
     });

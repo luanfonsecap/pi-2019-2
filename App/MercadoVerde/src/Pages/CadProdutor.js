@@ -63,6 +63,11 @@ class CadProdutor extends Component {
       return;
     }
 
+    if(this.state.telefone.length > 9) {
+      Alert.alert('Campo Telefone', 'Digite apenas nove números.')
+      return;
+    }
+
     if (dadosPreenchidos.length != 14)  
       return;
 
@@ -77,14 +82,20 @@ class CadProdutor extends Component {
     delete dados['isVisible'];
     delete dados['senhaC'];
 
-    dados.urlImage = `https://api.adorable.io/avatars/150/${this.state.usuario}`;    
+    dados.urlImagem = `https://api.adorable.io/avatars/150/${this.state.usuario}`;   
+    console.log(`Dados sendo enviados: ${JSON.stringify(dados)}`) 
 
-    fetch(`${url}/create/produtor`, {
+    fetch('http://192.168.1.6:1337/create/produtor', {
       method: 'POST',
       body: JSON.stringify(dados),
       headers: {'Content-type': 'application/json'}
     })
-    .then(res => console.log('Requisição Finalizada'))
+    .then(res => res.json())
+    .then(res =>{
+      console.log('Requisição Finalizada');
+      Alert.alert('Sucesso!', 'Faça login no app.')
+      this.props.navigation.navigate('Login');
+    })
     .catch(e => console.log(e));
   }
 
@@ -155,7 +166,7 @@ class CadProdutor extends Component {
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Telefone:</Text>
           <TextInput
-            placeholder="9 digitos sem ífen"
+            placeholder="Ex: 99999999"
             style={styleInput}
             onChangeText={input => this.state.telefone = input}
             keyboardType="numeric"

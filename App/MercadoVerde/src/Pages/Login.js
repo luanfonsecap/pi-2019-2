@@ -55,15 +55,17 @@ class Login extends Component {
       .then(res => res.json())
       .then(res => {
         if (res[0].status) {
-
+          console.log('Enviado requisição de login.');
           Promise.all([
             AsyncStorage.setItem('tipo', res[0].tipo),
             AsyncStorage.setItem('nome', res[0].nome),
             AsyncStorage.setItem('id', `${res[0].id}`),
             AsyncStorage.setItem('url', res[0].urlImagem),
           ]);
+          console.log('Dados de usuário salvos.');
 
           res[0].tipo === 'C' ? this.props.navigation.navigate('IndexC') : this.props.navigation.navigate('IndexP');
+          console.log('Redirecionando usuário.');
         } else {
           this.setState({ erro: res[0].msg });
         }

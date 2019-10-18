@@ -64,7 +64,7 @@ const GerenciaPedido = ({ navigation }) => {
               <Text style={styles.valorConteudo}>{navigation.getParam('valor')}</Text>
             </View>
             <View style={styles.local}>
-              <Text style={styles.localTitulo}>Bairro:</Text>
+              <Text style={styles.localTitulo}>Local:</Text>
               <Text style={styles.localConteudo}>{navigation.getParam('local')}</Text>
             </View>
             <View style={styles.cabecalho}>
