@@ -47,18 +47,18 @@ class Mercado extends Component {
 
   atualizar(that) {
 
-    fetch(`${url}${/* url aqui */}`, {
+    fetch(`${url}`, {
       method: 'POST',
-      body: JSON.stringify( that.state ),
-      headers: {'Content-Type':'application/json'}
+      body: JSON.stringify(that.state),
+      headers: { 'Content-Type': 'application/json' }
     })
-    .then(res => res.json())
-    .then(res => {
-      if(res[0].status) {
-        Alert.alert('Sucesso', 'Dados atualizados.')
-      }
-    })
-    .catch(e => Alert.alert('Erro', 'Tente novamente.'))
+      .then(res => res.json())
+      .then(res => {
+        if (res[0].status) {
+          Alert.alert('Sucesso', 'Dados atualizados.')
+        }
+      })
+      .catch(e => Alert.alert('Erro', 'Tente novamente.'))
   }
 
   render() {
@@ -84,7 +84,7 @@ class Mercado extends Component {
               </View>
               <View style={styles.container}>
                 <Text style={styles.label}>Atual:</Text>
-                <Text style={styles.valorAtual}>Valor atual</Text>
+                <Text style={styles.valorAtual}>{this.state.valorEntrega || 0.00}</Text>
               </View>
             </View>
 
@@ -103,7 +103,7 @@ class Mercado extends Component {
               </View>
               <View style={styles.containerLocais}>
                 <Text style={styles.labelLocais}>Locais Atuais:</Text>
-                <Text style={styles.locaisAtual}>{this.state.locais}</Text>
+                <Text style={styles.locaisAtual}>{this.state.locais || 'Nenhum local cadastrado'}</Text>
               </View>
             </View>
 
@@ -167,9 +167,9 @@ class Mercado extends Component {
             </View>
 
             <View style={styles.containerButton}>
-                <TouchableOpacity onPress={() => this.atualizar(this)}>
-                  <ButtonGreen title="Atualizar" />
-                </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.atualizar(this)}>
+                <ButtonGreen title="Atualizar" />
+              </TouchableOpacity>
             </View>
 
           </View>
