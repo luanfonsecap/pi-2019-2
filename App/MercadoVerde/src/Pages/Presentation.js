@@ -1,26 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 
 import ButtonGreen from '../Components/ButtonGreen';
 
 function Presentation({ navigation }) {
 
   return (
-    <ScrollView style={{backgroundColor: 'rgba(0,122,53, 0.9)'}}>
+    <ScrollView style={{backgroundColor: 'rgba(0,122,53, 0.8)'}}>
 
       <View style={styles.cardPresentation}>
         <Text style={styles.title}>Bem Vindo!</Text>
         <Text style={styles.textPresentation}>
-          O Mercado Verde tem como objetivo
-          conectar e aproximar produtores
-          com clientes diretos, facilitando
-          a compra de produtos
-          frescos e livres de agrotóxicos.
+          O Mercado Verde, tem como objetivo
+          conectar e aproximar produtores rurais
+          à clientes direto.
+          Facilitando a compra de produtos
+          frescos e livres de agrotóxicos!
           </Text>
       </View>
 
+      <Image style={styles.img}
+        source={require('../assets/groceries.png')} />
+
       <View style={styles.cardCadastro}>
-        <Text style={styles.textCadastro}>Como gostaria de se cadastrar?</Text>
+        <Text style={styles.textCadastro}>Como gostaria de se cadastrar ?</Text>
       </View>
 
       <View style={styles.buttonArea}>
@@ -44,7 +47,8 @@ const styles = StyleSheet.create({
     elevation: 2,
     borderRadius: 2,
     marginHorizontal: 20,
-    marginTop: 75,
+    marginTop: 45,
+    marginBottom: 50,
     padding: 15,
   },
   title: {
@@ -54,8 +58,11 @@ const styles = StyleSheet.create({
   textPresentation: {
     fontSize: 19
   },
+  img: {
+    alignSelf: 'center',
+  },
   cardCadastro: {
-    marginTop: 200,
+    marginTop: 60,
     backgroundColor: '#fff',
     marginHorizontal: 20,
     padding: 15,
