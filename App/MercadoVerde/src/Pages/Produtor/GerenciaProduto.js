@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, Alert, AsyncStorage, FlatList, Image, TextInput, ScrollView } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, Alert, AsyncStorage, FlatList, Image, TextInput, ScrollView, Picker } from 'react-native';
 
 import HeaderLogged from '../../Components/HeaderLogged';
 import ButtonGreen from '../../Components/ButtonGreen';
 import ButtonRed from '../../Components/ButtonRed';
 import InputStyle from '../../Components/Input';
+import url from '../../services/url';
 
 //simulação de dados vindos do servidor
 const produtos = [
@@ -41,9 +42,7 @@ class GerenciaProduto extends Component {
   //funcao para receber dados dos produtos relacionados ao produtor
   buscaDados(id) {
 
-    const url = 'http://192.168.100.19:1337/read/produto'
-
-    fetch(url, {
+    fetch(`${url}/read/produto`, {
       method: 'POST',
       body: JSON.stringify({ id }),
       headers: { 'Content-Type': 'application/json' }
@@ -124,9 +123,7 @@ class GerenciaProduto extends Component {
 
   removeProduto(id) {
 
-    const url = 'http://192.168.100.19:1337/delete/produto';
-
-    fetch(url, {
+    fetch(`${url}/delete/produto`, {
       method: 'POST',
       body: JSON.stringify({ id }),
       headers: { 'Content-Type': 'application/json' }
@@ -147,9 +144,7 @@ class GerenciaProduto extends Component {
 
   atualizaProduto(id) {
 
-    const url = 'http://10.59.128.133:1337/update/produto'
-
-    fetch(url, {
+    fetch(`${url}/update/produto`, {
       method: 'POST',
       body: JSON.stringify({ id, nome: this.state.nome, valor: this.state.valor, tipo: this.state.tipo, qtde: this.state.qtde }),
       headers: { 'Content-Type': 'application/json' }
@@ -186,7 +181,7 @@ class GerenciaProduto extends Component {
             <HeaderLogged />
 
             <FlatList
-              data={produtos}
+              data={this.state.dados}
               keyExtractor={produtos.id}
               renderItem={({ item }) => {
                 return (
@@ -219,6 +214,14 @@ class GerenciaProduto extends Component {
                         keyboardType="numeric"
                       />
 
+                      <Text style={styles.label}>Quantidade:</Text>
+                      <TextInput
+                        placeholder="Qtde do produto"
+                        style={InputStyle}
+                        onChangeText={input => this.state.qtde = input}
+                        keyboardType="numeric"
+                      />
+
                       <Picker
                         selectedValue={this.state.peso}
                         style={styles.picker}
@@ -231,14 +234,6 @@ class GerenciaProduto extends Component {
                         <Picker.Item label="Unidades" value="unidades" />
 
                       </Picker>
-
-                      <Text style={styles.label}>Quantidade:</Text>
-                      <TextInput
-                        placeholder="Qtde do produto"
-                        style={InputStyle}
-                        onChangeText={input => this.state.qtde = input}
-                        keyboardType="numeric"
-                      />
                     </View>
 
                     <View style={styles.botoes}>

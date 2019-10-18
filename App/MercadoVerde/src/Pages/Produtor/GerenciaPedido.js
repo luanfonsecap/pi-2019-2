@@ -4,13 +4,14 @@ import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, Alert, } fro
 import HeaderLogged from '../../Components/HeaderLogged';
 import ButtonGreen from '../../Components/ButtonGreen';
 import ButtonRed from '../../Components/ButtonRed';
+import url from '../../services/url';
 
 /* os produtos do pedido são passados por params, recebidos na req da página anterior */
 
 //função para confirmação do pedido
 function aceitaPedido(id) {
 
-  fetch('url', {
+  fetch(`${url}${/* url aqui */}`, {
     method: 'POST',
     body: JSON.stringify({ id }),
     headers: { 'Content-Type': 'application/json' }
@@ -25,7 +26,7 @@ function aceitaPedido(id) {
 //função para negar pedido e redirecionar a tela de pedidos
 function recusaPedido(id) {
 
-  fetch('url', {
+  fetch(`${url}${/* url aqui */}`, {
     method: 'POST',
     body: JSON.stringify({ id }),
     headers: { 'Content-Type': 'application/json' }

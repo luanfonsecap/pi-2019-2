@@ -16,6 +16,7 @@ import Modal from 'react-native-modal';
 import styleInput from '../Components/Input';
 import ButtonRed from '../Components/ButtonRed';
 import ButtonGreen from '../Components/ButtonGreen';
+import url from '../services/url';
 
 class CadProdutor extends Component {
 
@@ -78,13 +79,12 @@ class CadProdutor extends Component {
 
     dados.urlImage = `https://api.adorable.io/avatars/150/${this.state.usuario}`;    
 
-    const uri = 'http://192.168.100.19:1337/create/produtor';
-    fetch(uri, {
+    fetch(`${url}/create/produtor`, {
       method: 'POST',
       body: JSON.stringify(dados),
       headers: {'Content-type': 'application/json'}
     })
-    .then(res => console.log('ok'))
+    .then(res => console.log('Requisição Finalizada'))
     .catch(e => console.log(e));
   }
 

@@ -4,6 +4,7 @@ import { withNavigation } from 'react-navigation';
 import { Button } from 'react-native-elements';
 
 import HeaderLogged from '../../Components/HeaderLogged';
+import url from '../../services/url';
 
 //simulção de dados vindos do servidor
 const pedidos = [
@@ -53,7 +54,7 @@ class PedidosRecebidos extends Component {
     AsyncStorage.getItem('id')
       .then(id => {
 
-        fetch('url', {
+        fetch(`${url}${/* url aqui */}`, {
           method: 'POST',
           //envia id do produtor para buscar pedido relacionados a ele
           body: JSON.stringify({ id }),

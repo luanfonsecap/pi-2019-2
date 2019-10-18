@@ -5,6 +5,7 @@ import {
 import { withNavigation } from 'react-navigation';
 
 import styleInput from '../Components/Input';
+import url from '../services/url';
 
 class Login extends Component {
 
@@ -44,14 +45,13 @@ class Login extends Component {
       return;
     }
 
-    const uri = "http://192.168.100.19:1337/login";
     const requestInfo = {
       method: 'POST',
       body: JSON.stringify({ usuario, senha }),
       headers: { 'Content-type': 'application/json' }
     }
 
-    fetch(uri, requestInfo)
+    fetch(`${url}login`, requestInfo)
       .then(res => res.json())
       .then(res => {
         if (res[0].status) {

@@ -4,6 +4,7 @@ import { withNavigation } from 'react-navigation';
 import { Badge } from 'react-native-elements';
 
 import HeaderLogged from '../../Components/HeaderLogged';
+import url from '../../services/url';
 
 class Index extends Component {
 
@@ -20,8 +21,7 @@ class Index extends Component {
     AsyncStorage.getItem('id')
       .then(id => {
         //necessário alterar rota para recebeder array de pedidos e não produtos!
-        const url = 'http://192.168.100.19:1337/read/produto';
-        fetch(url, {
+        fetch(`${url}/read/produto`, {
           method: 'POST',
           body: JSON.stringify({ id }),
           headers: {'Content-Type':'application/json'}

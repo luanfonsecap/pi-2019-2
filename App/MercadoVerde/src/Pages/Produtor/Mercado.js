@@ -4,6 +4,7 @@ import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, Alert, Scrol
 import HeaderLogged from '../../Components/HeaderLogged';
 import ButtonGreen from '../../Components/ButtonGreen';
 import InputStyle from '../../Components/Input';
+import url from '../../services/url';
 
 class Mercado extends Component {
 
@@ -28,7 +29,7 @@ class Mercado extends Component {
     AsyncStorage.getItem('id')
       .then(id => {
 
-        fetch('http://10.59.128.133:1337/read/usuario', {
+        fetch(`${url}/read/usuario`, {
           method: 'POST',
           body: JSON.stringify({ id }),
           headers: { 'Content-Type': 'application/json' }
@@ -46,8 +47,7 @@ class Mercado extends Component {
 
   atualizar(that) {
 
-    const url = '';
-    fetch(url, {
+    fetch(`${url}${/* url aqui */}`, {
       method: 'POST',
       body: JSON.stringify( that.state ),
       headers: {'Content-Type':'application/json'}

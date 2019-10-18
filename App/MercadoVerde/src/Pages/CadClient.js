@@ -16,6 +16,7 @@ import Modal from 'react-native-modal';
 import styleInput from '../Components/Input';
 import ButtonRed from '../Components/ButtonRed';
 import ButtonGreen from '../Components/ButtonGreen';
+import url from '../services/url';
 
 class CadClient extends Component {
 
@@ -77,9 +78,7 @@ class CadClient extends Component {
     
     dados.urlImage = `https://api.adorable.io/avatars/150/${this.state.usuario}`;
 
-    const uri = 'http://10.59.128.133:1337/create/cliente';
-
-    fetch(uri, {
+    fetch(`${url}/create/cliente`, {
       method: 'POST',
       body: JSON.stringify(dados),
       headers: JSON.stringify({'Content-type': 'application/json'})
