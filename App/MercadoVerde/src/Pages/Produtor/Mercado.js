@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, Alert, ScrollView, TextInput, AsyncStorage, Picker } from 'react-native';
 
 import HeaderLogged from '../../Components/HeaderLogged';
+import ButtonRed from '../../Components/ButtonRed';
 import ButtonGreen from '../../Components/ButtonGreen';
 import InputStyle from '../../Components/Input';
 import url from '../../services/url';
@@ -16,7 +17,7 @@ class Mercado extends Component {
         nomeProduto: '',
         valorProduto: '',
         // kg ou und
-        peso: '',
+        tipo: '',
         qtdeProduto: '',
         //qual icone a ser renderizado, valor vindo de um select
         icone: ''
@@ -45,20 +46,40 @@ class Mercado extends Component {
       })
   }
 
-  atualizar(that) {
+  cancelar(that) {
 
-    fetch(`${url}`, {
-      method: 'POST',
-      body: JSON.stringify(that.state),
-      headers: { 'Content-Type': 'application/json' }
-    })
-      .then(res => res.json())
-      .then(res => {
-        if (res[0].status) {
-          Alert.alert('Sucesso', 'Dados atualizados.')
-        }
+    that.setState({
+      valorEntrega: '',
+      locais: '',
+      nomeProduto: '',
+      valorProduto: '',
+      peso: '',
+      qtdeProduto: '',
+      icone: ''
+    });
+
+    that.props.navigation.navigate('IndexP');
+  }
+
+  cadProduto() {
+
+    AsyncStorage.getItem('id')
+      .then(id => {
+
+        fetch(`${url}create/produto`, {
+          method: 'POST',
+          body: JSON.stringify({
+            nome: this.state.nomeProduto,
+            valor: this.state.valorProduto,
+            id_produtor: id,
+            qtde: this.state.qtdeProduto,
+            tipo: this.state.tipo,
+          }),
+          headers: { 'Content-Type': 'application/json' }
+        })
+          .then(res => res.json())
+          .then(res => console.log(res));
       })
-      .catch(e => Alert.alert('Erro', 'Tente novamente.'))
   }
 
   render() {
@@ -139,23 +160,23 @@ class Mercado extends Component {
                 />
               </View>
               <Picker
-                selectedValue={this.state.peso}
+                selectedValue={this.state.tipo}
                 style={styles.picker}
                 onValueChange={(itemValue, itemIndex) => {
-                  this.setState({ peso: itemValue })
+                  this.setState({ tipo: itemValue })
                 }}>
 
                 <Picker.Item label="Selecione" value="" />
-                <Picker.Item label="Kilogramas" value="KG" />
-                <Picker.Item label="Unidades" value="UND" />
+                <Picker.Item label="Quilogramas" value="kg" />
+                <Picker.Item label="Unidades" value="unidades" />
 
               </Picker>
 
               <Picker
-                selectedValue={this.state.peso}
+                selectedValue={this.state.icone}
                 style={styles.picker}
                 onValueChange={(itemValue, itemIndex) => {
-                  this.setState({ peso: itemValue })
+                  this.setState({ icone: itemValue })
                 }}>
 
                 <Picker.Item label="Selecione icone para o produto" value="" />
@@ -164,11 +185,18 @@ class Mercado extends Component {
                 <Picker.Item label="Tomate" value="tomate" />
 
               </Picker>
+
+              <View style={styles.containerButton}>
+                <TouchableOpacity onPress={() => this.cadProduto(this)}>
+                  <ButtonGreen title="Cadastrar" />
+                </TouchableOpacity>
+              </View>
+
             </View>
 
             <View style={styles.containerButton}>
-              <TouchableOpacity onPress={() => this.atualizar(this)}>
-                <ButtonGreen title="Atualizar" />
+              <TouchableOpacity onPress={() => this.cancelar(this)}>
+                <ButtonRed title="Cancelar" />
               </TouchableOpacity>
             </View>
 
