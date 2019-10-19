@@ -278,6 +278,8 @@ class CadProdutor extends Component {
 
       </View>
       </ScrollView>
+
+      <Progress.Circle size={30} indeterminate={true} />
       
       </ImageBackground>
     );

@@ -6,6 +6,7 @@ import { withNavigation } from 'react-navigation';
 
 import styleInput from '../Components/Input';
 import url from '../services/url';
+import * as Progress from 'react-native-progress';
 
 class Login extends Component {
 
@@ -14,7 +15,10 @@ class Login extends Component {
     this.state = {
       user: '',
       password: '',
-      erro: null
+      erro: null,
+      display: 'none',
+      progress: 0.3,
+      color: "#4BEC91"
     }
     this.verificaLogin();
   }
@@ -31,7 +35,7 @@ class Login extends Component {
           case 'P':
             this.props.navigation.navigate('IndexP');
             break;
-        
+
           default:
             break;
         }
@@ -40,10 +44,12 @@ class Login extends Component {
 
   validacao(usuario, senha) {
 
-      if(usuario === '' || senha === '') {
+    if (usuario === '' || senha === '') {
       Alert.alert('Erro', 'Preencha corretamente os campos.');
       return;
     }
+
+    this.setState({ display: 'flex', progress: 0.3, color: "#4BEC91", erro: null });
 
     const requestInfo = {
       method: 'POST',
@@ -54,6 +60,8 @@ class Login extends Component {
     fetch(`${url}login`, requestInfo)
       .then(res => res.json())
       .then(res => {
+        this.setState({ progress: 0.5 });
+        this.setState({ progress: 0.8 });
         if (res[0].status) {
           console.log('Enviado requisição de login.');
           Promise.all([
@@ -63,14 +71,16 @@ class Login extends Component {
             AsyncStorage.setItem('url', res[0].urlImagem),
           ]);
           console.log('Dados de usuário salvos.');
+          this.setState({ progress: 1 });
 
           res[0].tipo === 'C' ? this.props.navigation.navigate('IndexC') : this.props.navigation.navigate('IndexP');
           console.log('Redirecionando usuário.');
         } else {
-          this.setState({ erro: res[0].msg });
+          this.setState({ erro: res[0].msg, color: 'red' });
         }
       })
       .catch(e => {
+        this.setState({ display: 'none' });
         this.setState({ erro: 'Não foi possível fazer login.' });
         console.log(e);
       });
@@ -126,6 +136,8 @@ class Login extends Component {
             </Text>
           </View>
 
+          <Progress.Bar progress={this.state.progress} color={this.state.color} width={200} style={{ display: this.state.display }} />
+
         </View>
       </ImageBackground>
     );
@@ -146,7 +158,7 @@ const styles = StyleSheet.create({
     borderColor: '#707070',
     width: '30%',
     elevation: 5,
-    fontSize: 18
+    fontSize: 18,
   },
   botaoTexto: {
     fontSize: 20,
