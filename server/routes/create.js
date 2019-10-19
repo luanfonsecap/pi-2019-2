@@ -83,16 +83,20 @@ function cadProduto(req, res) {
 function cadPedido(req, res) {
 
     console.log('Recebendo requisição.');
-    const { status, id_produtor, id_cliente } = req.body;
+    const { status, id_produtor, id_cliente, produtos, tipo, qtde } = req.body;
 
-    const sqlQry = `INSERT INTO pedidos (status, id_produtor, id_cliente) VALUES ('${status}','${id_produtor}','${id_cliente}');`
+    const sqlQry = `INSERT INTO pedidos (status, id_produtor, id_cliente, produtos, tipo, qtde) VALUES ('${status}','${id_produtor}','${id_cliente}','${produtos}','${tipo}','${qtde}');`
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
             console.log('Erro na requisição.');
             res.json(error);
         } else {
-            console.log('Usuário criado.');
+            console.log('Pedido salvo com sucesso.');
+            results = [{
+                status: true,
+                msg: 'Pedido salvo com sucesso.'
+            }]
             res.json(results);
         }
     });
