@@ -76,7 +76,7 @@ class Login extends Component {
           res[0].tipo === 'C' ? this.props.navigation.navigate('IndexC') : this.props.navigation.navigate('IndexP');
           console.log('Redirecionando usuário.');
         } else {
-          this.setState({ erro: res[0].msg, color: 'red' });
+          this.setState({ erro: res[0].msg, color: 'red', progress: 0 });
         }
       })
       .catch(e => {
