@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, AsyncStorage, FlatList, ScrollView, Alert } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, AsyncStorage, FlatList, ScrollView, Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { Button } from 'react-native-elements';
 

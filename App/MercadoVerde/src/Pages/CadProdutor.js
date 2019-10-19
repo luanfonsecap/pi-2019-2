@@ -85,7 +85,7 @@ class CadProdutor extends Component {
     dados.urlImagem = `https://api.adorable.io/avatars/150/${this.state.usuario}`;   
     console.log(`Dados sendo enviados: ${JSON.stringify(dados)}`) 
 
-    fetch('http://192.168.1.6:1337/create/produtor', {
+    fetch(`${url}create/produtor`, {
       method: 'POST',
       body: JSON.stringify(dados),
       headers: {'Content-type': 'application/json'}
