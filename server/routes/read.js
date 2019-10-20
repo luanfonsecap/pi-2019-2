@@ -43,6 +43,7 @@ function infoPedido(req, res) {
             var products = results[0].produtos.split(',');
             var types = results[0].tipo.split(',');
             var quant = results[0].qtde.split(',');
+            var values = results[0].valor.split(',');
             var tamanho = products.length;
             var resultado = [{
                 status: results[0].status,
@@ -51,14 +52,17 @@ function infoPedido(req, res) {
             }]
             var contador = 0
             while (contador != tamanho) {
-                resultado.push({produto: products[contador],
-                                tipo: types[contador],
-                                quant: quant[contador]
+                resultado.push({
+                    id_produto: products[contador],
+                    tipo: types[contador],
+                    quant: quant[contador],
+                    valor_uni: values[contador],
+                    total: values[contador] * quant [contador]
                 })
-                contador++
-            }                 
+                contador++;
+            }
             res.json(resultado);
-         }
+        }
     });
 }
 

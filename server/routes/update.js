@@ -77,7 +77,7 @@ function altProduto(req, res) {
     });
 }
 
-function altProduto(req, res) {
+function altPedido(req, res) {
     const { status, id_produtor, id_cliente, produtos, tipo, qtde } = req.body;
     const sqlQry = `UPDATE produtos SET status='${status}', id_produtor='${id_produtor}', id_cliente='${id_cliente}', produtos=${produtos}, tipo=${tipo}, qtde=${qtde} WHERE id='${id}'`;
 

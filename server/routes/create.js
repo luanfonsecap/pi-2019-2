@@ -83,9 +83,9 @@ function cadProduto(req, res) {
 function cadPedido(req, res) {
 
     console.log('Recebendo requisição.');
-    const { status, id_produtor, id_cliente, produtos, tipo, qtde } = req.body;
+    const { id_produtor, id_cliente, produtos, valor, tipo, qtde } = req.body;
 
-    const sqlQry = `INSERT INTO pedidos (status, id_produtor, id_cliente, produtos, tipo, qtde) VALUES ('${status}','${id_produtor}','${id_cliente}','${produtos}','${tipo}','${qtde}');`
+    const sqlQry = `INSERT INTO pedidos (status, id_produtor, id_cliente, produtos, valor, tipo, qtde) VALUES ('Aguardando','${id_produtor}','${id_cliente}','${produtos}','${valor}','${tipo}','${qtde}');`
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
