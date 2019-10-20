@@ -66,7 +66,22 @@ function infoPedido(req, res) {
     });
 }
 
+function infoPedProdutor(req, res) {
+    const id = req.body.id;
+    const sqlQry = `SELECT * FROM pedidos WHERE id_produtor='${id}'`;
+
+    connection.query(sqlQry, function (error, results, fields) {
+        if (error) {
+            /* Lógica de tratamento da resposta */
+            res.json(error);
+        } else {
+            res.json(results);
+        }
+    });
+}
+
 router.post('/usuario', infoUsuario);
 router.post('/produto', infoProduto);
 router.post('/pedido', infoPedido);
+router.post('/pedprodutor', infoPedProdutor);
 module.exports = router;
