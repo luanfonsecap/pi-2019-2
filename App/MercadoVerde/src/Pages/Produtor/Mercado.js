@@ -183,6 +183,7 @@ class Mercado extends Component {
                 <Picker.Item label="Alface" value="alface" />
                 <Picker.Item label="Abacaxi" value="abacaxi" />
                 <Picker.Item label="Tomate" value="tomate" />
+                <Picker.Item label="Feijão" value="feijao" />
 
               </Picker>
 

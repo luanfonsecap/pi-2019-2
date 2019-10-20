@@ -49,7 +49,7 @@ class GerenciaProduto extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        if(res.length == 0){  
+        if (res.length == 0) {
           Alert.alert('OPS!', 'Você ainda não possui produtos cadastrados.')
         }
         this.setState({ dados: res });
@@ -115,6 +115,10 @@ class GerenciaProduto extends Component {
 
       case 'pimenta':
         return require('../../assets/chili.png');
+        break;
+
+      case 'feijao':
+        return require('../../assets/beans.png');
         break;
 
       default:
@@ -187,11 +191,6 @@ class GerenciaProduto extends Component {
               keyExtractor={produtos.id}
               renderItem={({ item }) => {
                 return (
-
-                  /* Necessário criar um select para que o produtor escolha o tipo de icone
-                  para seu produto será usado, com base em uma lista predefinida do select e imagens
-                  já disponibilizadas dentro do app em "img", assim facilitando para renderizar a imagem certa
-                  no lado do usuário Cliente */
 
                   <View style={styles.container}>
                     <View>

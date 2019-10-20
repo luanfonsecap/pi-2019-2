@@ -57,7 +57,7 @@ function infoPedido(req, res) {
                     tipo: types[contador],
                     quant: quant[contador],
                     valor_uni: values[contador],
-                    total: values[contador] * quant [contador]
+                    total: values[contador] * quant[contador]
                 })
                 contador++;
             }
