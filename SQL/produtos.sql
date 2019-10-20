@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS `produtos` (
 
 INSERT INTO `produtos` (`id`, `nome`, `valor`, `unidades`, `kg`, `id_produtor`, `icon`) VALUES
 (1, 'Tomate', 6.99, NULL, 25, 3, 'tomate'),
-(2, 'Feijão', 5.5, NULL, 300, 3, 'Feijão'),
-(3, 'Alface', 1.5, 20, NULL, 3, 'Alface');
+(2, 'Feijão', 5.5, NULL, 300, 3, 'feijao'),
+(3, 'Alface', 1.5, 20, NULL, 3, 'alface');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
