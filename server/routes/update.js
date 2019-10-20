@@ -77,8 +77,27 @@ function altProduto(req, res) {
     });
 }
 
+function altProduto(req, res) {
+    const { status, id_produtor, id_cliente, produtos, tipo, qtde } = req.body;
+    const sqlQry = `UPDATE produtos SET status='${status}', id_produtor='${id_produtor}', id_cliente='${id_cliente}', produtos=${produtos}, tipo=${tipo}, qtde=${qtde} WHERE id='${id}'`;
+
+    connection.query(sqlQry, function (error, results, fields) {
+        if (error) {
+            /* Lógica de tratamento da resposta */
+            res.json(error);
+        } else {
+            results = [{
+                status: true,
+                msg: 'Pedido alterado com sucesso.'
+            }]
+            res.json(results);
+        }
+    });
+}
+
 router.post('/cliente', altCliente);
 router.post('/produtor', altProdutor);
 router.post('/produto', altProduto);
+router.post('/pedido', altPedido);
 
 module.exports = router;

@@ -57,7 +57,26 @@ function delProduto(req, res) {
     });
 }
 
+function delPedido(req, res) {
+    const id = req.body.id;
+    const sqlQry = `DELETE FROM pedidos WHERE id='${id}'`;
+
+    connection.query(sqlQry, function (error, results, fields) {
+        if (error) {
+            /* Lógica de tratamento da resposta */
+            res.json(error);
+        } else {
+            results = [{
+                status: true,
+                msg: 'Pedido excluido com sucesso.'
+            }]
+            res.json(results);
+        }
+    });
+}
+
 router.post('/cliente', delCliente);
 router.post('/produtor', delProdutor);
 router.post('/produto', delProduto);
+router.post('/pedido', delPedido);
 module.exports = router;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 15-Out-2019 às 16:51
+-- Generation Time: 20-Out-2019 às 03:28
 -- Versão do servidor: 5.7.26
 -- versão do PHP: 7.2.18
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `mercadoverde`
 --
-CREATE DATABASE IF NOT EXISTS `mercadoverde` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `mercadoverde`;
 
 -- --------------------------------------------------------
 
@@ -65,6 +63,32 @@ INSERT INTO `cadastro` (`id`, `tipo`, `usuario`, `nome`, `email`, `telefone`, `s
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `pedidos`
+--
+
+DROP TABLE IF EXISTS `pedidos`;
+CREATE TABLE IF NOT EXISTS `pedidos` (
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
+  `status` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `id_cliente` bigint(10) NOT NULL,
+  `id_produtor` bigint(10) NOT NULL,
+  `produtos` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `tipo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `qtde` varchar(255) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `status`, `id_cliente`, `id_produtor`, `produtos`, `tipo`, `qtde`) VALUES
+(6, 'Aguardando', 1, 3, '1,2', 'kg,kg', '2,2'),
+(7, 'undefined', 1, 3, '1,2,3,4,5', 'kg,kg,unidades,unidades,kg', '2,2,2,2,2');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `produtos`
 --
 
@@ -76,8 +100,17 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   `unidades` int(255) DEFAULT NULL,
   `kg` int(255) DEFAULT NULL,
   `id_produtor` bigint(10) NOT NULL,
+  `icon` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `produtos`
+--
+
+INSERT INTO `produtos` (`id`, `nome`, `valor`, `unidades`, `kg`, `id_produtor`, `icon`) VALUES
+(1, 'Tomate', '7', NULL, 25, 3, 'tomate'),
+(2, 'Feijão', '5', NULL, 300, 3, 'Feijão');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
