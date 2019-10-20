@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 20-Out-2019 às 12:54
+-- Generation Time: 20-Out-2019 às 12:55
 -- Versão do servidor: 5.7.26
 -- versão do PHP: 7.2.18
 
@@ -59,60 +59,6 @@ INSERT INTO `cadastro` (`id`, `tipo`, `usuario`, `nome`, `email`, `telefone`, `s
 (1, 'C', 'lucas', 'Lucas Lima', 'lucasdaniels51@gmail.com', 973625747, 'M', 32626412, 'MG', 'Betim', 'São José dos Campos', 101, 'Taquaril', 'senha', '', ''),
 (3, 'C', 'teste2', 'teste2', 'teste2', 9999, 'T', 9999, 'TT', 'teste', 'teste', 9999, 'teste', '$2a$10$f73Z7DvwU2uboPenFLfzXuy30b3y/DNdFGp7NPX7bWIarO/Uqp2fu', NULL, ''),
 (4, 'C', 'teste3', 'teste3', 'teste3', 9999, 'T', 9999, 'TT', 'teste', 'teste', 9999, 'teste', '$2a$10$rmahzZaaA.3WT7bTpOLXA.czs/9PQFCHGQFVMyMhR9/RDF36DLvIm', NULL, '');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `pedidos`
---
-
-DROP TABLE IF EXISTS `pedidos`;
-CREATE TABLE IF NOT EXISTS `pedidos` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `status` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `id_cliente` bigint(10) NOT NULL,
-  `id_produtor` bigint(10) NOT NULL,
-  `produtos` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `tipo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `valor` varchar(255) NOT NULL,
-  `qtde` varchar(255) CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `pedidos`
---
-
-INSERT INTO `pedidos` (`id`, `status`, `id_cliente`, `id_produtor`, `produtos`, `tipo`, `valor`, `qtde`) VALUES
-(1, 'Aguardando', 1, 3, '1,2', 'kg,kg', '6.99,5.5', '2,2'),
-(2, 'Aguardando', 1, 3, '1,2,3', 'kg,kg,unidades', '6.99,5.5,1.5', '2,5,3');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `produtos`
---
-
-DROP TABLE IF EXISTS `produtos`;
-CREATE TABLE IF NOT EXISTS `produtos` (
-  `id` bigint(10) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(255) NOT NULL,
-  `valor` float NOT NULL,
-  `unidades` int(255) DEFAULT NULL,
-  `kg` int(255) DEFAULT NULL,
-  `id_produtor` bigint(10) NOT NULL,
-  `icon` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `produtos`
---
-
-INSERT INTO `produtos` (`id`, `nome`, `valor`, `unidades`, `kg`, `id_produtor`, `icon`) VALUES
-(1, 'Tomate', 6.99, NULL, 25, 3, 'tomate'),
-(2, 'Feijão', 5.5, NULL, 300, 3, 'Feijão'),
-(3, 'Alface', 1.5, 20, NULL, 3, 'Alface');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
