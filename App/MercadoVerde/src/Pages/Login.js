@@ -69,6 +69,7 @@ class Login extends Component {
             AsyncStorage.setItem('nome', res[0].nome),
             AsyncStorage.setItem('id', `${res[0].id}`),
             AsyncStorage.setItem('url', res[0].urlImagem),
+            AsyncStorage.setItem('bairro', res[0].bairro),
           ]);
           console.log('Dados de usuário salvos.');
           this.setState({ progress: 1 });
