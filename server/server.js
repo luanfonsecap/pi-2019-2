@@ -11,7 +11,10 @@ app.use(cors())
 
 //configurando router
 const router = express.Router();
-router.get('/', (req, res) => res.json({ message: `API respondendo na porta ${port}.` }));
+router.get('/', (req, res) => res.json({
+    message: `API respondendo na porta ${port}.`,
+    status: `Running...`
+}));
 
 //importando rotas
 const login = require('./routes/login');
