@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 21-Out-2019 às 23:16
+-- Generation Time: 21-Out-2019 às 23:22
 -- Versão do servidor: 5.7.26
 -- versão do PHP: 7.2.18
 
@@ -48,8 +48,8 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id`, `status`, `id_cliente`, `nome_cliente`, `bairro`, `id_produtor`, `produtos`, `tipo`, `valor`, `qtde`) VALUES
-(1, 'Aguardando', 1, 'Lucas Lima', 'Betim', 3, '1,2', 'kg,kg', '6.99,5.5', '2,2'),
-(2, 'Aguardando', 1, 'Lucas Lima', 'Betim', 3, '1,2,3', 'kg,kg,unidades', '6.99,5.5,1.5', '2,5,3');
+(1, 'Aguardando', 1, 'Lucas Lima', 'Taquaril', 3, '1,2', 'kg,kg', '6.99,5.5', '2,2'),
+(2, 'Aguardando', 1, 'Lucas Lima', 'Taquaril', 3, '1,2,3', 'kg,kg,unidades', '6.99,5.5,1.5', '2,5,3');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
