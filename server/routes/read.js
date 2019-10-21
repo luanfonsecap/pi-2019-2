@@ -50,7 +50,7 @@ function infoPedido(req, res) {
                 id_produtor: results[0].id_produtor,
                 id_cliente: results[0].id_cliente,
                 nome_cliente: results[0].nome_cliente,
-                local: results[0].local
+                bairro: results[0].bairro
             }]
             var contador = 0
             while (contador != tamanho) {
