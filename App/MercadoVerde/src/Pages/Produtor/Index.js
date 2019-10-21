@@ -20,14 +20,16 @@ class Index extends Component {
 
     AsyncStorage.getItem('id')
       .then(id => {
+        console.log(id);
         //necessário alterar rota para recebeder array de pedidos e não produtos!
-        fetch(`${url}/read/produto`, {
+        fetch(`${url}read/pedprodutor`, {
           method: 'POST',
           body: JSON.stringify({ id }),
           headers: {'Content-Type':'application/json'}
         })
         .then(res => res.json())
         .then(res => {
+          console.log(res);
           res.length >= 1 ? this.setState({ nPedidos: res.length, status: 'error'}) : null;
         })
       })
