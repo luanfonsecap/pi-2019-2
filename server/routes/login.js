@@ -8,7 +8,7 @@ function login(req, res) {
 
     const { usuario, senha } = req.body;
 
-    connection.query(`SELECT nome,senha,tipo,urlImagem,id FROM cadastro WHERE usuario = "${usuario}"`, function (error, results, fields) {
+    connection.query(`SELECT nome,senha,tipo,urlImagem,id,bairro FROM cadastro WHERE usuario = "${usuario}"`, function (error, results, fields) {
         if (error){
             if(error.errno == 'ECONNREFUSED') {
                 error = {

@@ -48,7 +48,9 @@ function infoPedido(req, res) {
             var resultado = [{
                 status: results[0].status,
                 id_produtor: results[0].id_produtor,
-                id_cliente: results[0].id_cliente
+                id_cliente: results[0].id_cliente,
+                nome_cliente: results[0].nome_cliente,
+                local: results[0].local
             }]
             var contador = 0
             while (contador != tamanho) {
