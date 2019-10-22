@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View, StyleSheet, TouchableOpacity, TextInput, Text, ImageBackground, ScrollView, Picker, TouchableHighlight, Alert
+  View, StyleSheet, TouchableOpacity, TextInput, Text, ImageBackground, ScrollView, Picker, TouchableHighlight, Alert, AsyncStorage
 } from 'react-native';
 
 import styleInput from '../../Components/Input';
@@ -14,8 +14,8 @@ class AltDados extends Component {
   constructor() {
     super();
     this.state = {
-      nome: null,
       usuario: null,
+      nome: null,
       email: null,
       telefone: null,
       sexo: null,
@@ -30,19 +30,53 @@ class AltDados extends Component {
     }
   }
 
-  /* o backend precisa validar quais dados foram enviados e alterar somente os mesmos no registro */
+  componentDidMount() {
+    this.buscaDados();
+  }
+
+  buscaDados() {
+    
+    AsyncStorage.getItem('id')
+      .then(id => {
+
+        fetch(`${url}read/usuario`, {
+          method: 'POST',
+          body: JSON.stringify({ id }),
+          headers: {'Content-Type':'application/json'}
+        })
+        .then(res => res.json())
+        .then(res => {
+
+          delete res[0]['id'];
+          delete res[0]['tipo'];
+          delete res[0]['urlImagem'];
+
+          this.setState({...res[0]});
+          console.log(this.state);
+        })
+      })
+  }
+
   enviaDados() {
 
     const dados = this.state;
     delete dados['senhaC'];
 
-    fetch(`${url}/update/usuario`, {
-      method: 'POST',
-      body: JSON.stringify(dados),
-      headers: {'Content-type': 'application/json'}
-    })
-    .then(res => console.log('Alteração concluída'))
-    .catch(e => console.log(e));
+    AsyncStorage.getItem('id')
+      .then(id => {
+
+        dados.id = id;
+        console.log(dados);
+
+        fetch(`${url}update/produtor`, {
+          method: 'POST',
+          body: JSON.stringify(dados),
+          headers: {'Content-type': 'application/json'}
+        })
+        .then(res => res.json())
+        .then(res => console.log(res))
+        .catch(e => console.log(e));
+      })
   }
 
   render() {
@@ -61,7 +95,7 @@ class AltDados extends Component {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Nome da Feira:</Text>
               <TextInput
-                placeholder="Nome da sua feira"
+                placeholder={this.state.nome}
                 style={styleInput}
                 onChangeText={input => this.state.nome = input}
                 editable={true}
@@ -71,7 +105,7 @@ class AltDados extends Component {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Usuário:</Text>
               <TextInput
-                placeholder="Seu nome de usuário"
+                placeholder={this.state.usuario}
                 style={styleInput}
                 onChangeText={input => this.state.usuario = input}
               />
@@ -80,7 +114,7 @@ class AltDados extends Component {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Email:</Text>
               <TextInput
-                placeholder="Seu e-mail"
+                placeholder={this.state.email}
                 style={styleInput}
                 onChangeText={input => this.state.email = input}
                 keyboardType="email-address"
@@ -90,7 +124,7 @@ class AltDados extends Component {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Telefone:</Text>
               <TextInput
-                placeholder="9 digitos sem ífen"
+                placeholder={`${this.state.telefone}`}
                 style={styleInput}
                 onChangeText={input => this.state.telefone = input}
                 keyboardType="numeric"
@@ -117,7 +151,7 @@ class AltDados extends Component {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>CEP:</Text>
               <TextInput
-                placeholder="Seu CEP"
+                placeholder={`${this.state.cep}`}
                 style={styleInput}
                 onChangeText={input => this.state.cep = input}
                 onBlur={() => { this.validaCep(this.state.cep) }}
@@ -128,7 +162,7 @@ class AltDados extends Component {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>UF:</Text>
               <TextInput
-                placeholder="Seu estado. Ex: MG, SP, RJ"
+                placeholder={this.state.uf}
                 style={styleInput}
                 onChangeText={input => this.state.uf = input}
               />
@@ -137,7 +171,7 @@ class AltDados extends Component {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Cidade:</Text>
               <TextInput
-                placeholder="Sua cidade"
+                placeholder={this.state.cidade}
                 style={styleInput}
                 onChangeText={input => this.state.cidade = input}
               />
@@ -146,7 +180,7 @@ class AltDados extends Component {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Rua:</Text>
               <TextInput
-                placeholder="Sua rua"
+                placeholder={this.state.rua}
                 style={styleInput}
                 onChangeText={input => this.state.rua = input}
               />
@@ -155,7 +189,7 @@ class AltDados extends Component {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>N°:</Text>
               <TextInput
-                placeholder="Número da casa"
+                placeholder={`${this.state.numero}`}
                 style={styleInput}
                 onChangeText={input => this.state.numero = input}
                 keyboardType="numeric"
@@ -165,29 +199,9 @@ class AltDados extends Component {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Bairro:</Text>
               <TextInput
-                placeholder="Seu bairro"
+                placeholder={this.state.bairro}
                 style={styleInput}
                 onChangeText={input => this.state.bairro = input}
-              />
-            </View>
-
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Senha:</Text>
-              <TextInput
-                placeholder="Sua senha"
-                style={styleInput}
-                onChangeText={input => this.state.senha = input}
-                secureTextEntry={true}
-              />
-            </View>
-
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Confirmar Senha:</Text>
-              <TextInput
-                placeholder="Confirme sua senha"
-                style={styleInput}
-                onChangeText={input => this.state.senhaC = input}
-                secureTextEntry={true}
               />
             </View>
 
@@ -195,7 +209,7 @@ class AltDados extends Component {
               <TouchableOpacity>
                 <ButtonRed title="Cancelar" />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => { this.validaDados() }}>
+              <TouchableOpacity onPress={() => { this.enviaDados() }}>
                 <ButtonGreen title="Alterar" />
               </TouchableOpacity>
             </View>
