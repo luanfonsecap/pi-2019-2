@@ -74,7 +74,10 @@ class AltDados extends Component {
           headers: {'Content-type': 'application/json'}
         })
         .then(res => res.json())
-        .then(res => console.log(res))
+        .then(res => {
+          Alert.alert('Sucesso', 'Informações alteradas!')
+          this.props.navigation.navigate('IndexP');
+        })
         .catch(e => console.log(e));
       })
   }
