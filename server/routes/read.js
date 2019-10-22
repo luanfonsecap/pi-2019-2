@@ -77,7 +77,38 @@ function infoPedProdutor(req, res) {
             /* Lógica de tratamento da resposta */
             res.json(error);
         } else {
-            res.json(results);
+            var tamanho = results.length;
+            var contador = 0;
+            resultado = [{
+                Info: "Ok",
+                Dados: "Carregados"
+            }]
+
+            console.log(results);
+            
+
+            while (contador != tamanho) {
+                values = results[contador].valor.split(',');
+                client_id = results[contador].id_cliente;
+                quant = results[contador].qtde.split(',');
+
+                var count = 0;
+                var size = values.length;
+                var total = 0;
+                while (count != size) {
+                    total = total + (values[count] * quant[count])
+                    count++;
+                }
+                resultado.push({
+                    id: results[contador].id,
+                    IDCliente: client_id[contador],
+                    Nome: results[contador].nome_cliente,
+                    Valor: total.toFixed(2),
+                    Bairro: results[contador].bairro
+                })
+                contador++;
+            }
+            res.json(resultado);
         }
     });
 }
