@@ -6,13 +6,10 @@ const bcrypt = require('bcrypt');
 var pass = "";
 
 function altCliente(req, res) {
-    const { usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha, id, urlImagem } = req.body;
-    bcrypt.hash(senha, 1, function (err, hash) {
-        pass = hash;
-    })
+    const { usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, id } = req.body;
 
     const sqlQry = `UPDATE cadastro SET usuario='${usuario}', nome='${nome}', email='${email}', telefone='${telefone}', sexo='${sexo}', cep='${cep}', uf='${uf}',
-    cidade='${cidade}', rua='${rua}', numero='${numero}', bairro='${bairro}', senha='${pass}', urlImagem='${urlImagem}' WHERE id='${id}'`;
+    cidade='${cidade}', rua='${rua}', numero='${numero}', bairro='${bairro}' WHERE id='${id}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
@@ -29,13 +26,10 @@ function altCliente(req, res) {
 }
 
 function altProdutor(req, res) {
-    const { usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, senha, id, urlImagem } = req.body;
-    bcrypt.hash(senha, 1, function (err, hash) {
-        pass = hash;
-    })
+    const { usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, id } = req.body;
 
     const sqlQry = `UPDATE cadastro SET usuario='${usuario}', nome='${nome}', email='${email}', telefone='${telefone}', sexo='${sexo}', cep='${cep}', uf='${uf}',
-    cidade='${cidade}', rua='${rua}', numero='${numero}', bairro='${bairro}', senha='${pass}', urlImagem='${urlImagem}' WHERE id='${id}'`;
+    cidade='${cidade}', rua='${rua}', numero='${numero}', bairro='${bairro}' WHERE id='${id}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
