@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 20-Out-2019 às 12:55
+-- Generation Time: 21-Out-2019 às 23:22
 -- Versão do servidor: 5.7.26
 -- versão do PHP: 7.2.18
 
@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   `id` bigint(10) NOT NULL AUTO_INCREMENT,
   `status` varchar(255) CHARACTER SET utf8 NOT NULL,
   `id_cliente` bigint(10) NOT NULL,
+  `nome_cliente` varchar(255) NOT NULL,
+  `bairro` varchar(255) NOT NULL,
   `id_produtor` bigint(10) NOT NULL,
   `produtos` varchar(255) CHARACTER SET utf8 NOT NULL,
   `tipo` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
@@ -45,9 +47,9 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
 -- Extraindo dados da tabela `pedidos`
 --
 
-INSERT INTO `pedidos` (`id`, `status`, `id_cliente`, `id_produtor`, `produtos`, `tipo`, `valor`, `qtde`) VALUES
-(1, 'Aguardando', 1, 3, '1,2', 'kg,kg', '6.99,5.5', '2,2'),
-(2, 'Aguardando', 1, 3, '1,2,3', 'kg,kg,unidades', '6.99,5.5,1.5', '2,5,3');
+INSERT INTO `pedidos` (`id`, `status`, `id_cliente`, `nome_cliente`, `bairro`, `id_produtor`, `produtos`, `tipo`, `valor`, `qtde`) VALUES
+(1, 'Aguardando', 1, 'Lucas Lima', 'Taquaril', 3, '1,2', 'kg,kg', '6.99,5.5', '2,2'),
+(2, 'Aguardando', 1, 'Lucas Lima', 'Taquaril', 3, '1,2,3', 'kg,kg,unidades', '6.99,5.5,1.5', '2,5,3');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
