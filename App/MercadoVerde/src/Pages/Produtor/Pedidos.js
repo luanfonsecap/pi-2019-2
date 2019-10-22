@@ -100,11 +100,11 @@ class PedidosRecebidos extends Component {
                   <View style={styles.card}>
                     <Text style={styles.nome}>Pedido de <Text style={styles.bold}>{item.user}</Text></Text>
                     <Text style={styles.valor}>R$ {item.value}</Text>
-                    <Text style={styles.local}>{item.local}</Text>
+                    <Text style={styles.local}>{item.bairro}</Text>
                     <Button
                       title="Gerenciar"
                       buttonStyle={{ backgroundColor: '#EB5B65', marginTop: 10 }}
-                      onPress={() => this.gerenciaPedido(item.id, item.user, item.value, item.local, item.produtos)}
+                      onPress={() => this.gerenciaPedido(item.id, item.user, item.value, item.bairro, item.produtos)}
                     />
                   </View>
                 );
