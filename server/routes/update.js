@@ -89,6 +89,24 @@ function altPedido(req, res) {
     });
 }
 
+function altAvaliacao(req, res) {
+    const { id_pedido, estrelas } = req.body;
+    const sqlQry = `UPDATE avaliacao SET estrelas='${estrelas}' WHERE id_pedido='${id_pedido}'`;
+
+    connection.query(sqlQry, function (error, results, fields) {
+        if (error) {
+            /* Lógica de tratamento da resposta */
+            res.json(error);
+        } else {
+            results = [{
+                status: true,
+                msg: 'Avaliação alterada.'
+            }]
+            res.json(results);
+        }
+    });
+}
+
 router.post('/cliente', altCliente);
 router.post('/produtor', altProdutor);
 router.post('/produto', altProduto);

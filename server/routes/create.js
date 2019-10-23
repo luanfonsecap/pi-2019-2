@@ -103,8 +103,34 @@ function cadPedido(req, res) {
 
 }
 
+function cadAvaliacao(req, res) {
+
+    console.log('Recebendo requisição.');
+    const { id_pedido, nome_produtor, id_produtor, urlImagem, estrelas } = req.body;
+    const sqlQry = `INSERT INTO avaliacao (id_pedido, nome_produtor, id_produtor, urlImagem, estrelas) VALUES ('${id_pedido}','${nome_produtor}','${id_produtor}', '${urlImagem}', '${estrelas}');`
+    connection.query(sqlQry, function (error, results, fields) {
+        if (error) {
+            /* Lógica de tratamento da resposta */
+            console.log("Erro ao avaliar produtor.");
+            results = [{
+                status: false,
+                msg: 'Erro ao avaliar produtor.'
+            }]
+            res.json(results);
+        } else {
+            console.log('Avaliação recebida.');
+            results = [{
+                status: true,
+                msg: 'Avaliação recebida.'
+            }]
+            res.json(results);
+        }
+    });
+
+}
 router.post('/cliente', cadCliente);
 router.post('/produtor', cadProdutor);
 router.post('/produto', cadProduto);
 router.post('/pedido', cadPedido);
+router.post('/avaliacao', cadAvaliacao);
 module.exports = router;
