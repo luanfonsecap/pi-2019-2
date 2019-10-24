@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 20-Out-2019 às 12:55
+-- Generation Time: 24-Out-2019 às 01:04
 -- Versão do servidor: 5.7.26
 -- versão do PHP: 7.2.18
 
@@ -46,19 +46,11 @@ CREATE TABLE IF NOT EXISTS `cadastro` (
   `senha` varchar(255) NOT NULL,
   `urlImagem` varchar(255) DEFAULT NULL,
   `areas` varchar(255) NOT NULL,
+  `avaliacao_med` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `usuario_UNIQUE` (`usuario`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `cadastro`
---
-
-INSERT INTO `cadastro` (`id`, `tipo`, `usuario`, `nome`, `email`, `telefone`, `sexo`, `cep`, `uf`, `cidade`, `rua`, `numero`, `bairro`, `senha`, `urlImagem`, `areas`) VALUES
-(1, 'C', 'lucas', 'Lucas Lima', 'lucasdaniels51@gmail.com', 973625747, 'M', 32626412, 'MG', 'Betim', 'São José dos Campos', 101, 'Taquaril', 'senha', '', ''),
-(3, 'C', 'teste2', 'teste2', 'teste2', 9999, 'T', 9999, 'TT', 'teste', 'teste', 9999, 'teste', '$2a$10$f73Z7DvwU2uboPenFLfzXuy30b3y/DNdFGp7NPX7bWIarO/Uqp2fu', NULL, ''),
-(4, 'C', 'teste3', 'teste3', 'teste3', 9999, 'T', 9999, 'TT', 'teste', 'teste', 9999, 'teste', '$2a$10$rmahzZaaA.3WT7bTpOLXA.czs/9PQFCHGQFVMyMhR9/RDF36DLvIm', NULL, '');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -183,9 +183,9 @@ function infoHistoricoPed(req, res) {
     });
 }
 
-function infoAvaliacao(req, res) {
+function infoMelhores(req, res) {
     const { cidade } = req.body;
-    const sqlQry = `SELECT  FROM avaliacao WHERE estrela >= 4`;
+    const sqlQry = `SELECT id,nome,avaliacao_med,urlImagem FROM cadastro WHERE avaliacao_med >= 4 AND cidade='${cidade}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
@@ -193,7 +193,21 @@ function infoAvaliacao(req, res) {
             res.json(error);
         } else {
             tamanho = results.length;
-            res.json(results);
+            contador = 0;
+            resultado = []
+            while (contador != tamanho) {
+                resultado.push(
+                    {
+                        id: results[contador].id,
+                        nome: results[contador].nome,
+                        avaliacao: results[contador].avaliacao_med,
+                        url: results[contador].urlImagem
+                    }
+                )
+                contador++;
+            }
+            
+            res.json(resultado);
         }
     });
 }
@@ -204,5 +218,5 @@ router.post('/pedido', infoPedido);
 router.post('/pedprodutor', infoPedProdutor);
 router.post('/pedcliente', infoPedCliente);
 router.post('/historico', infoHistoricoPed);
-router.post('/avaliacao', infoAvaliacao);
+router.post('/melhores', infoMelhores);
 module.exports = router;

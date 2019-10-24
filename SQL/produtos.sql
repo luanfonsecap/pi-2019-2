@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 20-Out-2019 às 12:55
+-- Generation Time: 24-Out-2019 às 01:04
 -- Versão do servidor: 5.7.26
 -- versão do PHP: 7.2.18
 
@@ -39,15 +39,6 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   `icon` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `produtos`
---
-
-INSERT INTO `produtos` (`id`, `nome`, `valor`, `unidades`, `kg`, `id_produtor`, `icon`) VALUES
-(1, 'Tomate', 6.99, NULL, 25, 3, 'tomate'),
-(2, 'Feijão', 5.5, NULL, 300, 3, 'feijao'),
-(3, 'Alface', 1.5, 20, NULL, 3, 'alface');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
