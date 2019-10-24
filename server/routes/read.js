@@ -212,6 +212,58 @@ function infoMelhores(req, res) {
     });
 }
 
+function infoMercado(req, res) {
+    const { id } = req.body;
+    const sqlQry = `SELECT nome,cidade,avaliacao_med,urlImagem FROM cadastro WHERE id = ${id}`;
+    const sqlQry2 = `SELECT * FROM produtos WHERE id_produtor = ${id}`
+    connection.query(sqlQry, function (error, results, fields) {
+        if (error) {
+            /* Lógica de tratamento da resposta */
+            res.json(error);
+        } else {
+            var resultado = [{
+                nome: results[0].nome,
+                cidade: results[0].cidade,
+                avaliacao: results[0].avaliacao_med,
+                url: results[0].urlImagem
+            }]
+            connection.query(sqlQry2, function (error2, results2, fields2) {
+                if (error) {
+                    /* Lógica de tratamento da resposta */
+                    res.json(error);
+                } else {
+                    tamanho = results2.length;
+                    contador = 0;
+                    while (contador != tamanho) {
+                        if (results2[contador].unidades === null) {
+                            resultado.push({
+                                id: results2[contador].id,
+                                nome: results2[contador].nome,
+                                qtde: results2[contador].kg,
+                                tipo: "kg",
+                                preço: results2[contador].valor,
+                                icon: results2[contador].icon
+                            })
+                        } else {
+                            resultado.push({
+                                id: results2[contador].id,
+                                nome: results2[contador].nome,
+                                qtde: results2[contador].unidades,
+                                tipo: "unidades",
+                                preço: results2[contador].valor,
+                                icon: results2[contador].icon
+                            })
+                        }
+                        contador++;
+                    }
+                    res.json(resultado);
+                }
+            });
+        }
+    });
+    
+}
+
 router.post('/usuario', infoUsuario);
 router.post('/produto', infoProduto);
 router.post('/pedido', infoPedido);
@@ -219,4 +271,5 @@ router.post('/pedprodutor', infoPedProdutor);
 router.post('/pedcliente', infoPedCliente);
 router.post('/historico', infoHistoricoPed);
 router.post('/melhores', infoMelhores);
+router.post('/mercado', infoMercado);
 module.exports = router;
