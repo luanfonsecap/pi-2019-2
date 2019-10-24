@@ -184,8 +184,8 @@ function infoHistoricoPed(req, res) {
 }
 
 function infoAvaliacao(req, res) {
-    const id = req.body.id;
-    const sqlQry = `SELECT * FROM avaliacao WHERE estrela >= 4`;
+    const { cidade } = req.body;
+    const sqlQry = `SELECT  FROM avaliacao WHERE estrela >= 4`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
@@ -193,18 +193,6 @@ function infoAvaliacao(req, res) {
             res.json(error);
         } else {
             tamanho = results.length;
-            contador = 0;
-            resultado = [];
-
-         //   while (contador != tamanho) {
-         //       resultado.push[{
-         //           
-         //       }];
-         //       contador++;
-         //   }
-            
-
-
             res.json(results);
         }
     });

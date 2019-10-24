@@ -104,10 +104,10 @@ function cadPedido(req, res) {
 }
 
 function cadAvaliacao(req, res) {
-
     console.log('Recebendo requisição.');
     const { id_pedido, nome_produtor, id_produtor, urlImagem, estrelas } = req.body;
     const sqlQry = `INSERT INTO avaliacao (id_pedido, nome_produtor, id_produtor, urlImagem, estrelas) VALUES ('${id_pedido}','${nome_produtor}','${id_produtor}', '${urlImagem}', '${estrelas}');`
+    const sqlQry2 = `SELECT  estrelas FROM avaliacao WHERE id_produtor='${id_produtor}'`;
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
@@ -118,16 +118,47 @@ function cadAvaliacao(req, res) {
             }]
             res.json(results);
         } else {
-            console.log('Avaliação recebida.');
-            results = [{
-                status: true,
-                msg: 'Avaliação recebida.'
-            }]
-            res.json(results);
-        }
+            connection.query(sqlQry2, function (error2, results2, fields2) {
+                if (error1) {
+                    /* Lógica de tratamento da resposta */
+                    console.log("Erro");
+                    results = [{
+                        status: false,
+                        msg: 'Erro ao extrair dados.'
+                    }]
+                    res.json(results2);
+                } else {
+                    var tamanho = results1.length;
+                    var contador = 0;
+                    var valores = 0;
+                    while (contador != tamanho) {
+                        valores = valores + results1[contador].estrelas;
+                        contador++;
+                    }
+                    media = valores/tamanho;
+                    console.log(media);
+                    
+                    var sqlQry3 = `UPDATE cadastro SET avaliacao_med='${media}' WHERE id=${id_produtor}`;
+                    connection.query(sqlQry3, function (error3, results3, fields3) {
+                        if (error1) {
+                            /* Lógica de tratamento da resposta */
+                            console.log("Erro ao alterar avaliação média.");
+                            results = [{
+                                status: false,
+                                msg: 'Erro ao alterar avaliação média.'
+                            }]
+                            res.json(error3);
+                        } else {
+                            console.log("Sucesso");
+                        }
+                    });
+                }
+            });
+            res.json({status: true});
+        } 
     });
-
 }
+
 router.post('/cliente', cadCliente);
 router.post('/produtor', cadProdutor);
 router.post('/produto', cadProduto);
