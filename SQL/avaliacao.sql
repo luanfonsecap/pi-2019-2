@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: 23-Out-2019 às 03:58
+-- Generation Time: 24-Out-2019 às 01:04
 -- Versão do servidor: 5.7.26
 -- versão do PHP: 7.2.18
 
@@ -37,18 +37,6 @@ CREATE TABLE IF NOT EXISTS `avaliacao` (
   `estrelas` int(1) NOT NULL,
   PRIMARY KEY (`id_pedido`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `avaliacao`
---
-
-INSERT INTO `avaliacao` (`id_pedido`, `nome_produtor`, `id_produtor`, `urlImagem`, `estrelas`) VALUES
-(1, 'José dos Tomates', 1, 'teste.com', 5),
-(2, 'José dos Tomates', 1, 'teste.com', 3),
-(3, 'José dos Mamões', 2, 'teste.com', 3),
-(4, 'José dos Mamões', 2, 'teste.com', 4),
-(5, 'José dos Chuchus', 3, 'teste.com', 5),
-(6, 'José dos Chuchus', 3, 'teste.com', 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
