@@ -268,7 +268,7 @@ class CadProdutor extends Component {
         </View>
 
         <View style={styles.botoes}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
             <ButtonRed title="Cancelar"/>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => {this.validaDados()}}>
@@ -279,8 +279,6 @@ class CadProdutor extends Component {
       </View>
       </ScrollView>
 
-      <Progress.Circle size={30} indeterminate={true} />
-      
       </ImageBackground>
     );
   }
