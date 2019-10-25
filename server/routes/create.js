@@ -81,23 +81,39 @@ function cadProduto(req, res) {
 }
 
 function cadPedido(req, res) {
-
-    console.log('Recebendo requisição.');
     const { id_produtor, id_cliente, nome_cliente, cidade, produtos, valor, tipo, qtde } = req.body;
-
     const sqlQry = `INSERT INTO pedidos (status, id_produtor, id_cliente, nome_cliente, cidade, produtos, valor, tipo, qtde) VALUES ('Aguardando','${id_produtor}','${id_cliente}','${nome_cliente}', '${cidade}', '${produtos}','${valor}','${tipo}','${qtde}');`
+    var prods = produtos.split(',');
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
-            console.log('Erro na requisição.');
+            console.log('Erro na requisição I.');
             res.json(error);
         } else {
-            console.log('Pedido salvo com sucesso.');
-            results = [{
-                status: true,
-                msg: 'Pedido salvo com sucesso.'
-            }]
-            res.json(results);
+            var contador = 0;
+            prods.forEach(prod => {
+                var sqlQry2 = `SELECT vendas FROM produtos WHERE id=${prod}`;
+                connection.query(sqlQry2, function (error2, results2, fields2) {
+                    if (error) {
+                        /* Lógica de tratamento da resposta */
+                        console.log('Erro na requisição II.');
+                        res.json(error2);
+                    } else {
+                        var soma = results2[0].vendas + 1;
+                        var sqlQry3 = `UPDATE produtos SET vendas='${soma}' WHERE id='${prod}'`;
+                        connection.query(sqlQry3, function (error3, results3, fields3) {
+                            if (error) {
+                                /* Lógica de tratamento da resposta */
+                                console.log('Erro na requisição III.');
+                                res.json(error3);
+                            } else {
+                                console.log('');
+                            }
+                        });
+                    }
+                });
+            });
+            res.json([{ status: true }]);
         }
     });
 
@@ -135,9 +151,9 @@ function cadAvaliacao(req, res) {
                         valores = valores + results1[contador].estrelas;
                         contador++;
                     }
-                    media = valores/tamanho;
+                    media = valores / tamanho;
                     console.log(media);
-                    
+
                     var sqlQry3 = `UPDATE cadastro SET avaliacao_med='${media}' WHERE id=${id_produtor}`;
                     connection.query(sqlQry3, function (error3, results3, fields3) {
                         if (error1) {
@@ -154,8 +170,8 @@ function cadAvaliacao(req, res) {
                     });
                 }
             });
-            res.json({status: true});
-        } 
+            res.json({ status: true });
+        }
     });
 }
 

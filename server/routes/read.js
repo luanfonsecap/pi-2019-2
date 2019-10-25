@@ -225,7 +225,8 @@ function infoMercado(req, res) {
                 nome: results[0].nome,
                 cidade: results[0].cidade,
                 avaliacao: results[0].avaliacao_med,
-                url: results[0].urlImagem
+                url: results[0].urlImagem,
+                produtos: []
             }]
             connection.query(sqlQry2, function (error2, results2, fields2) {
                 if (error) {
@@ -236,16 +237,16 @@ function infoMercado(req, res) {
                     contador = 0;
                     while (contador != tamanho) {
                         if (results2[contador].unidades === null) {
-                            resultado.push({
+                            resultado[0].produtos.push({
                                 id: results2[contador].id,
                                 nome: results2[contador].nome,
                                 qtde: results2[contador].kg,
                                 tipo: "kg",
                                 preço: results2[contador].valor,
-                                icon: results2[contador].icon
+                                icon: results2[contador].icon,
                             })
                         } else {
-                            resultado.push({
+                            resultado[0].produtos.push({
                                 id: results2[contador].id,
                                 nome: results2[contador].nome,
                                 qtde: results2[contador].unidades,
