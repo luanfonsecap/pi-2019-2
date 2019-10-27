@@ -9,7 +9,7 @@ import {
   ScrollView,
   Picker,
   TouchableHighlight,
-  Alert
+  Alert,
 } from 'react-native';
 
 import Modal from 'react-native-modal';
@@ -18,7 +18,7 @@ import ButtonRed from '../Components/ButtonRed';
 import ButtonGreen from '../Components/ButtonGreen';
 import url from '../services/url';
 
-class CadClient extends Component {
+class CadProdutor extends Component {
 
   constructor() {
     super();
@@ -63,9 +63,15 @@ class CadClient extends Component {
       return;
     }
 
+    if(this.state.telefone.length > 9) {
+      Alert.alert('Campo Telefone', 'Digite apenas nove números.')
+      return;
+    }
+
     if (dadosPreenchidos.length != 14)  
       return;
 
+    console.log('Enviando requisição');
     this.enviaDados();
 
   }
@@ -75,15 +81,21 @@ class CadClient extends Component {
     const dados = this.state;
     delete dados['isVisible'];
     delete dados['senhaC'];
-    
-    dados.urlImage = `https://api.adorable.io/avatars/150/${this.state.usuario}`;
 
-    fetch(`${url}/create/cliente`, {
+    dados.urlImagem = `https://api.adorable.io/avatars/150/${this.state.usuario}`;   
+    console.log(`Dados sendo enviados: ${JSON.stringify(dados)}`) 
+
+    fetch(`${url}create/cliente`, {
       method: 'POST',
       body: JSON.stringify(dados),
-      headers: JSON.stringify({'Content-type': 'application/json'})
+      headers: {'Content-type': 'application/json'}
     })
-    .then(res => console.log(res))
+    .then(res => res.json())
+    .then(res =>{
+      console.log('Requisição Finalizada');
+      Alert.alert('Sucesso!', 'Faça login no app.')
+      this.props.navigation.navigate('Login');
+    })
     .catch(e => console.log(e));
   }
 
@@ -154,7 +166,7 @@ class CadClient extends Component {
         <View style={styles.inputGroup}>
           <Text style={styles.label}>Telefone:</Text>
           <TextInput
-            placeholder="9 digitos sem ífen"
+            placeholder="Ex: 99999999"
             style={styleInput}
             onChangeText={input => this.state.telefone = input}
             keyboardType="numeric"
@@ -172,7 +184,8 @@ class CadClient extends Component {
             
             <Picker.Item label="Selecione" value="" />
             <Picker.Item label="Masculino" value="M" />
-            <Picker.Item label="Femenino" value="F" />
+            <Picker.Item label="Feminino" value="F" />
+            <Picker.Item label="Não Declarado" value="N" />
 
           </Picker>
         </View>
@@ -184,6 +197,7 @@ class CadClient extends Component {
             style={styleInput}
             onChangeText={input => this.state.cep = input}
             onBlur={() => {this.validaCep(this.state.cep)}}
+            keyboardType="numeric"
           />
         </View>
 
@@ -254,7 +268,7 @@ class CadClient extends Component {
         </View>
 
         <View style={styles.botoes}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
             <ButtonRed title="Cancelar"/>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => {this.validaDados()}}>
@@ -264,7 +278,7 @@ class CadClient extends Component {
 
       </View>
       </ScrollView>
-      
+
       </ImageBackground>
     );
   }
@@ -276,7 +290,6 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
     padding: 30
   },
   label: {
@@ -289,10 +302,9 @@ const styles = StyleSheet.create({
   botoes: {
     marginTop: 30,
     flexDirection: 'row',
-    alignContent: 'space-around',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%'
+    width: '100%',
   },
   picker: {
     backgroundColor: '#fff',
@@ -314,4 +326,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CadClient;
+export default CadProdutor;

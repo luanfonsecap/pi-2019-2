@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, AsyncStorage, Platform } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 class HeaderLogged extends Component {

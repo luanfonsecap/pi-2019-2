@@ -34,8 +34,7 @@ class GerenciaProduto extends Component {
 
     AsyncStorage.getItem('id')
       .then(id => {
-        console.log(id);
-        this.buscaDados(id);
+         this.buscaDados(id);
       })
   }
 
@@ -49,6 +48,7 @@ class GerenciaProduto extends Component {
     })
       .then(res => res.json())
       .then(res => {
+        console.log(res);
         if (res.length == 0) {
           Alert.alert('OPS!', 'Você ainda não possui produtos cadastrados.')
         }
@@ -196,7 +196,7 @@ class GerenciaProduto extends Component {
                     <View>
                       <Image style={styles.imagem} source={this.carregaIcon(item.icon)} />
                       <Text style={styles.labelCabecalho}>{item.nome}</Text>
-                      <Text style={styles.labelCabecalho}>R$ {item.preco}</Text>
+                      <Text style={styles.labelCabecalho}>R$ {item.valor}</Text>
                       <Text style={styles.labelCabecalho}>Qtde: {this.quantidade(item.kg, item.unidades)}</Text>
                     </View>
                     <View style={styles.form}>
