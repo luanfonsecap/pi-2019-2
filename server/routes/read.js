@@ -265,6 +265,31 @@ function infoMercado(req, res) {
     
 }
 
+function infoPopulares(req, res) {
+    const sqlQry = `SELECT id,vendas FROM produtos`;
+    connection.query(sqlQry, function (error, results, fields) {
+        if(error) {
+            res.json(error);
+        } else {
+            var tamanho = results.length;
+            var contador = 0;
+            var contador2 = 0;
+            var vendas = [];
+            var ids = [];
+            var { max, id } = [];
+
+            while (contador != tamanho) {
+                vendas.push([results[contador].vendas]);
+                ids.push([results[contador].id]);
+                contador++;
+            }
+            
+            console.log(Math.max(vendas[0], vendas[1], vendas[2]));
+            
+        }
+    });
+}
+
 router.post('/usuario', infoUsuario);
 router.post('/produto', infoProduto);
 router.post('/pedido', infoPedido);
@@ -273,4 +298,5 @@ router.post('/pedcliente', infoPedCliente);
 router.post('/historico', infoHistoricoPed);
 router.post('/melhores', infoMelhores);
 router.post('/mercado', infoMercado);
+router.post('/populares', infoPopulares);
 module.exports = router;
