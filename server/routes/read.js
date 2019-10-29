@@ -50,11 +50,12 @@ function infoPedido(req, res) {
                 id_produtor: results[0].id_produtor,
                 id_cliente: results[0].id_cliente,
                 nome_cliente: results[0].nome_cliente,
-                bairro: results[0].bairro
+                bairro: results[0].bairro,
+                produtos: []
             }]
             var contador = 0
             while (contador != tamanho) {
-                resultado.push({
+                resultado[0].produtos.push({
                     id_produto: products[contador],
                     tipo: types[contador],
                     quant: quant[contador],
