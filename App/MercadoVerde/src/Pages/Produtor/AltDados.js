@@ -25,8 +25,6 @@ class AltDados extends Component {
       rua: null,
       numero: null,
       bairro: null,
-      senha: null,
-      senhaC: null,
     }
   }
 
@@ -50,6 +48,9 @@ class AltDados extends Component {
           delete res[0]['id'];
           delete res[0]['tipo'];
           delete res[0]['urlImagem'];
+          delete res[0]['senha'];
+          delete res[0]['senhaC'];
+          delete res[0]['areas'];
 
           this.setState({...res[0]});
           console.log(this.state);
@@ -60,7 +61,6 @@ class AltDados extends Component {
   enviaDados() {
 
     const dados = this.state;
-    delete dados['senhaC'];
 
     AsyncStorage.getItem('id')
       .then(id => {

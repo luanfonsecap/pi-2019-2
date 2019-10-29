@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { withNavigation  } from 'react-navigation';
 import { Badge } from 'react-native-elements';
 
 import HeaderLogged from '../../Components/HeaderLogged';
@@ -33,6 +33,7 @@ class Index extends Component {
           res.length >= 1 ? this.setState({ nPedidos: res.length, status: 'error'}) : null;
         })
       })
+      /* this.props.navigation.dispatch(StackActions.popToTop()); */
   }
 
   render() {

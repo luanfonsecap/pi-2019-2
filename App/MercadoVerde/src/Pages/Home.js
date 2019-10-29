@@ -3,19 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, AsyncStorage } from 'r
 
 function Home({navigation}) {
 
-  useEffect(() => {
-    
-    AsyncStorage.getItem('nome')
-      .then(nome => {
-        if(!nome)
-          return;
-        AsyncStorage.getItem('tipo').then(tipo => {
-          /* Pagina na qual deverá ser redirecionado caso já logado */
-          tipo === 'C' ? navigation.navigate('IndexC') : navigation.navigate('IndexP')
-        })
-      })
-  }, []);
-
   return(
     <View style={styles.home}>
 

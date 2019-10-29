@@ -95,10 +95,10 @@ function infoPedProdutor(req, res) {
                 }
                 resultado.push({
                     id: results[contador].id,
-                    IDCliente: client_id[contador],
-                    Nome: results[contador].nome_cliente,
-                    Valor: total.toFixed(2),
-                    Bairro: results[contador].bairro
+                    id_cliente: results[contador].id_cliente,
+                    nome: results[contador].nome_cliente,
+                    valor: total.toFixed(2),
+                    bairro: results[contador].bairro
                 })
                 contador++;
             }

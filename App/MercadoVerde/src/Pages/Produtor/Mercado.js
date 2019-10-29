@@ -20,30 +20,33 @@ class Mercado extends Component {
         tipo: '',
         qtdeProduto: '',
         //qual icone a ser renderizado, valor vindo de um select
-        icone: ''
+        icone: '',
+        //id do produtor
+        id: ''
       }
+    AsyncStorage.getItem('id')
+      .then(id => this.setState({ id }))
+      .catch(e => Alert.alert('Erro', 'Ocorreu um erro, reinicie o aplicativo'));
     /* this.buscaDados() */
   }
 
   buscaDados() {
 
-    AsyncStorage.getItem('id')
-      .then(id => {
+    const id = this.state.id;
 
-        fetch(`${url}/read/usuario`, {
-          method: 'POST',
-          body: JSON.stringify({ id }),
-          headers: { 'Content-Type': 'application/json' }
-        })
-          .then(res => res.json())
-          .then(res => {
-            this.setState({
-              valorEntrega: res[0].valorEntrega,
-              locais: res[0].locais
-            });
-          })
-
+    fetch(`${url}/read/usuario`, {
+      method: 'POST',
+      body: JSON.stringify({ id }),
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(res => res.json())
+      .then(res => {
+        this.setState({
+          valorEntrega: res[0].valorEntrega,
+          locais: res[0].locais
+        });
       })
+
   }
 
   cancelar(that) {
@@ -61,25 +64,59 @@ class Mercado extends Component {
     that.props.navigation.navigate('IndexP');
   }
 
-  cadProduto() {
+  cadProduto(that) {
 
-    AsyncStorage.getItem('id')
-      .then(id => {
+    fetch(`${url}create/produto`, {
+      method: 'POST',
+      body: JSON.stringify({
+        nome: that.state.nomeProduto,
+        valor: that.state.valorProduto,
+        id_produtor: that.state.id,
+        qtde: that.state.qtdeProduto,
+        tipo: that.state.tipo,
+      }),
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(res => res.json())
+      .then(res => console.log(res));
+  }
 
-        fetch(`${url}create/produto`, {
-          method: 'POST',
-          body: JSON.stringify({
-            nome: this.state.nomeProduto,
-            valor: this.state.valorProduto,
-            id_produtor: id,
-            qtde: this.state.qtdeProduto,
-            tipo: this.state.tipo,
-          }),
-          headers: { 'Content-Type': 'application/json' }
-        })
-          .then(res => res.json())
-          .then(res => console.log(res));
+  altTaxa(that) {
+
+    fetch(`${url}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        id_produtor: that.state.id,
+        taxaEntrega: that.state.valorEntrega
+      }),
+      headers: { 'Content-type': 'application/json' }
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        Alert.alert('Sucesso!', 'Valor da entrega alterado.');
       })
+
+  }
+
+  altLocais(that) {
+
+    //expressão regular que elimina todos os espaços em branco
+    const areas = that.state.locais.replace(/\s{1,}/g, '');
+
+    fetch(`${url}`, {
+      method: 'POST',
+      body: JSON.stringify({
+        id_produtor: this.state.id,
+        areas
+      }),
+      headers: { 'Content-type': 'application/json' }
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      Alert.alert('Sucesso!', 'Locais alterados.');
+    })
   }
 
   render() {
@@ -107,6 +144,12 @@ class Mercado extends Component {
                 <Text style={styles.label}>Atual:</Text>
                 <Text style={styles.valorAtual}>{this.state.valorEntrega || 0.00}</Text>
               </View>
+
+              <View style={styles.containerButton}>
+                <TouchableOpacity onPress={() => this.altTaxa(this)}>
+                  <ButtonGreen title="Alterar" />
+                </TouchableOpacity>
+              </View>
             </View>
 
             <View style={styles.card}>
@@ -125,6 +168,12 @@ class Mercado extends Component {
               <View style={styles.containerLocais}>
                 <Text style={styles.labelLocais}>Locais Atuais:</Text>
                 <Text style={styles.locaisAtual}>{this.state.locais || 'Nenhum local cadastrado'}</Text>
+              </View>
+
+              <View style={styles.containerButton}>
+                <TouchableOpacity onPress={() => this.altLocais(this)}>
+                  <ButtonGreen title="Alterar" />
+                </TouchableOpacity>
               </View>
             </View>
 

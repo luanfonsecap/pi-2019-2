@@ -15,6 +15,8 @@ const Index = ({ navigation }) => {
   */
 
   /* Adicionar também badge que irá mostrar quantidade de produtos no carrinho */
+
+  /* Necessário adicionar estrelas de avaliação com react-native-elements*/
   
   return (
     <Container>

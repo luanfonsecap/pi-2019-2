@@ -158,7 +158,7 @@ function navegaMercado(id, navigation) {
   navigation.navigate('Home', { id });
 }
 
-/* Necessário fazer ajuste para que imagem do produtor seja renderizada */
+/* Necessário fazer ajuste para que imagem do produtor seja renderizada] */
 
 const Home = ({ navigation }) => {
 

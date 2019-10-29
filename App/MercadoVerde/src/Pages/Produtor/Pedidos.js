@@ -9,21 +9,21 @@ import url from '../../services/url';
 //simulção de dados vindos do servidor
 const pedidos = [
   {
-    id: 1, user: 'Luiz Inácio', value: '26,00', local: 'Curitiba', produtos: [
+    id: 1, id_cliente: 1, nome: 'Luiz Inácio', valor: '26,00', bairro: 'Curitiba', produtos: [
       { nome: 'Alface Americana', und: 3, kg: null },
       { nome: 'Abacaxi', und: 1, kg: null },
       { nome: 'Tomate', und: null, kg: 2 },
     ]
   },
   {
-    id: 2, user: 'Sérgio Moro', value: '12,00', local: 'Brasilia', produtos: [
+    id: 1, id_cliente: 2, nome: 'Sérgio Moro', valor: '12,00', bairro: 'Brasilia', produtos: [
       { nome: 'Alface Americana', und: 4, kg: null },
       { nome: 'Abacaxi', und: 2, kg: null },
       { nome: 'Tomate', und: null, kg: 1 },
     ]
   },
   {
-    id: 3, user: 'Dilma Roussef', value: '36,00', local: 'São Paulo', produtos: [
+    id: 1, id_cliente: 3, nome: 'Dilma Roussef', valor: '36,00', bairro: 'São Paulo', produtos: [
       { nome: 'Alface Americana', und: 4, kg: null },
       { nome: 'Abacaxi', und: 2, kg: null },
       { nome: 'Tomate', und: null, kg: 1 },
@@ -44,7 +44,7 @@ class PedidosRecebidos extends Component {
     super(props);
     this.state = {
       isVisible: false,
-      pedidos: []
+      pedidos: null,
     }
     this.buscaDados();
   }
@@ -54,17 +54,15 @@ class PedidosRecebidos extends Component {
     AsyncStorage.getItem('id')
       .then(id => {
 
-        fetch(`${url}`, {
+        fetch(`${url}read/pedprodutor`, {
           method: 'POST',
-          //envia id do produtor para buscar pedido relacionados a ele
           body: JSON.stringify({ id }),
           headers: { 'Content-Type': 'application/json' }
         })
-          .then(res => res.json)
-          //atualiza o array de pedidos dentro do estado do componente com os 
-          //dados vindos dos servidor
+          .then(res => res.json())
           .then(res => {
             this.setState({ pedidos: res });
+            console.log(this.state.pedidos);
           })
           .catch(e => {
             console.log(e)
@@ -91,20 +89,18 @@ class PedidosRecebidos extends Component {
           <ImageBackground style={{ width: '100%', height: '100%' }}
             source={require('../../img/bg.png')}>
             <FlatList
-              //recebe os dados de pedidos pelo estado do componente para
-              //renderizar os cards
-              data={pedidos}
+              data={this.state.pedidos}
               keyExtractor={pedidos.id}
               renderItem={({ item }) => {
                 return (
                   <View style={styles.card}>
-                    <Text style={styles.nome}>Pedido de <Text style={styles.bold}>{item.user}</Text></Text>
-                    <Text style={styles.valor}>R$ {item.value}</Text>
+                    <Text style={styles.nome}>Pedido de <Text style={styles.bold}>{item.nome}</Text></Text>
+                    <Text style={styles.valor}>R$ {item.valor}</Text>
                     <Text style={styles.local}>{item.bairro}</Text>
                     <Button
                       title="Gerenciar"
                       buttonStyle={{ backgroundColor: '#EB5B65', marginTop: 10 }}
-                      onPress={() => this.gerenciaPedido(item.id, item.user, item.value, item.bairro, item.produtos)}
+                      onPress={() => this.gerenciaPedido(item.id, item.nome, item.valor, item.bairro, item.produtos, item.id_cliente)}
                     />
                   </View>
                 );

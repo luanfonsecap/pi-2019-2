@@ -29,12 +29,8 @@ class HeaderLogged extends Component {
 
         <TouchableOpacity style={styles.botaoSair}
           onPress={() => {
-            Promise.all([
-              AsyncStorage.removeItem('tipo'),
-              AsyncStorage.removeItem('nome'),
-              AsyncStorage.removeItem('id'),
-              AsyncStorage.removeItem('url'),
-            ]).then(res => this.props.navigation.navigate('Home'));
+            AsyncStorage.clear()
+              .then(res => this.props.navigation.navigate('Home'));
           }}>
           <View>
             <Text style={styles.textoBotao}>Sair</Text>
