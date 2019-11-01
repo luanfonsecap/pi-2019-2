@@ -74,6 +74,7 @@ class Mercado extends Component {
         id_produtor: that.state.id,
         qtde: that.state.qtdeProduto,
         tipo: that.state.tipo,
+        icon: that.this.icone 
       }),
       headers: { 'Content-Type': 'application/json' }
     })

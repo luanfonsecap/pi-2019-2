@@ -33,7 +33,7 @@ function infoProduto(req, res) {
 
 function infoPedido(req, res) {
     const id = req.body.id;
-    const sqlQry = `SELECT * FROM pedidos WHERE id='${id}'`;
+    const sqlQry = `SELECT * FROM pedidos WHERE id='${id} '`;
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
@@ -41,6 +41,7 @@ function infoPedido(req, res) {
         } else {
             var resultado;
             var products = results[0].produtos.split(',');
+            var names = results[0].nomes.split(',');
             var types = results[0].tipo.split(',');
             var quant = results[0].qtde.split(',');
             var values = results[0].valor.split(',');
@@ -57,6 +58,7 @@ function infoPedido(req, res) {
             while (contador != tamanho) {
                 resultado[0].produtos.push({
                     id_produto: products[contador],
+                    nome: names[contador],
                     tipo: types[contador],
                     quant: quant[contador],
                     valor_uni: values[contador],
@@ -64,8 +66,8 @@ function infoPedido(req, res) {
                 })
                 contador++;
             }
-            res.json(resultado);
         }
+        res.json(resultado);
     });
 }
 
@@ -207,7 +209,7 @@ function infoMelhores(req, res) {
                 )
                 contador++;
             }
-            
+
             res.json(resultado);
         }
     });
@@ -263,7 +265,7 @@ function infoMercado(req, res) {
             });
         }
     });
-    
+
 }
 
 router.post('/usuario', infoUsuario);

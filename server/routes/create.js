@@ -59,10 +59,10 @@ function cadProdutor(req, res) {
 
 function cadProduto(req, res) {
 
-    const { nome, valor, qtde, id_produtor, tipo, icon } = req.body;
+    const { nome, valor, qtde, id_produtor, tipo, icon, nomes } = req.body;
 
-    const sqlQry = `INSERT INTO produtos (nome,valor,${tipo},id_produtor, icon) VALUES 
-    ('${nome}','${valor}','${qtde}','${id_produtor}', '${icon}')`;
+    const sqlQry = `INSERT INTO produtos (nome,valor,${tipo},id_produtor, icon, nomes) VALUES 
+    ('${nome}','${valor}','${qtde}','${id_produtor}', '${icon}', '${nomes}')`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
