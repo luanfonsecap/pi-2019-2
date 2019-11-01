@@ -53,7 +53,6 @@ class Mercado extends Component {
 
     that.setState({
       valorEntrega: '',
-      locais: '',
       nomeProduto: '',
       valorProduto: '',
       peso: '',
@@ -100,26 +99,6 @@ class Mercado extends Component {
 
   }
 
-  altLocais(that) {
-
-    //expressão regular que elimina todos os espaços em branco
-    const areas = that.state.locais.replace(/\s{1,}/g, '');
-
-    fetch(`${url}`, {
-      method: 'POST',
-      body: JSON.stringify({
-        id_produtor: this.state.id,
-        areas
-      }),
-      headers: { 'Content-type': 'application/json' }
-    })
-    .then(res => res.json())
-    .then(res => {
-      console.log(res);
-      Alert.alert('Sucesso!', 'Locais alterados.');
-    })
-  }
-
   render() {
     return (
       <ImageBackground source={require('../../img/bg.png')}
@@ -152,24 +131,6 @@ class Mercado extends Component {
                 </TouchableOpacity>
               </View>
             </View>
-
-            <View style={styles.card}>
-              <View>
-                <Text style={styles.titulo}>Locais de Atendimento</Text>
-              </View>
-              <View style={styles.container}>
-                <Text style={styles.label}>Locais:</Text>
-                <TextInput
-                  keyboardType="default"
-                  placeholder="Digite separado por vírgulas"
-                  style={InputStyle}
-                  onChangeText={input => this.state.locais = input}
-                />
-              </View>
-              <View style={styles.containerLocais}>
-                <Text style={styles.labelLocais}>Locais Atuais:</Text>
-                <Text style={styles.locaisAtual}>{this.state.locais || 'Nenhum local cadastrado'}</Text>
-              </View>
 
               <View style={styles.containerButton}>
                 <TouchableOpacity onPress={() => this.altLocais(this)}>
@@ -251,7 +212,6 @@ class Mercado extends Component {
               </TouchableOpacity>
             </View>
 
-          </View>
         </ScrollView>
       </ImageBackground>
     );
