@@ -213,7 +213,7 @@ function infoProdutosDestaque(req, res) {
 
 function infoMelhores(req, res) {
     const { cidade } = req.body;
-    const sqlQry = `SELECT id,nome,avaliacao_med_pro,urlImagem FROM cadastro WHERE avaliacao_med >= 4 AND cidade='${cidade}'`;
+    const sqlQry = `SELECT id,nome,avaliacao_med,urlImagem FROM cadastro WHERE avaliacao_med >= 4 AND cidade='${cidade}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
