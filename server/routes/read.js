@@ -186,9 +186,34 @@ function infoHistoricoPed(req, res) {
     });
 }
 
+function infoProdutosDestaque(req, res) {
+    const sqlQry = `SELECT id,nome,tipo,id_produtor FROM produtos  ORDER BY vendas DESC LIMIT 4 `;
+
+    connection.query(sqlQry, function (error, results, fields) {
+        if (error) {
+            /* Lógica de tratamento da resposta */
+            res.json(error);
+        } else {
+            var contador = 0;
+            var resultado = [];
+            console.log(results);
+            while (contador != 4) {
+                
+                resultado.push({
+                    nome: results[contador].nome,
+                    tipo: results[contador].tipo,
+                    id_produtor: results[contador].id_produtor
+                })
+                contador++;
+            }
+            res.json(resultado);
+        }
+    });
+}
+
 function infoMelhores(req, res) {
     const { cidade } = req.body;
-    const sqlQry = `SELECT id,nome,avaliacao_med,urlImagem FROM cadastro WHERE avaliacao_med >= 4 AND cidade='${cidade}'`;
+    const sqlQry = `SELECT id,nome,avaliacao_med_pro,urlImagem FROM cadastro WHERE avaliacao_med >= 4 AND cidade='${cidade}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
@@ -274,6 +299,7 @@ router.post('/pedido', infoPedido);
 router.post('/pedprodutor', infoPedProdutor);
 router.post('/pedcliente', infoPedCliente);
 router.post('/historico', infoHistoricoPed);
+router.post('/produtosdestaque', infoProdutosDestaque);
 router.post('/melhores', infoMelhores);
 router.post('/mercado', infoMercado);
 module.exports = router;
