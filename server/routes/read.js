@@ -202,7 +202,8 @@ function infoProdutosDestaque(req, res) {
                 resultado.push({
                     nome: results[contador].nome,
                     tipo: results[contador].tipo,
-                    id_produtor: results[contador].id_produtor
+                    id_produtor: results[contador].id_produtor,
+                    id: results[contador].id
                 })
                 contador++;
             }

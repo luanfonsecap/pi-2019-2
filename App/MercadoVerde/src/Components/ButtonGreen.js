@@ -8,7 +8,7 @@ import {
 class ButtonGreen extends Component {
 
   render() {
-    return(
+    return (
         <View style={styles.botao}>
           <Text style={styles.texto}>{this.props.title}</Text>
         </View>
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#4BEC91',
     padding: 2,
     borderRadius: 3,
-    width: 130,
-    padding: 7
+    width: 'auto',
+    padding: 7,
   },
   texto: {
     color: 'white',

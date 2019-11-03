@@ -7,7 +7,10 @@ import Presentation from './Pages/Presentation';
 import Login from './Pages/Login';
 import CadProdutor from './Pages/CadProdutor';
 import CadClient from './Pages/CadClient';
+
 import IndexP from './Pages/Produtor/Index';
+import MercadoProdutor from './Pages/Cliente/MercadoProdutor';
+
 import IndexC from './Pages/Cliente/Index';
 import Pedidos from './Pages/Produtor/Pedidos';
 import GerenciaPedido from './Pages/Produtor/GerenciaPedido';
@@ -31,6 +34,7 @@ const stackLogout = createStackNavigator({
 
 const stackLoggedC = createStackNavigator({
   IndexC: {screen: IndexC, navigationOptions: noHeader},
+  MercadoProdutor: {screen: MercadoProdutor, navigationOptions: noHeader}
 });
 
 const stackLoggedP = createStackNavigator({
