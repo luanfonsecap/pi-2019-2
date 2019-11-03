@@ -299,7 +299,7 @@ router.post('/pedido', infoPedido);
 router.post('/pedprodutor', infoPedProdutor);
 router.post('/pedcliente', infoPedCliente);
 router.post('/historico', infoHistoricoPed);
-router.post('/produtosdestaque', infoProdutosDestaque);
+router.get('/produtosdestaque', infoProdutosDestaque);
 router.post('/melhores', infoMelhores);
 router.post('/mercado', infoMercado);
 module.exports = router;
