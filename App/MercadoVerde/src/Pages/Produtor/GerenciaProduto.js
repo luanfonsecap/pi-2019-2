@@ -48,7 +48,6 @@ class GerenciaProduto extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res.length == 0) {
           Alert.alert('OPS!', 'Você ainda não possui produtos cadastrados.')
         }
@@ -129,7 +128,7 @@ class GerenciaProduto extends Component {
 
   removeProduto(id) {
 
-    fetch(`${url}/delete/produto`, {
+    fetch(`${url}delete/produto`, {
       method: 'POST',
       body: JSON.stringify({ id }),
       headers: { 'Content-Type': 'application/json' }
@@ -149,14 +148,16 @@ class GerenciaProduto extends Component {
   }
 
   atualizaProduto(id) {
+    console.log(this.state.tipo, this.state.qtde);
 
-    fetch(`${url}/update/produto`, {
+    fetch(`${url}update/produto`, {
       method: 'POST',
       body: JSON.stringify({ id, nome: this.state.nome, valor: this.state.valor, tipo: this.state.tipo, qtde: this.state.qtde }),
       headers: { 'Content-Type': 'application/json' }
     })
       .then(res => res.json())
       .then(res => {
+        console.log(res);
         if (res[0].status) {
           Alert.alert('Sucesso', 'Produto atualizado.');
         } else {
@@ -188,7 +189,7 @@ class GerenciaProduto extends Component {
 
             <FlatList
               data={this.state.dados}
-              keyExtractor={produtos.id}
+              keyExtractor={this.state.dados.id}
               renderItem={({ item }) => {
                 return (
 
@@ -224,10 +225,10 @@ class GerenciaProduto extends Component {
                       />
 
                       <Picker
-                        selectedValue={this.state.peso}
+                        selectedValue={this.state.tipo}
                         style={styles.picker}
                         onValueChange={(itemValue, itemIndex) => {
-                          this.setState({ peso: itemValue })
+                          this.setState({ tipo: itemValue })
                         }}>
 
                         <Picker.Item label="Selecione o tipo de quantidade" value={null} />
