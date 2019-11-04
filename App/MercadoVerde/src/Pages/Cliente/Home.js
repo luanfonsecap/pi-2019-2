@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image, FlatList, ScrollView, AsyncStorage } from 'react-native';
 import { Rating } from 'react-native-elements';
+import { Header, Footer, FooterTab, Button, Icon, Badge, Container } from 'native-base';
+
+import TabNavigator from '../../Components/TabNavigator';
+import HeaderLogged from '../../Components/HeaderLogged';
 
 import url from '../../services/url';
 
@@ -30,6 +34,7 @@ class Home extends Component {
   componentDidMount() {
     this.getProdutos();
     this.getAvaliados();
+    global.sacolaGlobal = [];
   }
 
   iconeProduto(icon) {
@@ -190,7 +195,6 @@ class Home extends Component {
 
     AsyncStorage.getItem('cidade')
       .then(cidade => {
-        console.log(cidade);
         fetch(`${url}read/melhores`, {
           method: 'POST',
           body: JSON.stringify({ cidade }),
@@ -209,10 +213,13 @@ class Home extends Component {
 
     return (
 
-      <View>
+      <Fragment>
         <ImageBackground source={require('../../img/bg.png')}
           style={{ width: '100%', height: '100%' }}
         >
+          <Header androidStatusBarColor="#00BA51" style={{ display: 'none' }}></Header>
+          <HeaderLogged />
+
 
           <ScrollView>
             <View style={styles.container}>
@@ -224,7 +231,7 @@ class Home extends Component {
                   return (
                     <TouchableOpacity key={produto.id} onPress={() => this.navegaMercado(produto.id_produtor)}>
                       <View style={{ ...styles.produto, backgroundColor: this.fundoProduto(produto.tipo) }}>
-                        <Text style={{alignSelf: 'center', color: '#fff', marginBottom: 5,}}>{produto.nome}</Text>
+                        <Text style={{ alignSelf: 'center', color: '#fff', marginBottom: 5, }}>{produto.nome}</Text>
                         <Image style={styles.produtoImagem} source={this.iconeProduto(produto.tipo)} />
                       </View>
                     </TouchableOpacity>
@@ -265,14 +272,14 @@ class Home extends Component {
           </ScrollView>
 
         </ImageBackground>
-      </View >
+      </Fragment>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    margin: 20,
+    margin: 25,
   },
   titulo: {
     fontSize: 23,

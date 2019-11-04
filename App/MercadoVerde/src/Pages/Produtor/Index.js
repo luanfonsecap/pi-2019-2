@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
-import { withNavigation  } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 import { Badge } from 'react-native-elements';
+import { Header } from 'native-base';
 
 import HeaderLogged from '../../Components/HeaderLogged';
 import url from '../../services/url';
@@ -24,13 +25,13 @@ class Index extends Component {
         fetch(`${url}read/pedprodutor`, {
           method: 'POST',
           body: JSON.stringify({ id }),
-          headers: {'Content-Type':'application/json'}
+          headers: { 'Content-Type': 'application/json' }
         })
-        .then(res => res.json())
-        .then(res => {
-          console.log(res);
-          res.length >= 1 ? this.setState({ nPedidos: res.length, status: 'error'}) : null;
-        })
+          .then(res => res.json())
+          .then(res => {
+            console.log(res);
+            res.length >= 1 ? this.setState({ nPedidos: res.length, status: 'error' }) : null;
+          })
       })
   }
 
@@ -38,6 +39,7 @@ class Index extends Component {
 
     return (
       <View>
+        <Header androidStatusBarColor="#00BA51" style={{ display: 'none' }}></Header>
         <HeaderLogged />
         <ImageBackground style={{ width: '100%', height: '100%' }}
           source={require('../../img/bg.png')}>

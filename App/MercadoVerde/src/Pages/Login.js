@@ -3,6 +3,7 @@ import {
   View, Text, TextInput, StyleSheet, TouchableOpacity, ImageBackground, Alert, AsyncStorage
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { Header } from 'native-base';
 
 import styleInput from '../Components/Input';
 import url from '../services/url';
@@ -93,6 +94,8 @@ class Login extends Component {
       <ImageBackground source={require('../img/bg.png')}
         style={{ width: '100%', height: '100%' }}
       >
+      <Header androidStatusBarColor="#00BA51" style={{ display: 'none' }}></Header>
+
         <View style={styles.login}>
 
 

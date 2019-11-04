@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, StyleSheet, Alert, TouchableOpacity, ImageBackground, Image } from 'react-native';
 
-import HeaderLogged from '../../Components/HeaderLogged';
+class Carrinho extends Component  {
 
-const Carrinho =  () => {
+  componentDidMount() {
 
-  return(
-    <View>
-      <Text>Carrinho</Text>
-    </View>
-  );
+    console.log(global.sacolaGlobal);
+  }
+
+  render() {
+
+    return(
+      <View>
+        <Text>Carrinho</Text>
+      </View>
+    );
+  }
 
 }
 

@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, AsyncStorage } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Header } from 'native-base';
 
-function Home({navigation}) {
+function Home({ navigation }) {
 
-  return(
+  return (
     <View style={styles.home}>
+      <Header androidStatusBarColor="#007A35" style={{ display: 'none' }}></Header>
 
       <View >
         <Image source={require('../img/logo.png')}
@@ -18,11 +20,11 @@ function Home({navigation}) {
       </Text>
 
 
-      <TouchableOpacity onPress={() => {navigation.navigate('Login')}}
+      <TouchableOpacity onPress={() => { navigation.navigate('Login') }}
         style={[styles.botao, styles.shadow]}>
         <Text style={styles.botaoTexto}>Entrar</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => {navigation.navigate('Presentation')}}
+      <TouchableOpacity onPress={() => { navigation.navigate('Presentation') }}
         style={[styles.botao, styles.shadow]}>
         <Text style={styles.botaoTexto}>Cadastrar</Text>
       </TouchableOpacity>

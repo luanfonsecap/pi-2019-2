@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { View, Text, StyleSheet, Alert, TouchableOpacity, ImageBackground, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Alert, TouchableOpacity, ImageBackground, Image, ScrollView, AsyncStorage } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { Rating, AirbnbRating, Overlay } from 'react-native-elements';
 import url from '../../services/url';
@@ -25,10 +25,14 @@ class MercadoProdutor extends Component {
       isVisible: false,
       nome: '',
       cidade: '',
+      id: '',
       avaliacao: 0,
       url: '',
-      produtos: []
+      produtos: [],
+      sacola: []
     }
+
+    AsyncStorage.getItem('id').then(id => this.setState({ id }));
   }
 
   componentDidMount() {
@@ -213,10 +217,25 @@ class MercadoProdutor extends Component {
     }
   }
 
+  adcSacola(idProduto, idProdutor, valor, tipo) {
+
+    const produto = {
+      idCliente: this.state.id,
+      idProduto,
+      idProdutor,
+      valor,
+      tipo
+    }
+
+    this.setState({sacola: [...this.state.sacola, produto]});
+    global.sacolaGlobal.push(...this.state.sacola);
+    console.log(this.state.sacola);
+  }
+
   render() {
     return (
       <Fragment>
-
+        
         <HeaderLogged />
 
         <ImageBackground source={require('../../img/bg.png')}
@@ -258,7 +277,7 @@ class MercadoProdutor extends Component {
                             <Text style={styles.prodNome}>{prod.nome}</Text>
                             <Text style={styles.prodPreco}>R$ {prod.valor} {prod.unidades ? 'Und.' : 'Kg.'}</Text>
                           </View>
-                          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => console.warn('pressed')}>
+                          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.adcSacola(prod.id, prod.id_produtor, prod.valor, prod.tipo)}>
                             <Image style={styles.cartProd} source={require('../../assets/add-to-cart.png')} />
                           </TouchableOpacity>
                         </View>

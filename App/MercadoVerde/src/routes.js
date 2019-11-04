@@ -8,10 +8,10 @@ import Login from './Pages/Login';
 import CadProdutor from './Pages/CadProdutor';
 import CadClient from './Pages/CadClient';
 
-import IndexP from './Pages/Produtor/Index';
+import IndexC from './Pages/Cliente/Index';
 import MercadoProdutor from './Pages/Cliente/MercadoProdutor';
 
-import IndexC from './Pages/Cliente/Index';
+import IndexP from './Pages/Produtor/Index';
 import Pedidos from './Pages/Produtor/Pedidos';
 import GerenciaPedido from './Pages/Produtor/GerenciaPedido';
 import GerenciaProduto from './Pages/Produtor/GerenciaProduto'
