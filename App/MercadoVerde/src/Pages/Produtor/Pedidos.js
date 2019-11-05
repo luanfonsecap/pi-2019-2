@@ -76,9 +76,25 @@ class PedidosRecebidos extends Component {
 
   }
 
-  gerenciaPedido(id, cliente, valor, local, produtos) {
-    this.props.navigation.navigate('GerenciaPedido',
-      { id, cliente, valor, local, produtos });
+  gerenciaPedido(id, valorTotal, local) {
+    console.log(id);
+
+    fetch(`${url}read/pedido`, {
+      method: 'POST',
+      body: JSON.stringify({ id }),
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(res => res.json())
+      .then(res => {
+        
+        const produtos  = res[0].produtos;
+        const cliente = res[0].nome_cliente;
+        const id = res[0].id_cliente;
+
+        this.props.navigation.navigate('GerenciaPedido',
+          { id, cliente, valorTotal, local, produtos });
+      })
+
   }
 
   render() {
@@ -100,7 +116,7 @@ class PedidosRecebidos extends Component {
                     <Button
                       title="Gerenciar"
                       buttonStyle={{ backgroundColor: '#EB5B65', marginTop: 10 }}
-                      onPress={() => this.gerenciaPedido(item.id, item.nome, item.valor, item.bairro, item.produtos, item.id_cliente)}
+                      onPress={() => this.gerenciaPedido(item.id, item.valor, item.bairro)}
                     />
                   </View>
                 );

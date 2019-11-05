@@ -13,23 +13,23 @@ export default class FooterTabsBadgeExample extends Component {
         <Footer>
           <FooterTab style={styles.footer}>
             <Button style={styles.button} active vertical>
-              <Icon name="apps" />
+              <Icon type="Feather" name="home" />
               <Text>Home</Text>
             </Button>
             <Button style={styles.button} vertical>
-              <Icon name="alert" />
+              <Icon type="Feather" name="bell" />
               <Text>Alertas</Text>
             </Button>
-            <Button style={styles.button} vertical>
+            <Button onPress={() => this.props.navigation.navigate('Sacola')} style={styles.button} vertical>
               <Icon type="Feather" name="shopping-bag" />
               <Text>Sacola</Text>
             </Button>
             <Button style={styles.button} vertical>
-              <Icon name="list" />
+              <Icon type="Feather" name="list" />
               <Text>Pedidos</Text>
             </Button>
             <Button style={styles.button} vertical>
-              <Icon name="person" />
+              <Icon type="Feather" name="user" />
               <Text>Perfil</Text>
             </Button>
           </FooterTab>

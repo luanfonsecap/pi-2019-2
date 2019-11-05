@@ -217,14 +217,17 @@ class MercadoProdutor extends Component {
     }
   }
 
-  adcSacola(idProduto, idProdutor, valor, tipo) {
+  adcSacola(idProduto, idProdutor, valor, tipo, nome, kg, unidades) {
 
     const produto = {
       idCliente: this.state.id,
       idProduto,
       idProdutor,
       valor,
-      tipo
+      tipo,
+      nome,
+      kg,
+      unidades,
     }
 
     this.setState({sacola: [...this.state.sacola, produto]});
@@ -277,7 +280,7 @@ class MercadoProdutor extends Component {
                             <Text style={styles.prodNome}>{prod.nome}</Text>
                             <Text style={styles.prodPreco}>R$ {prod.valor} {prod.unidades ? 'Und.' : 'Kg.'}</Text>
                           </View>
-                          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.adcSacola(prod.id, prod.id_produtor, prod.valor, prod.tipo)}>
+                          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.adcSacola(prod.id, prod.id_produtor, prod.valor, prod.tipo, prod.nome, prod.kg, prod.unidades)}>
                             <Image style={styles.cartProd} source={require('../../assets/add-to-cart.png')} />
                           </TouchableOpacity>
                         </View>
@@ -394,7 +397,7 @@ const styles = StyleSheet.create({
   },
   prodContainer: {
     margin: 15,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   imgProd: {
     height: 40,

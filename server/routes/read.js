@@ -33,7 +33,8 @@ function infoProduto(req, res) {
 
 function infoPedido(req, res) {
     const id = req.body.id;
-    const sqlQry = `SELECT * FROM pedidos WHERE id='${id} '`;
+    console.log(id);
+    const sqlQry = `SELECT * FROM pedidos WHERE id=${id}`;
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */

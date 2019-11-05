@@ -40,11 +40,11 @@ function recusaPedido(id) {
     .cactch(e => console.log(e));
 }
 
-function quantidade(kg, und) { 
-  if(kg) {
-    return `${kg} Kg.`; 
+function quantidade(tipo, quant) { 
+  if(tipo === 'kg') {
+    return `${quant} Kg.`; 
   } else {
-    return `${und} Und.`; 
+    return `${quant} Und.`; 
   }
  }
 
@@ -61,7 +61,7 @@ const GerenciaPedido = ({ navigation }) => {
           <View style={styles.detalhes}>
             <View style={styles.valor}>
               <Text style={styles.valorTitulo}>Valor:</Text>
-              <Text style={styles.valorConteudo}>{navigation.getParam('valor')}</Text>
+              <Text style={styles.valorConteudo}>R$ {navigation.getParam('valorTotal')}</Text>
             </View>
             <View style={styles.local}>
               <Text style={styles.localTitulo}>Local:</Text>
@@ -80,9 +80,9 @@ const GerenciaPedido = ({ navigation }) => {
             {
               navigation.getParam('produtos').map(produto => {
                 return (
-                  <View style={styles.relacaoProdutos} key={produto.nome}>
+                  <View style={styles.relacaoProdutos} key={produto.id_produto}>
                     <Text style={styles.detalhesProduto}>{produto.nome}</Text>
-                    <Text style={styles.detalhesProduto}>{quantidade(produto.kg, produto.und)}</Text>
+                    <Text style={styles.detalhesProduto}>{quantidade(produto.tipo, produto.quant)}</Text>
                   </View>
                 );
               })
