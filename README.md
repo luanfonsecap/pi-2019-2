@@ -11,6 +11,7 @@ App de agricultura familiar com objetivo de conectar e aproximar produtores   ru
 Projeto desenvolvido com:
  - React Native
  - React Native Elements
+ - Native Base
  - React Navigation
  - NodeJS
  - Express
