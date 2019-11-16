@@ -214,7 +214,7 @@ function infoDestaque(req, res) {
 
 function infoMelhores(req, res) {
     const { cidade } = req.body;
-    const sqlQry = `SELECT id,nome,avaliacao_med,urlImagem FROM cadastro WHERE cidade='${cidade}' ORDER BY avaliacao_med DESC limit 10 `;
+    const sqlQry = `SELECT id,nome,avaliacao_med,urlImagem FROM cadastro WHERE avaliacao_med >= 4 AND cidade='${cidade}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {

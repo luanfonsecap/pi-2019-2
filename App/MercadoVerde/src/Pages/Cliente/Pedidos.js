@@ -27,7 +27,7 @@ class Pedidos extends Component {
 
     fetch(`${url}read/historico`, {
       method: 'POST',
-      body: JSON.stringify({ id: 2, status: 'Aguardando' }),
+      body: JSON.stringify({ id, status: 'Aguardando' }),
       headers: { 'Content-type': 'application/json' }
     }).then(res => res.json())
       .then(lista => this.setState({ lista }))
@@ -80,6 +80,7 @@ class Pedidos extends Component {
         >
 
           <Text style={styles.titulo}>Histórico de Pedidos</Text>
+          {this.state.lista.length === 0 ? <Text style={{fontSize: 20, alignSelf: 'center', color: '#EB5B65', fontWeight: 'bold'}}>Você ainda não realizou nenhuma compra!</Text> : null}
 
           <FlatList
             data={this.state.lista}

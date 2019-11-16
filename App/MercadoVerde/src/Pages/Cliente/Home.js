@@ -182,7 +182,7 @@ class Home extends Component {
 
   getProdutos() {
 
-    fetch(`${url}read/produtosdestaque`, {
+    fetch(`${url}read/destaque`, {
       method: 'GET',
       headers: { 'Content-type': 'application/json' }
     })
