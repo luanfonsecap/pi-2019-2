@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image, FlatList, ScrollView, AsyncStorage } from 'react-native';
 import { Rating } from 'react-native-elements';
-import { Header, Footer, FooterTab, Button, Icon, Badge, Container } from 'native-base';
+import { Header } from 'native-base';
 
 import TabNavigator from '../../Components/TabNavigator';
 import HeaderLogged from '../../Components/HeaderLogged';
@@ -204,6 +204,7 @@ class Home extends Component {
           .then(res => {
             this.setState({ avaliados: res });
           })
+          .then(res => console.log(this.state.avaliados))
           .catch(e => console.log(e));
       })
 

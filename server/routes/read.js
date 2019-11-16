@@ -150,7 +150,7 @@ function infoPedCliente(req, res) {
 
 function infoHistoricoPed(req, res) {
     const { id, status } = req.body;
-    const sqlQry = `SELECT * FROM pedidos WHERE id_produtor='${id}' AND status='${status}'`;
+    const sqlQry = `SELECT * FROM pedidos WHERE id_cliente='${id}' AND status='${status}'`;
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
@@ -174,10 +174,9 @@ function infoHistoricoPed(req, res) {
                     count++;
                 }
                 resultado.push({
-                    id: results[contador].id,
-                    IDProdutor: results[contador].id_produtor,
-                    IDCliente: client_id[contador],
-                    Nome: results[contador].nome_cliente,
+                    IdProdutor: results[contador].id_produtor,
+                    IdCompra: results[contador].id,
+                    Produtos: results[contador].nomes,
                     Valor: total.toFixed(2),
                 })
                 contador++;
