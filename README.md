@@ -13,6 +13,7 @@ Projeto desenvolvido com:
  - React Native Elements
  - Native Base
  - React Navigation
+ - React Native Progress
  - NodeJS
  - Express
  - Nodemon
