@@ -49,6 +49,8 @@ function altProduto(req, res) {
     const { id, nome, valor, tipo, qtde } = req.body;
     let coluna = "";
 
+    console.log(tipo, qtde, valor);
+
     if (tipo === "kg") {
         coluna = "unidades";
     } else {

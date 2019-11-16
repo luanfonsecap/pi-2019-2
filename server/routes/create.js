@@ -121,8 +121,8 @@ function cadPedido(req, res) {
 
 function cadAvaliacao(req, res) {
     console.log('Recebendo requisição.');
-    const { id_pedido, nome_produtor, id_produtor, urlImagem, estrelas } = req.body;
-    const sqlQry = `INSERT INTO avaliacao (id_pedido, nome_produtor, id_produtor, urlImagem, estrelas) VALUES ('${id_pedido}','${nome_produtor}','${id_produtor}', '${urlImagem}', '${estrelas}');`
+    const { id_pedido, nome_produtor, id_produtor, estrelas } = req.body;
+    const sqlQry = `INSERT INTO avaliacao (id_pedido, nome_produtor, id_produtor, estrelas) VALUES ('${id_pedido}','${nome_produtor}','${id_produtor}','${estrelas}');`
     const sqlQry2 = `SELECT  estrelas FROM avaliacao WHERE id_produtor='${id_produtor}'`;
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
@@ -134,7 +134,7 @@ function cadAvaliacao(req, res) {
             }]
             res.json(results);
         } else {
-            connection.query(sqlQry2, function (error2, results2, fields2) {
+            connection.query(sqlQry2, function (error1, results1, fields2) {
                 if (error1) {
                     /* Lógica de tratamento da resposta */
                     console.log("Erro");

@@ -73,7 +73,7 @@ class Mercado extends Component {
         id_produtor: that.state.id,
         qtde: that.state.qtdeProduto,
         tipo: that.state.tipo,
-        icon: that.this.icone 
+        icon: that.this.icone
       }),
       headers: { 'Content-Type': 'application/json' }
     })
@@ -131,86 +131,81 @@ class Mercado extends Component {
                 </TouchableOpacity>
               </View>
             </View>
+          </View>
 
-              <View style={styles.containerButton}>
-                <TouchableOpacity onPress={() => this.altLocais(this)}>
-                  <ButtonGreen title="Alterar" />
-                </TouchableOpacity>
-              </View>
+          <View style={styles.card}>
+            <View>
+              <Text style={styles.titulo}>Cadastrar Produto</Text>
             </View>
-
-            <View style={styles.card}>
-              <View>
-                <Text style={styles.titulo}>Cadastrar Produto</Text>
-              </View>
-              <View style={styles.container}>
-                <Text style={styles.label}>Nome:</Text>
-                <TextInput
-                  keyboardType="default"
-                  placeholder="Digite o nome do produto"
-                  style={InputStyle}
-                  onChangeText={input => this.state.nomeProduto = input}
-                />
-              </View>
-              <View style={styles.container}>
-                <Text style={styles.label}>Valor:</Text>
-                <TextInput
-                  keyboardType="numeric"
-                  placeholder="Digite o valor do produto"
-                  style={InputStyle}
-                  onChangeText={input => this.state.valorProduto = input}
-                />
-              </View>
-              <View style={styles.container}>
-                <Text style={styles.label}>Qtde:</Text>
-                <TextInput
-                  keyboardType="numeric"
-                  placeholder="Digite a quantidade"
-                  style={InputStyle}
-                  onChangeText={input => this.state.qtdeProduto = input}
-                />
-              </View>
-              <Picker
-                selectedValue={this.state.tipo}
-                style={styles.picker}
-                onValueChange={(itemValue, itemIndex) => {
-                  this.setState({ tipo: itemValue })
-                }}>
-
-                <Picker.Item label="Selecione" value="" />
-                <Picker.Item label="Quilogramas" value="kg" />
-                <Picker.Item label="Unidades" value="unidades" />
-
-              </Picker>
-
-              <Picker
-                selectedValue={this.state.icone}
-                style={styles.picker}
-                onValueChange={(itemValue, itemIndex) => {
-                  this.setState({ icone: itemValue })
-                }}>
-
-                <Picker.Item label="Selecione icone para o produto" value="" />
-                <Picker.Item label="Alface" value="alface" />
-                <Picker.Item label="Abacaxi" value="abacaxi" />
-                <Picker.Item label="Tomate" value="tomate" />
-                <Picker.Item label="Feijão" value="feijao" />
-
-              </Picker>
-
-              <View style={styles.containerButton}>
-                <TouchableOpacity onPress={() => this.cadProduto(this)}>
-                  <ButtonGreen title="Cadastrar" />
-                </TouchableOpacity>
-              </View>
-
+            <View style={styles.container}>
+              <Text style={styles.label}>Nome:</Text>
+              <TextInput
+                keyboardType="default"
+                placeholder="Digite o nome do produto"
+                style={InputStyle}
+                onChangeText={input => this.state.nomeProduto = input}
+              />
             </View>
+            <View style={styles.container}>
+              <Text style={styles.label}>Valor:</Text>
+              <TextInput
+                keyboardType="numeric"
+                placeholder="Digite o valor do produto"
+                style={InputStyle}
+                onChangeText={input => this.state.valorProduto = input}
+              />
+            </View>
+            <View style={styles.container}>
+              <Text style={styles.label}>Qtde:</Text>
+              <TextInput
+                keyboardType="numeric"
+                placeholder="Digite a quantidade"
+                style={InputStyle}
+                onChangeText={input => this.state.qtdeProduto = input}
+              />
+            </View>
+            <Picker
+              selectedValue={this.state.tipo}
+              style={styles.picker}
+              onValueChange={(itemValue, itemIndex) => {
+                this.setState({ tipo: itemValue })
+              }}>
+
+              <Picker.Item label="Selecione" value="" />
+              <Picker.Item label="Quilogramas" value="kg" />
+              <Picker.Item label="Unidades" value="unidades" />
+
+            </Picker>
+
+            <Picker
+              selectedValue={this.state.icone}
+              style={styles.picker}
+              onValueChange={(itemValue, itemIndex) => {
+                this.setState({ icone: itemValue })
+              }}>
+
+              <Picker.Item label="Selecione icone para o produto" value="" />
+              <Picker.Item label="Alface" value="alface" />
+              <Picker.Item label="Abacaxi" value="abacaxi" />
+              <Picker.Item label="Tomate" value="tomate" />
+              <Picker.Item label="Feijão" value="feijao" />
+              <Picker.Item label="Kiwi" value="kiwi" />
+
+            </Picker>
 
             <View style={styles.containerButton}>
-              <TouchableOpacity onPress={() => this.cancelar(this)}>
-                <ButtonRed title="Cancelar" />
+              <TouchableOpacity onPress={() => this.cadProduto(this)}>
+                <ButtonGreen title="Cadastrar" />
               </TouchableOpacity>
             </View>
+
+          </View>
+
+          <View style={styles.containerButton}>
+            <TouchableOpacity onPress={() => this.cancelar(this)}>
+              <ButtonRed title="Cancelar" />
+            </TouchableOpacity>
+          </View>
 
         </ScrollView>
       </ImageBackground>

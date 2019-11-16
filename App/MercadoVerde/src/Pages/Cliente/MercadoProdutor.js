@@ -217,25 +217,60 @@ class MercadoProdutor extends Component {
     }
   }
 
-  adcSacola(idProduto, idProdutor, valor, tipo) {
+  adcSacola(idProduto, idProdutor, valor, tipo, nome, kg) {
 
-    const produto = {
-      idCliente: this.state.id,
-      idProduto,
-      idProdutor,
-      valor,
-      tipo
+    console.log(global.sacolaGlobal.length);
+
+    if (global.sacolaGlobal.length === 0) {
+
+      let qtde = 1;
+      const produto = {
+        idCliente: this.state.id,
+        idProduto,
+        idProdutor,
+        valor,
+        tipo,
+        nome,
+        qtde
+      }
+      global.sacolaGlobal.push(produto);
+      console.log('Adicionado novo produto');
+    } else {
+
+      let sacolaAtualizada = global.sacolaGlobal
+      sacolaAtualizada.forEach(prod => {
+
+        if (prod.idProduto === idProduto) {
+
+          prod.qtde = prod.qtde + 1
+          console.log(`Adicionado mais uma unidade de ${prod.nome}`);
+        } else {
+
+          let qtde = 1;
+          const produto = {
+            idCliente: this.state.id,
+            idProduto,
+            idProdutor,
+            valor,
+            tipo,
+            nome,
+            qtde
+          }
+          console.log('Adicionado novo produto');
+          sacolaAtualizada.push(produto);
+        }
+      });
+      console.log(sacolaAtualizada);
+      global.sacolaGlobal = sacolaAtualizada;
+
     }
 
-    this.setState({sacola: [...this.state.sacola, produto]});
-    global.sacolaGlobal.push(...this.state.sacola);
-    console.log(this.state.sacola);
   }
 
   render() {
     return (
       <Fragment>
-        
+
         <HeaderLogged />
 
         <ImageBackground source={require('../../img/bg.png')}
@@ -277,55 +312,13 @@ class MercadoProdutor extends Component {
                             <Text style={styles.prodNome}>{prod.nome}</Text>
                             <Text style={styles.prodPreco}>R$ {prod.valor} {prod.unidades ? 'Und.' : 'Kg.'}</Text>
                           </View>
-                          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.adcSacola(prod.id, prod.id_produtor, prod.valor, prod.tipo)}>
+                          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.adcSacola(prod.id, prod.id_produtor, prod.valor, prod.tipo, prod.nome)}>
                             <Image style={styles.cartProd} source={require('../../assets/add-to-cart.png')} />
                           </TouchableOpacity>
                         </View>
                       );
                     })
                   }
-
-                  <Overlay isVisible={this.state.isVisible}
-                    onBackdropPress={() => this.setState({ isVisible: false })}
-                  >
-                    <View style={{ padding: 20 }}>
-
-                      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <Image style={styles.imgProdutor} source={require('../../img/demo.png')} />
-                        <Text style={{ fontSize: 20, fontWeight: 'bold', paddingHorizontal: 15 }}>José dos Tomates</Text>
-                      </View>
-
-                      <Text style={{ marginTop: 20, fontSize: 18, padding: 10 }}>Como foi sua experiência com esse produtor ?</Text>
-
-                      <View style={{ margin: 40 }}>
-                        <AirbnbRating
-                          count={5}
-                          reviews={["Péssima", "Ruim", "Boa", "Ótima", "Perfeita"]}
-                          defaultRating={0}
-                          size={30}
-                          onFinishRating={() => {
-                            /* envia avaliacao ao servidor */
-                            setTimeout(() => {
-
-                              Alert.alert('Sucesso!', 'Sua avaliação foi enviada.')
-                              this.setState({ isVisible: false })
-                            }, 1500);
-                          }}
-                        />
-
-                        <View >
-                          <TouchableOpacity style={{ marginTop: 100 }} onPress={() => this.setState({ isVisible: false })}>
-                            <ButtonRed title="Cancelar" />
-                          </TouchableOpacity>
-                        </View>
-                      </View>
-
-                    </View>
-                  </Overlay>
-
-                  <TouchableOpacity onPress={() => this.setState({ isVisible: true })}>
-                    <ButtonGreen title="Avaliar Produtor" />
-                  </TouchableOpacity>
                 </View>
 
               </View>
@@ -394,7 +387,7 @@ const styles = StyleSheet.create({
   },
   prodContainer: {
     margin: 15,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   imgProd: {
     height: 40,

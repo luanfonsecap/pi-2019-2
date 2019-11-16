@@ -10,6 +10,8 @@ import CadClient from './Pages/CadClient';
 
 import IndexC from './Pages/Cliente/Index';
 import MercadoProdutor from './Pages/Cliente/MercadoProdutor';
+import Sacola from './Pages/Cliente/Sacola';
+import HistoricoPedidos from './Pages/Cliente/Pedidos';
 
 import IndexP from './Pages/Produtor/Index';
 import Pedidos from './Pages/Produtor/Pedidos';
@@ -34,7 +36,9 @@ const stackLogout = createStackNavigator({
 
 const stackLoggedC = createStackNavigator({
   IndexC: {screen: IndexC, navigationOptions: noHeader},
-  MercadoProdutor: {screen: MercadoProdutor, navigationOptions: noHeader}
+  MercadoProdutor: {screen: MercadoProdutor, navigationOptions: noHeader},
+  Sacola: {screen: Sacola, navigationOptions: noHeader},
+  HistoricoPedidos: {screen: HistoricoPedidos, navigationOptions: noHeader},
 });
 
 const stackLoggedP = createStackNavigator({

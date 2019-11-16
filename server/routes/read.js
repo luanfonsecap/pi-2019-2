@@ -33,7 +33,8 @@ function infoProduto(req, res) {
 
 function infoPedido(req, res) {
     const id = req.body.id;
-    const sqlQry = `SELECT * FROM pedidos WHERE id='${id} '`;
+    console.log(id);
+    const sqlQry = `SELECT * FROM pedidos WHERE id=${id}`;
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
@@ -149,7 +150,7 @@ function infoPedCliente(req, res) {
 
 function infoHistoricoPed(req, res) {
     const { id, status } = req.body;
-    const sqlQry = `SELECT * FROM pedidos WHERE id_produtor='${id}' AND status='${status}'`;
+    const sqlQry = `SELECT * FROM pedidos WHERE id_cliente='${id}' AND status='${status}'`;
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
@@ -173,10 +174,9 @@ function infoHistoricoPed(req, res) {
                     count++;
                 }
                 resultado.push({
-                    id: results[contador].id,
-                    IDProdutor: results[contador].id_produtor,
-                    IDCliente: client_id[contador],
-                    Nome: results[contador].nome_cliente,
+                    IdProdutor: results[contador].id_produtor,
+                    IdCompra: results[contador].id,
+                    Produtos: results[contador].nomes,
                     Valor: total.toFixed(2),
                 })
                 contador++;
@@ -186,7 +186,7 @@ function infoHistoricoPed(req, res) {
     });
 }
 
-function infoProdutosDestaque(req, res) {
+function infoDestaque(req, res) {
     const sqlQry = `SELECT id,nome,tipo,id_produtor FROM produtos  ORDER BY vendas DESC LIMIT 4 `;
 
     connection.query(sqlQry, function (error, results, fields) {
@@ -214,7 +214,7 @@ function infoProdutosDestaque(req, res) {
 
 function infoMelhores(req, res) {
     const { cidade } = req.body;
-    const sqlQry = `SELECT id,nome,avaliacao_med,urlImagem FROM cadastro WHERE avaliacao_med >= 4 AND cidade='${cidade}'`;
+    const sqlQry = `SELECT id,nome,avaliacao_med,urlImagem FROM cadastro WHERE cidade='${cidade}' ORDER BY avaliacao_med DESC limit 10 `;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
@@ -294,13 +294,94 @@ function infoMercado(req, res) {
 
 }
 
+function infoSaldo(req, res) {
+    const { id_usuario } = req.body;
+    const sqlQry = `SELECT saldo FROM conta WHERE id_usuario = ${id_usuario}`;
+    connection.query(sqlQry, function (error, results, fields) {
+        if (error) {
+            /* Lógica de tratamento da resposta */
+            res.json(error);
+        } else {
+            res.json(results);
+        }
+    });
+
+}
+
+function infoCartao(req, res) {
+    const { id_usuario, valorcompra, cartao, validade, cvv } = req.body;
+    const sqlQry = `SELECT cartao,validade,cvv,limite FROM conta WHERE id_usuario = ${id_usuario}`;
+    connection.query(sqlQry, function (error, results, fields) {
+        if (error) {
+            res.json(error);
+        } else {
+            var cartaobanco = results[0].cartao;
+            var validadebanco = results[0].validade;
+            var cvvbanco = results[0].cvv;
+            var limitebanco = results[0].limite;
+            var resultado = [];
+            var erro = 0;
+
+            // Valida número do cartão.
+            if (cartao != cartaobanco) {
+                resultado.push({Cartão: 'inválido'});
+                erro++
+            }
+            else {
+                resultado.push({Cartão: 'válido'});
+            }
+
+            // Valida validade do cartão.
+            if (validade != validadebanco) {
+                resultado.push({Validade: 'inválido'});
+                erro++
+            }
+            else {
+                resultado.push({Validade: 'válido'});
+            }
+
+            // Valida o código de segurança do cartão.
+            if (cvv != cvvbanco) {
+                resultado.push({CVV: 'inválido'});
+                erro++
+            }
+            else {
+                resultado.push({CVV: 'válido'});
+            }
+
+            // Valida se o limite é suficiente para a compra.
+            if (valorcompra > limitebanco) {
+                resultado.push({Limite: 'Insuficiente'});
+                erro++
+            }
+            else {
+                resultado.push({Limite: 'suficiente'});
+            }
+
+            // Valida se a compra pode ser feita.
+            if (erro != 0) {
+                resultado.push({Status: false});
+            }
+            else {
+                resultado.push({Status: true});              
+            }
+
+            res.json(resultado);
+        }
+    });
+
+}
+
 router.post('/usuario', infoUsuario);
 router.post('/produto', infoProduto);
 router.post('/pedido', infoPedido);
 router.post('/pedprodutor', infoPedProdutor);
 router.post('/pedcliente', infoPedCliente);
 router.post('/historico', infoHistoricoPed);
-router.get('/produtosdestaque', infoProdutosDestaque);
+router.get('/destaque', infoDestaque);
 router.post('/melhores', infoMelhores);
 router.post('/mercado', infoMercado);
+router.post('/saldo', infoSaldo);
+router.post('/cartao', infoCartao);
+
 module.exports = router;
