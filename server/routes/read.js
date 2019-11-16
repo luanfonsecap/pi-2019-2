@@ -74,7 +74,7 @@ function infoPedido(req, res) {
 
 function infoPedProdutor(req, res) {
     const id = req.body.id;
-    const sqlQry = `SELECT * FROM pedidos WHERE id_produtor='${id}'`;
+    const sqlQry = `SELECT * FROM pedidos WHERE id_produtor='${id}' AND status='Aguardando'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
