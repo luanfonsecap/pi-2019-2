@@ -74,7 +74,7 @@ function infoPedido(req, res) {
 
 function infoPedProdutor(req, res) {
     const id = req.body.id;
-    const sqlQry = `SELECT * FROM pedidos WHERE id_produtor='${id}'`;
+    const sqlQry = `SELECT * FROM pedidos WHERE id_produtor='${id}' AND status='Aguardando'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
@@ -150,7 +150,7 @@ function infoPedCliente(req, res) {
 
 function infoHistoricoPed(req, res) {
     const { id, status } = req.body;
-    const sqlQry = `SELECT * FROM pedidos WHERE id_produtor='${id}' AND status='${status}'`;
+    const sqlQry = `SELECT * FROM pedidos WHERE id_cliente='${id}' AND status='${status}'`;
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
@@ -174,10 +174,9 @@ function infoHistoricoPed(req, res) {
                     count++;
                 }
                 resultado.push({
-                    id: results[contador].id,
-                    IDProdutor: results[contador].id_produtor,
-                    IDCliente: client_id[contador],
-                    Nome: results[contador].nome_cliente,
+                    IdProdutor: results[contador].id_produtor,
+                    IdCompra: results[contador].id,
+                    Produtos: results[contador].nomes,
                     Valor: total.toFixed(2),
                 })
                 contador++;
@@ -215,7 +214,7 @@ function infoDestaque(req, res) {
 
 function infoMelhores(req, res) {
     const { cidade } = req.body;
-    const sqlQry = `SELECT id,nome,avaliacao_med,urlImagem FROM cadastro WHERE cidade='${cidade}' ORDER BY avaliacao_med DESC limit 10 `;
+    const sqlQry = `SELECT id,nome,avaliacao_med,urlImagem FROM cadastro WHERE avaliacao_med >= 4 AND cidade='${cidade}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {

@@ -5,6 +5,7 @@ import HeaderLogged from '../../Components/HeaderLogged';
 import ButtonGreen from '../../Components/ButtonGreen';
 import ButtonRed from '../../Components/ButtonRed';
 import url from '../../services/url';
+import socket from 'socket.io-client'
 
 /* os produtos do pedido são passados por params, recebidos na req da página anterior */
 
@@ -19,6 +20,9 @@ function aceitaPedido(id) {
     .then(res => res.json())
     .then(res => {
       res[0].status ? Alert.alert('Sucesso!', 'O pedido foi confirmado.') : Alert.alert('Falhou!', 'O pedido não foi confirmado.')
+      socket.on('statusPedido', (data) => {
+        res[0].status = data;
+      })
     })
     .cactch(e => console.log(e));
 }

@@ -24,7 +24,7 @@ export default class FooterTabsBadgeExample extends Component {
               <Icon type="Feather" name="shopping-bag" />
               <Text>Sacola</Text>
             </Button>
-            <Button style={styles.button} vertical>
+            <Button onPress={() => this.props.navigation.navigate('HistoricoPedidos')} style={styles.button} vertical>
               <Icon type="Feather" name="list" />
               <Text>Pedidos</Text>
             </Button>
