@@ -201,12 +201,6 @@ class Mercado extends Component {
 
           </View>
 
-          <View style={styles.containerButton}>
-            <TouchableOpacity onPress={() => this.cancelar(this)}>
-              <ButtonRed title="Cancelar" />
-            </TouchableOpacity>
-          </View>
-
         </ScrollView>
       </ImageBackground>
     );

@@ -174,9 +174,9 @@ function infoHistoricoPed(req, res) {
                     count++;
                 }
                 resultado.push({
-                    IdProdutor: results[contador].id_produtor,
                     IdCompra: results[contador].id,
                     Produtos: results[contador].nomes,
+                    Data: results[contador].data,
                     Valor: total.toFixed(2),
                 })
                 contador++;
@@ -198,7 +198,7 @@ function infoDestaque(req, res) {
             var resultado = [];
             console.log(results);
             while (contador != 4) {
-                
+
                 resultado.push({
                     nome: results[contador].nome,
                     tipo: results[contador].tipo,
@@ -324,46 +324,46 @@ function infoCartao(req, res) {
 
             // Valida número do cartão.
             if (cartao != cartaobanco) {
-                resultado.push({Cartão: 'inválido'});
+                resultado.push({ Cartão: 'inválido' });
                 erro++
             }
             else {
-                resultado.push({Cartão: 'válido'});
+                resultado.push({ Cartão: 'válido' });
             }
 
             // Valida validade do cartão.
             if (validade != validadebanco) {
-                resultado.push({Validade: 'inválido'});
+                resultado.push({ Validade: 'inválido' });
                 erro++
             }
             else {
-                resultado.push({Validade: 'válido'});
+                resultado.push({ Validade: 'válido' });
             }
 
             // Valida o código de segurança do cartão.
             if (cvv != cvvbanco) {
-                resultado.push({CVV: 'inválido'});
+                resultado.push({ CVV: 'inválido' });
                 erro++
             }
             else {
-                resultado.push({CVV: 'válido'});
+                resultado.push({ CVV: 'válido' });
             }
 
             // Valida se o limite é suficiente para a compra.
             if (valorcompra > limitebanco) {
-                resultado.push({Limite: 'Insuficiente'});
+                resultado.push({ Limite: 'Insuficiente' });
                 erro++
             }
             else {
-                resultado.push({Limite: 'suficiente'});
+                resultado.push({ Limite: 'suficiente' });
             }
 
             // Valida se a compra pode ser feita.
             if (erro != 0) {
-                resultado.push({Status: false});
+                resultado.push({ Status: false });
             }
             else {
-                resultado.push({Status: true});              
+                resultado.push({ Status: true });
             }
 
             res.json(resultado);

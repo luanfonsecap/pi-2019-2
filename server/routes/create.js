@@ -82,7 +82,8 @@ function cadProduto(req, res) {
 
 function cadPedido(req, res) {
     const { id_produtor, id_cliente, nome_cliente, cidade, produtos, valor, tipo, qtde, nomes, metodo } = req.body;
-    const sqlQry = `INSERT INTO pedidos (status, id_produtor, id_cliente, nome_cliente, cidade, produtos, valor, tipo, qtde, nomes) VALUES ('Aguardando','${id_produtor}','${id_cliente}','${nome_cliente}', '${cidade}', '${produtos}','${valor}','${tipo}','${qtde}', '${nomes}');`
+    const data = `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`
+    const sqlQry = `INSERT INTO pedidos (status, id_produtor, id_cliente, nome_cliente, cidade, produtos, valor, tipo, qtde, nomes, data) VALUES ('Aguardando','${id_produtor}','${id_cliente}','${nome_cliente}', '${cidade}', '${produtos}','${valor}','${tipo}','${qtde}', '${nomes}', '${data}');`
     var prods = produtos.split(',');
     var values = valor.split(',');
     var amount = qtde.split(',');

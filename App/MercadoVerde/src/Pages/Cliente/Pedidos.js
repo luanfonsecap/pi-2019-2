@@ -25,9 +25,9 @@ class Pedidos extends Component {
 
     await AsyncStorage.getItem('id').then(id => this.setState({ id }));
 
-    fetch(`${url}read/historico`, {
+    await fetch(`${url}read/historico`, {
       method: 'POST',
-      body: JSON.stringify({ id: this.state.id, status: 'Aguardando' }),
+      body: JSON.stringify({ id: this.state.id, status: 'Concluido' }),
       headers: { 'Content-type': 'application/json' }
     }).then(res => res.json())
       .then(lista => this.setState({ lista }))
@@ -35,6 +35,8 @@ class Pedidos extends Component {
         console.log(e);
         Alert.alert('Erro', 'Erro ao conectar com servidor!');
       })
+
+    console.log(this.state.lista);
   }
 
   async avaliacao(idProdutor, idCompra) {
@@ -80,7 +82,7 @@ class Pedidos extends Component {
         >
 
           <Text style={styles.titulo}>Histórico de Pedidos</Text>
-          {this.state.lista.length === 0 ? <Text style={{fontSize: 20, alignSelf: 'center', color: '#EB5B65', fontWeight: 'bold'}}>Você ainda não realizou nenhuma compra!</Text> : null}
+          {this.state.lista.length === 0 ? <Text style={{ fontSize: 20, alignSelf: 'center', color: '#EB5B65', fontWeight: 'bold' }}>Você ainda não realizou nenhuma compra!</Text> : null}
 
           <FlatList
             data={this.state.lista}
@@ -88,10 +90,10 @@ class Pedidos extends Component {
             renderItem={({ item }) => {
               return (
                 <View style={styles.container}>
-                  <Text style={styles.id}>Id da compra: {item.IdCompra}</Text>
+                  <Text>{item.Data}</Text>
                   <Text style={styles.produtos}>Produtos:</Text>
                   <View>
-                    <Text style={styles.produto}>{item.Produtos}</Text>
+                    <Text style={styles.produto}>{item.Produtos.replace(',', ' ')}</Text>
                   </View>
                   <Text style={styles.valor}>Valor da compra: <Text style={styles.preco}>{item.Valor}</Text></Text>
                   <TouchableOpacity onPress={() => this.avaliacao(item.IdProdutor, item.IdCompra)} style={styles.avaliar}>

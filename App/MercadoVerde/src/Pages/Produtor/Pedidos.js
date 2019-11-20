@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { View, Text, ImageBackground, StyleSheet, AsyncStorage, FlatList, ScrollView, Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { Button } from 'react-native-elements';
@@ -86,8 +86,8 @@ class PedidosRecebidos extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        
-        const produtos  = res[0].produtos;
+
+        const produtos = res[0].produtos;
         const cliente = res[0].nome_cliente;
         const id = res[0].id_cliente;
 
@@ -99,32 +99,34 @@ class PedidosRecebidos extends Component {
 
   render() {
     return (
-      <ScrollView>
-        <View>
-          <HeaderLogged nome="Luan" imagem={null} />
-          <ImageBackground style={{ width: '100%', height: '100%' }}
-            source={require('../../img/bg.png')}>
-            <FlatList
-              data={this.state.pedidos}
-              keyExtractor={pedidos.id}
-              renderItem={({ item }) => {
-                return (
-                  <View style={styles.card}>
-                    <Text style={styles.nome}>Pedido de <Text style={styles.bold}>{item.nome}</Text></Text>
-                    <Text style={styles.valor}>R$ {item.valor}</Text>
-                    <Text style={styles.local}>{item.bairro}</Text>
-                    <Button
-                      title="Gerenciar"
-                      buttonStyle={{ backgroundColor: '#EB5B65', marginTop: 10 }}
-                      onPress={() => this.gerenciaPedido(item.id, item.valor, item.bairro)}
-                    />
-                  </View>
-                );
-              }}
-            />
-          </ImageBackground>
-        </View>
-      </ScrollView>
+      <Fragment>
+        <ImageBackground style={{ width: '100%', height: '100%' }}
+          source={require('../../img/bg.png')}>
+          <ScrollView>
+            <View>
+              <HeaderLogged nome="Luan" imagem={null} />
+              <FlatList
+                data={this.state.pedidos}
+                keyExtractor={pedidos.id}
+                renderItem={({ item }) => {
+                  return (
+                    <View style={styles.card}>
+                      <Text style={styles.nome}>Pedido de <Text style={styles.bold}>{item.nome}</Text></Text>
+                      <Text style={styles.valor}>R$ {item.valor}</Text>
+                      <Text style={styles.local}>{item.bairro}</Text>
+                      <Button
+                        title="Gerenciar"
+                        buttonStyle={{ backgroundColor: '#EB5B65', marginTop: 10 }}
+                        onPress={() => this.gerenciaPedido(item.id, item.valor, item.bairro)}
+                      />
+                    </View>
+                  );
+                }}
+              />
+            </View>
+          </ScrollView>
+        </ImageBackground>
+      </Fragment>
     );
   }
 
