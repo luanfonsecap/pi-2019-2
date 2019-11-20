@@ -100,9 +100,9 @@ class Carrinho extends Component {
     }
   }
 
-  fundoProduto(tipo) {
+  fundoProduto(fundo) {
 
-    switch (tipo) {
+    switch (fundo) {
       case 'tomate':
         return '#F06A6A';
         break;
@@ -185,6 +185,8 @@ class Carrinho extends Component {
 
   async enviarPedido() {
 
+    console.log(this.state.sacola);
+
     const produtosId = this.state.sacola.map(prod => {
       return prod.idProduto;
     });
@@ -221,6 +223,15 @@ class Carrinho extends Component {
     });
     stringQtde = stringQtde.substr(0, (stringQtde.length - 1));
 
+    const nomes = this.state.sacola.map(prod => {
+      return prod.nome;
+    });
+    let stringNomes = '';
+    nomes.forEach(nome => {
+      stringNomes = stringNomes + `${nome},`
+    });
+    stringNomes = stringNomes.substr(0, (stringNomes.length - 1));
+
 
     await fetch(`${url}create/pedido`, {
       method: 'POST',
@@ -232,20 +243,20 @@ class Carrinho extends Component {
         produtos: stringIds,
         valor: stringValores,
         tipo: stringTipos,
-        qtde: stringQtde
+        qtde: stringQtde,
+        nomes: stringNomes
       }),
       headers: { 'Content-type': 'application/json' }
     })
       .then(res => res.json())
       .then(res => {
-        if (res.status) {
+        if (res[0].status) {
           Alert.alert('Sucesso!', 'Pedido enviado ao produtor.');
           this.setState({ sacola: [] });
           global.sacolaGlobal = [];
         } else {
           Alert.alert('Falha!', 'Pedido não foi enviado ao produtor.');
         }
-        console.log(res);
       })
       .catch(e => {
         console.log(e);
@@ -278,8 +289,8 @@ class Carrinho extends Component {
                 renderItem={({ item }) => {
                   return (
                     <View style={styles.prodContainer}>
-                      <View style={{ ...styles.areaImg, backgroundColor: this.fundoProduto(item.tipo) }}>
-                        <Image style={styles.imgProd} source={this.carregaIcon(item.tipo)} />
+                      <View style={{ ...styles.areaImg, backgroundColor: this.fundoProduto(item.fundo) }}>
+                        <Image style={styles.imgProd} source={this.carregaIcon(item.fundo)} />
                       </View>
                       <View style={styles.column}>
                         <Text style={styles.prodNome}>{item.nome}</Text>
@@ -296,7 +307,7 @@ class Carrinho extends Component {
             </View>
 
             <TouchableOpacity onPress={this.enviarPedido.bind(this)} style={styles.fecharSacola}>
-              <ButtonRed title="Fechar Sacola" />
+              <ButtonRed title="Fazer Pedido" />
             </TouchableOpacity>
           </ScrollView>
         </ImageBackground>

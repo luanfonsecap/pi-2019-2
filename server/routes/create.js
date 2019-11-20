@@ -81,9 +81,12 @@ function cadProduto(req, res) {
 }
 
 function cadPedido(req, res) {
-    const { id_produtor, id_cliente, nome_cliente, cidade, produtos, valor, tipo, qtde } = req.body;
-    const sqlQry = `INSERT INTO pedidos (status, id_produtor, id_cliente, nome_cliente, cidade, produtos, valor, tipo, qtde) VALUES ('Aguardando','${id_produtor}','${id_cliente}','${nome_cliente}', '${cidade}', '${produtos}','${valor}','${tipo}','${qtde}');`
+    const { id_produtor, id_cliente, nome_cliente, cidade, produtos, valor, tipo, qtde, nomes, metodo } = req.body;
+    const sqlQry = `INSERT INTO pedidos (status, id_produtor, id_cliente, nome_cliente, cidade, produtos, valor, tipo, qtde, nomes) VALUES ('Aguardando','${id_produtor}','${id_cliente}','${nome_cliente}', '${cidade}', '${produtos}','${valor}','${tipo}','${qtde}', '${nomes}');`
     var prods = produtos.split(',');
+    var values = valor.split(',');
+    var amount = qtde.split(',');
+    var total = 0;
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
@@ -113,6 +116,66 @@ function cadPedido(req, res) {
                     }
                 });
             });
+            var contador = 0;
+            while (contador != values.length) {
+                total = total + (values[contador]*amount[contador]);
+                contador++
+            }
+            if (metodo === "saldo") {
+                var sqlQry = `SELECT saldo FROM conta WHERE id_usuario=${id_cliente}; SELECT saldo FROM conta WHERE id_usuario=${id_produtor}`;
+                var saldo_cliente = 0;
+                var saldo_produtor = 0;
+                connection.query(sqlQry, function (error, results, fields) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                    saldo_cliente = ((results[0][0].saldo) - total);
+                    saldo_produtor = ((results[1][0].saldo) + total);
+                    var sqlQry2 = `UPDATE conta SET saldo='${saldo_cliente}' WHERE id_usuario=${id_cliente};
+                                   UPDATE conta SET saldo='${saldo_produtor}' WHERE id_usuario=${id_produtor}`;                               
+                    }
+                    connection.query(sqlQry2, function (error2, results2, fields2) {
+                        if (error) {
+                            console.log(error2);
+                        } else {
+                        console.log("ok");
+                                                      
+                        }    
+                    });
+                });
+                
+            }
+            if (metodo === "cartao") {
+                var sqlQry = `SELECT limite FROM conta WHERE id_usuario=${id_cliente}; SELECT saldo FROM conta WHERE id_usuario =${id_produtor}`; 
+                var limite_cliente = 0;
+                var saldo_produtor = 0;
+                connection.query(sqlQry, function (error, results, fields) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        connection.query(sqlQry, function (error, results, fields) {
+                            if (error) {
+                                console.log(error);
+                            } else {
+                            limite_cliente = ((results[0][0].limite) - total);
+                            saldo_produtor = ((results[1][0].saldo) + total);
+                            var sqlQry2 = `UPDATE conta SET limite='${limite_cliente}' WHERE id_usuario=${id_cliente};
+                                           UPDATE conta SET saldo='${saldo_produtor}' WHERE id_usuario=${id_produtor}`;                               
+                            }
+                            connection.query(sqlQry2, function (error2, results2, fields2) {
+                                if (error) {
+                                    console.log(error2);
+                                } else {
+                                console.log("ok");
+                                                              
+                                }    
+                            });
+                        });
+                        
+                    }
+                });
+                
+            }
             res.json([{ status: true }]);
         }
     });

@@ -39,6 +39,7 @@ class MercadoProdutor extends Component {
 
     this.getProdutos();
     this.getDados();
+    console.log(produtos);
   }
 
   getDados() {
@@ -217,52 +218,92 @@ class MercadoProdutor extends Component {
     }
   }
 
-  adcSacola(idProduto, idProdutor, valor, tipo, nome, kg) {
+  adcSacola(idProduto, idProdutor, valor, fundo, nome, kg) {
 
     console.log(global.sacolaGlobal.length);
 
     if (global.sacolaGlobal.length === 0) {
 
       let qtde = 1;
-      const produto = {
-        idCliente: this.state.id,
-        idProduto,
-        idProdutor,
-        valor,
-        tipo,
-        nome,
-        qtde
+      if (kg) {
+
+        const produto = {
+          idCliente: this.state.id,
+          idProduto,
+          idProdutor,
+          valor,
+          tipo: 'kg',
+          nome,
+          qtde,
+          fundo
+        }
+        global.sacolaGlobal.push(produto);
+        console.log('Adicionado novo produto, kilogramas');
+      } else {
+
+        const produto = {
+          idCliente: this.state.id,
+          idProduto,
+          idProdutor,
+          valor,
+          tipo: 'unidades',
+          nome,
+          qtde,
+          fundo
+        }
+        global.sacolaGlobal.push(produto);
+        console.log('Adicionado novo produto, unidade');
       }
-      global.sacolaGlobal.push(produto);
-      console.log('Adicionado novo produto');
+
     } else {
 
-      let sacolaAtualizada = global.sacolaGlobal
+      var sacolaAtualizada = global.sacolaGlobal;
       sacolaAtualizada.forEach(prod => {
-
+        
         if (prod.idProduto === idProduto) {
-
+          
           prod.qtde = prod.qtde + 1
           console.log(`Adicionado mais uma unidade de ${prod.nome}`);
-        } else {
+        }
+      });
+      console.log(sacolaAtualizada);
+      global.sacolaGlobal = sacolaAtualizada;
+      
+      var novoProduto = sacolaAtualizada.find(elemento => elemento.idProduto === idProduto);
+      if (novoProduto === undefined) {
+        var sacolaAtualizada = global.sacolaGlobal;
+        console.log('NOVO PRODUTO ADICIONADO!!!');
 
-          let qtde = 1;
+        if (kg) {
+
           const produto = {
             idCliente: this.state.id,
             idProduto,
             idProdutor,
             valor,
-            tipo,
+            tipo: 'kg',
             nome,
-            qtde
+            qtde: 1,
+            fundo
           }
-          console.log('Adicionado novo produto');
+          console.log('Adicionado novo produto, kilogramas');
+          sacolaAtualizada.push(produto);
+        } else {
+
+          const produto = {
+            idCliente: this.state.id,
+            idProduto,
+            idProdutor,
+            valor,
+            tipo: 'unidades',
+            nome,
+            qtde: 1,
+            fundo
+          }
+          console.log('Adicionado novo produto, unidades');
           sacolaAtualizada.push(produto);
         }
-      });
-      console.log(sacolaAtualizada);
-      global.sacolaGlobal = sacolaAtualizada;
-
+      }
     }
 
   }
@@ -312,7 +353,7 @@ class MercadoProdutor extends Component {
                             <Text style={styles.prodNome}>{prod.nome}</Text>
                             <Text style={styles.prodPreco}>R$ {prod.valor} {prod.unidades ? 'Und.' : 'Kg.'}</Text>
                           </View>
-                          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.adcSacola(prod.id, prod.id_produtor, prod.valor, prod.tipo, prod.nome)}>
+                          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.adcSacola(prod.id, prod.id_produtor, prod.valor, prod.tipo, prod.nome, prod.kg, prod.unidades)}>
                             <Image style={styles.cartProd} source={require('../../assets/add-to-cart.png')} />
                           </TouchableOpacity>
                         </View>
