@@ -306,9 +306,16 @@ class Carrinho extends Component {
               />
             </View>
 
-            <TouchableOpacity onPress={this.enviarPedido.bind(this)} style={styles.fecharSacola}>
-              <ButtonRed title="Fazer Pedido" />
-            </TouchableOpacity>
+            {
+              this.state.sacola.length === 0 ?
+                <Text style={styles.feedbackTexto}>Sua sacola está vazia <Icon style={{color: '#EB5B65'}} type="Feather" name="frown" /></Text>
+                :
+                <TouchableOpacity onPress={this.enviarPedido.bind(this)} style={styles.fecharSacola}>
+                  <ButtonRed title="Fazer Pedido" />
+                </TouchableOpacity>
+            }
+
+
           </ScrollView>
         </ImageBackground>
       </Fragment>
@@ -384,6 +391,17 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 10,
     marginBottom: 20
+  },
+  feedbackTexto: {
+    padding: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 5,
+    elevation: 3,
+    marginBottom: 15,
+    color: '#EB5B65'
   }
 });
 
