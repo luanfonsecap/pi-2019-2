@@ -27,7 +27,7 @@ class Pedidos extends Component {
 
     fetch(`${url}read/historico`, {
       method: 'POST',
-      body: JSON.stringify({ id, status: 'Aguardando' }),
+      body: JSON.stringify({ id: this.state.id, status: 'Aguardando' }),
       headers: { 'Content-type': 'application/json' }
     }).then(res => res.json())
       .then(lista => this.setState({ lista }))
