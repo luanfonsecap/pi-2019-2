@@ -5,6 +5,7 @@ import HeaderLogged from '../../Components/HeaderLogged';
 import ButtonGreen from '../../Components/ButtonGreen';
 import ButtonRed from '../../Components/ButtonRed';
 import url from '../../services/url';
+import socket from 'socket.io-client'
 
 /* os produtos do pedido são passados por params, recebidos na req da página anterior */
 
@@ -36,7 +37,7 @@ function recusaPedido(id, navigation) {
     .then(res => {
       console.log(res);
       res.status ? Alert.alert('Sucesso!', 'O pedido foi recusado.') : Alert.alert('Falhou!', 'Falha ao recusar pedido.');
-      
+
       navigation.navigate('Index');
     });
 }

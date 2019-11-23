@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = 1337 //porta padrao
 const cors = require('cors')
+const http = require('http').Server(app);//protocolo http
+const io = require('socket.io')(http);//protocolo wss
 
 //configurando o body parser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,6 +24,13 @@ const create = require('./routes/create');
 const read = require('./routes/read');
 const update = require('./routes/update');
 const delet = require('./routes/delete');
+
+//functions do socket.io
+io.on('connection', function(socket){
+    socket.emit('statusPedido', data => {
+        console.log(data);
+    });
+});
 
 //definindo as rotas
 app.use('/', router);

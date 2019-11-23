@@ -111,7 +111,8 @@ function cadPedido(req, res) {
                                 console.log('Erro na requisição III.');
                                 res.json(error3);
                             } else {
-                                console.log('');
+                                console.log("OK");
+                                
                             }
                         });
                     }
@@ -239,9 +240,35 @@ function cadAvaliacao(req, res) {
     });
 }
 
+function cadCompra(req, res) {
+    const {valor, metodo, id_produtor, id_cliente} = req.body;
+    var resultado = [];
+    if (metodo === cartao) {
+        const sqlQry = `SELECT limite FROM conta WHERE id_usuario='${id_cliente}'; SELECT saldo FROM conta WHERE id_usuario='${id_produtor}'`
+        var limite;
+        var saldo;
+        connection.query(sqlQry, function (error, results, fields) {
+            if (error) {
+                console.log(error);
+                resultado.push({status: false});
+            } else {
+                var nlimite = limite - results[0].limite;
+                var nsaldo = saldo + results[1].saldo;
+                console.log(nlimite, nsaldo);
+                
+            }
+        });
+
+    } else {
+        
+    }
+
+}
+
 router.post('/cliente', cadCliente);
 router.post('/produtor', cadProdutor);
 router.post('/produto', cadProduto);
 router.post('/pedido', cadPedido);
 router.post('/avaliacao', cadAvaliacao);
+router.post('/compra', cadCompra);
 module.exports = router;
