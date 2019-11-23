@@ -9,10 +9,9 @@ Desenvolvimento de um Aplicativo Mobile.
 
 Aplicativo de agricultura familiar com objetivo de conectar e aproximar produtores   rurais com clientes diretos, facilitando a compra de produtos frescos e livres de agrotóxicos.
 
->![WARNING]
+:exclamation:
 >Aplicação ainda não finalizada.
 >Necessário implementar novas e bem elaboradas regras de negócio assim como, funcionalidades e correção de bugs.
->![IMPORTANT]
 > Trabalho puramente acadêmico para conclusão de semestre.
 
 ## Funcionalidades
@@ -33,7 +32,7 @@ Para rodar este projeto em modo de desenvolvimento é necessário ter instaldo e
 [NodeJS](https://nodejs.org/en/), React Native CLI, [MySQL](https://dev.mysql.com/downloads/workbench/), [Chocolatey](https://chocolatey.org/). 
 E algum emulador Android de sua preferência.
 
->![NOTE]
+>:exclamation:
 >Você precisa configurar o seu emulador de forma correta para rodar a aplicação.
 > Você pode encontrar [aqui](https://docs.rocketseat.dev/ambiente-react-native/introducao) um tutorial de configuração.
 
