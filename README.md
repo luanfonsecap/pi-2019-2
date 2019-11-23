@@ -1,10 +1,12 @@
 # Repositório Projeto Interdisciplinar - Una Betim
 
-Desenvolvimento de um Aplicativo Mobile
+Desenvolvimento de um Aplicativo Mobile.
+
+![Screenshots do App](https://github.com/luanfonsecap/pi-2019-2/blob/master/Docs/assets/Screenshots%20App.png)
 
 ## Mercado Verde
 
-![Logotipo do aplicativo](https://github.com/luanfonsecap/pi-2019-2/blob/master/App/MercadoVerde/src/img/logo.png?raw=true)
+![Logotipo do aplicativo](https://github.com/luanfonsecap/pi-2019-2/blob/master/Docs/assets/logo.png)
 
 App de agricultura familiar com objetivo de conectar e aproximar produtores   rurais com clientes diretos, facilitando a compra de produtos frescos e livres de agrotóxicos.
 
