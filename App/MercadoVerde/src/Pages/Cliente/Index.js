@@ -14,23 +14,23 @@ export default class FooterTabsBadgeExample extends Component {
           <FooterTab style={styles.footer}>
             <Button style={styles.button} active vertical>
               <Icon type="Feather" name="home" />
-              <Text>Home</Text>
+              <Text style={styles.legenda}>Home</Text>
             </Button>
             <Button style={styles.button} vertical>
               <Icon type="Feather" name="bell" />
-              <Text>Alertas</Text>
+              <Text style={styles.legenda}>Alertas</Text>
             </Button>
             <Button onPress={() => this.props.navigation.navigate('Sacola')} style={styles.button} vertical>
               <Icon type="Feather" name="shopping-bag" />
-              <Text>Sacola</Text>
+              <Text style={styles.legenda}>Sacola</Text>
             </Button>
             <Button onPress={() => this.props.navigation.navigate('HistoricoPedidos')} style={styles.button} vertical>
               <Icon type="Feather" name="list" />
-              <Text>Pedidos</Text>
+              <Text style={styles.legenda}>Pedidos</Text>
             </Button>
             <Button style={styles.button} vertical>
               <Icon type="Feather" name="user" />
-              <Text>Perfil</Text>
+              <Text style={styles.legenda}>Perfil</Text>
             </Button>
           </FooterTab>
         </Footer>
@@ -47,5 +47,8 @@ const styles = StyleSheet.create({
   },
   footer: {
     backgroundColor: '#00BA51',
+  },
+  legenda: {
+    fontSize: 10
   }
 });

@@ -28,6 +28,7 @@ class MercadoProdutor extends Component {
       id: '',
       avaliacao: 0,
       url: '',
+      taxa: '',
       produtos: [],
       sacola: []
     }
@@ -57,7 +58,8 @@ class MercadoProdutor extends Component {
           nome: res[0].nome,
           cidade: res[0].cidade,
           avaliacao: res[0].avaliacao,
-          url: res[0].url
+          url: res[0].url,
+          taxa: res[0].taxa
         });
         console.log(this.state);
       })
@@ -335,6 +337,7 @@ class MercadoProdutor extends Component {
               </View>
               <View style={styles.localizacaoArea}>
                 <Text style={styles.localizacao}>{this.state.cidade}</Text>
+                <Text style={styles.localizacao}>Taxa de Entrega: R${this.state.taxa}</Text>
               </View>
             </View>
             <View style={styles.corpo}>
@@ -353,7 +356,7 @@ class MercadoProdutor extends Component {
                             <Text style={styles.prodNome}>{prod.nome}</Text>
                             <Text style={styles.prodPreco}>R$ {prod.valor} {prod.unidades ? 'Und.' : 'Kg.'}</Text>
                           </View>
-                          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.adcSacola(prod.id, prod.id_produtor, prod.valor, prod.tipo, prod.nome, prod.kg, prod.unidades)}>
+                          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={() => this.adcSacola(prod.id, prod.id_produtor, prod.valor, prod.icon, prod.nome, prod.kg, prod.unidades)}>
                             <Image style={styles.cartProd} source={require('../../assets/add-to-cart.png')} />
                           </TouchableOpacity>
                         </View>
@@ -416,6 +419,8 @@ const styles = StyleSheet.create({
   },
   localizacaoArea: {
     marginTop: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   produtosArea: {
     height: '100%'

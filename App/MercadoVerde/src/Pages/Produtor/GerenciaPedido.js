@@ -9,44 +9,45 @@ import url from '../../services/url';
 /* os produtos do pedido são passados por params, recebidos na req da página anterior */
 
 //função para confirmação do pedido
-function aceitaPedido(id) {
+function aceitaPedido(id, navigation) {
 
-  fetch(`${url}`, {
+  fetch(`${url}update/pedido`, {
     method: 'POST',
-    body: JSON.stringify({ id }),
+    body: JSON.stringify({ id, status: 'Em produção' }),
     headers: { 'Content-Type': 'application/json' }
   })
     .then(res => res.json())
     .then(res => {
-      res[0].status ? Alert.alert('Sucesso!', 'O pedido foi confirmado.') : Alert.alert('Falhou!', 'O pedido não foi confirmado.')
+      res.status ? Alert.alert('Sucesso!', 'O pedido foi confirmado.') : Alert.alert('Falhou!', 'O pedido não foi confirmado.');
+
+      navigation.navigate('Index');
     })
-    .cactch(e => console.log(e));
 }
 
 //função para negar pedido e redirecionar a tela de pedidos
-function recusaPedido(id) {
+function recusaPedido(id, navigation) {
 
-  fetch(`${url}`, {
+  fetch(`${url}delete/pedido`, {
     method: 'POST',
     body: JSON.stringify({ id }),
     headers: { 'Content-Type': 'application/json' }
   })
     .then(res => res.json())
     .then(res => {
-      res[0].status ? Alert.alert('Sucesso!', 'O pedido foi recusado.') : Alert.alert('Falhou!', 'Falha ao recusar pedido.');
-
-      navigation.navigate('Pedidos');
-    })
-    .cactch(e => console.log(e));
+      console.log(res);
+      res.status ? Alert.alert('Sucesso!', 'O pedido foi recusado.') : Alert.alert('Falhou!', 'Falha ao recusar pedido.');
+      
+      navigation.navigate('Index');
+    });
 }
 
-function quantidade(tipo, quant) { 
-  if(tipo === 'kg') {
-    return `${quant} Kg.`; 
+function quantidade(tipo, quant) {
+  if (tipo === 'kg') {
+    return `${quant} Kg.`;
   } else {
-    return `${quant} Und.`; 
+    return `${quant} Und.`;
   }
- }
+}
 
 const GerenciaPedido = ({ navigation }) => {
 
@@ -90,10 +91,10 @@ const GerenciaPedido = ({ navigation }) => {
           </View>
 
           <View style={styles.botoes}>
-            <TouchableOpacity onPress={() => recusaPedido(navigation.getParam('id'))}>
+            <TouchableOpacity onPress={() => recusaPedido(navigation.getParam('idPedido'), navigation)}>
               <ButtonRed title="Recusar" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => aceitaPedido(navigation.getParam('id'))}>
+            <TouchableOpacity onPress={() => aceitaPedido(navigation.getParam('idPedido'), navigation)}>
               <ButtonGreen title="Aceitar" />
             </TouchableOpacity>
           </View>

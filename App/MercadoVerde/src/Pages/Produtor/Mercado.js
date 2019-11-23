@@ -13,7 +13,6 @@ class Mercado extends Component {
     super(),
       this.state = {
         valorEntrega: '',
-        locais: '',
         nomeProduto: '',
         valorProduto: '',
         // kg ou und
@@ -24,17 +23,17 @@ class Mercado extends Component {
         //id do produtor
         id: ''
       }
-    AsyncStorage.getItem('id')
-      .then(id => this.setState({ id }))
-      .catch(e => Alert.alert('Erro', 'Ocorreu um erro, reinicie o aplicativo'));
-    /* this.buscaDados() */
   }
 
-  buscaDados() {
+  async componentDidMount() {
+
+    await AsyncStorage.getItem('id')
+      .then(id => this.setState({ id }))
+      .catch(e => Alert.alert('Erro', 'Ocorreu um erro, reinicie o aplicativo'));
 
     const id = this.state.id;
 
-    fetch(`${url}/read/usuario`, {
+    fetch(`${url}read/usuario`, {
       method: 'POST',
       body: JSON.stringify({ id }),
       headers: { 'Content-Type': 'application/json' }
@@ -42,10 +41,10 @@ class Mercado extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({
-          valorEntrega: res[0].valorEntrega,
-          locais: res[0].locais
+          valorEntrega: res[0].taxa,
         });
       })
+      .catch(e => console.log(e));
 
   }
 
@@ -65,6 +64,11 @@ class Mercado extends Component {
 
   cadProduto(that) {
 
+    if (!that.state.icone) {
+      Alert.alert('Ops!', 'Você esqueceu de adicionar o icone do produto.');
+      return;
+    }
+
     fetch(`${url}create/produto`, {
       method: 'POST',
       body: JSON.stringify({
@@ -73,21 +77,32 @@ class Mercado extends Component {
         id_produtor: that.state.id,
         qtde: that.state.qtdeProduto,
         tipo: that.state.tipo,
-        icon: that.this.icone
+        icon: that.state.icone
       }),
       headers: { 'Content-Type': 'application/json' }
     })
       .then(res => res.json())
-      .then(res => console.log(res));
+      .then(res => {
+        if (res[0].status) {
+          Alert.alert(`Sucesso!`, `${res[0].msg}`);
+          that.setState({
+            nomeProduto: '',
+            valorProduto: '',
+            peso: '',
+            qtdeProduto: '',
+            icone: ''
+          });
+        }
+      });
   }
 
   altTaxa(that) {
 
-    fetch(`${url}`, {
+    fetch(`${url}update/taxa`, {
       method: 'POST',
       body: JSON.stringify({
-        id_produtor: that.state.id,
-        taxaEntrega: that.state.valorEntrega
+        id: that.state.id,
+        valorTaxa: that.state.valorEntrega
       }),
       headers: { 'Content-type': 'application/json' }
     })
@@ -95,6 +110,7 @@ class Mercado extends Component {
       .then(res => {
         console.log(res);
         Alert.alert('Sucesso!', 'Valor da entrega alterado.');
+        that.setState({ valorEntrega: '' });
       })
 
   }
@@ -122,7 +138,7 @@ class Mercado extends Component {
               </View>
               <View style={styles.container}>
                 <Text style={styles.label}>Atual:</Text>
-                <Text style={styles.valorAtual}>{this.state.valorEntrega || 0.00}</Text>
+                <Text style={styles.valorAtual}>{this.state.valorEntrega}</Text>
               </View>
 
               <View style={styles.containerButton}>
@@ -171,7 +187,7 @@ class Mercado extends Component {
                 this.setState({ tipo: itemValue })
               }}>
 
-              <Picker.Item label="Selecione" value="" />
+              <Picker.Item label="Selecione o tipo de quantidade" value="" />
               <Picker.Item label="Quilogramas" value="kg" />
               <Picker.Item label="Unidades" value="unidades" />
 
@@ -181,15 +197,22 @@ class Mercado extends Component {
               selectedValue={this.state.icone}
               style={styles.picker}
               onValueChange={(itemValue, itemIndex) => {
-                this.setState({ icone: itemValue })
+                this.setState({ icone: itemValue });
               }}>
 
               <Picker.Item label="Selecione icone para o produto" value="" />
+              <Picker.Item label="Sem icone" value="undefined" />
               <Picker.Item label="Alface" value="alface" />
               <Picker.Item label="Abacaxi" value="abacaxi" />
               <Picker.Item label="Tomate" value="tomate" />
               <Picker.Item label="Feijão" value="feijao" />
               <Picker.Item label="Kiwi" value="kiwi" />
+              <Picker.Item label="Maça" value="maca" />
+              <Picker.Item label="Banana" value="banana" />
+              <Picker.Item label="Repolho" value="repolho" />
+              <Picker.Item label="Cenoura" value="cenoura" />
+              <Picker.Item label="Limão" value="limao" />
+              <Picker.Item label="Uvas" value="uva" />
 
             </Picker>
 

@@ -2,8 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../services/connection');
-const bcrypt = require('bcrypt');
-var pass = "";
 
 function altCliente(req, res) {
     const { usuario, nome, email, telefone, sexo, cep, uf, cidade, rua, numero, bairro, id } = req.body;
@@ -74,18 +72,18 @@ function altProduto(req, res) {
 }
 
 function altPedido(req, res) {
-    const { status, id_produtor, id_cliente, produtos, tipo, qtde } = req.body;
-    const sqlQry = `UPDATE produtos SET status='${status}', id_produtor='${id_produtor}', id_cliente='${id_cliente}', produtos=${produtos}, tipo=${tipo}, qtde=${qtde} WHERE id='${id}'`;
+    const { id, status } = req.body;
+    const sqlQry = `UPDATE pedidos SET status='${status}' WHERE id='${id}'`;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
             res.json(error);
         } else {
-            results = [{
+            results = {
                 status: true,
-                msg: 'Pedido alterado com sucesso.'
-            }]
+                msg: `Pedido alterado com sucesso.`
+            };
             res.json(results);
         }
     });
@@ -109,9 +107,31 @@ function altAvaliacao(req, res) {
     });
 }
 
+function altTaxa(req, res) {
+    const { id, valorTaxa } = req.body;
+    const sqlQry = `UPDATE cadastro SET taxa='${valorTaxa}' WHERE id='${id}'`;
+
+    connection.query(sqlQry, function (error, results, fields) {
+        if (error) {
+            const error = {
+                status: false,
+                msg: 'Não foi possível atualizar sua taxa.'
+            }
+            res.json(error);
+        } else {
+            results = [{
+                status: true,
+                msg: 'Taxa atualizada.'
+            }]
+            res.json(results);
+        }
+    });
+}
+
 router.post('/cliente', altCliente);
 router.post('/produtor', altProdutor);
 router.post('/produto', altProduto);
 router.post('/pedido', altPedido);
+router.post('/taxa', altTaxa);
 
 module.exports = router;

@@ -106,9 +106,9 @@ class Home extends Component {
     }
   }
 
-  fundoProduto(tipo) {
+  fundoProduto(icon) {
 
-    switch (tipo) {
+    switch (icon) {
       case 'tomate':
         return '#F06A6A';
         break;
@@ -187,7 +187,7 @@ class Home extends Component {
       headers: { 'Content-type': 'application/json' }
     })
       .then(res => res.json())
-      .then(res => this.setState({ produtos: res }))
+      .then(res => { console.log(res); this.setState({ produtos: res }) })
       .catch(e => console.log(e));
   }
 
@@ -214,66 +214,65 @@ class Home extends Component {
 
     return (
 
-      <Fragment>
-        <ImageBackground source={require('../../img/bg.png')}
-          style={{ width: '100%', height: '100%' }}
-        >
-          <Header androidStatusBarColor="#00BA51" style={{ display: 'none' }}></Header>
-          <HeaderLogged />
+      <ImageBackground source={require('../../img/bg.png')}
+        style={{ width: '100%', height: '100%' }}
+      >
+        <ScrollView>
+        <Header androidStatusBarColor="#00BA51" style={{ display: 'none' }}></Header>
+        <HeaderLogged />
 
 
-          <ScrollView>
-            <View style={styles.container}>
-              <Text style={styles.titulo}>Mais populares</Text>
+          <View style={styles.container}>
+            <Text style={styles.titulo}>Mais populares</Text>
 
-              <View style={styles.produtos}>
+            <View style={styles.produtos}>
 
-                {this.state.produtos.map(produto => {
-                  return (
-                    <TouchableOpacity key={produto.id} onPress={() => this.navegaMercado(produto.id_produtor)}>
-                      <View style={{ ...styles.produto, backgroundColor: this.fundoProduto(produto.tipo) }}>
-                        <Text style={{ alignSelf: 'center', color: '#fff', marginBottom: 5, }}>{produto.nome}</Text>
-                        <Image style={styles.produtoImagem} source={this.iconeProduto(produto.tipo)} />
-                      </View>
-                    </TouchableOpacity>
-                  );
-                })}
-
-              </View>
-            </View>
-
-            <View style={styles.container}>
-              <Text style={styles.titulo}>Melhores da sua região</Text>
-
-              <FlatList
-                data={this.state.avaliados}
-                keyExtractor={this.state.avaliados.id}
-                renderItem={({ item }) => {
-                  return (
-                    <View style={styles.containerProdutor}>
-                      <View style={styles.row}>
-                        <Image style={styles.imgProdutor} source={require('../../assets/groceries.png')} />
-                        <Text style={styles.nomeProdutor}>{item.nome}</Text>
-                      </View>
-                      <View style={styles.rowFooter}>
-                        <Rating
-                          imageSize={20}
-                          readonly
-                          startingValue={item.avaliacao}
-                        />
-                        <TouchableOpacity style={styles.btnProdutor} onPress={() => this.navegaMercado(item.id)}>
-                          <Text style={styles.textBtn}>Ver</Text>
-                        </TouchableOpacity>
-                      </View>
+              {this.state.produtos.map(produto => {
+                return (
+                  <TouchableOpacity key={produto.id} onPress={() => this.navegaMercado(produto.id_produtor)}>
+                    <View style={{ ...styles.produto, backgroundColor: this.fundoProduto(produto.icon) }}>
+                      <Text style={{ alignSelf: 'center', color: '#fff', marginBottom: 5, }}>{produto.nome}</Text>
+                      <Image style={styles.produtoImagem} source={this.iconeProduto(produto.icon)} />
                     </View>
-                  );
-                }}
-              />
-            </View>
-          </ScrollView>
+                  </TouchableOpacity>
+                );
+              })}
 
-        </ImageBackground>
-      </Fragment>
+            </View>
+          </View>
+
+          <View style={styles.container}>
+            <Text style={styles.titulo}>Melhores da sua região</Text>
+
+            <FlatList
+              data={this.state.avaliados}
+              keyExtractor={this.state.avaliados.id}
+              renderItem={({ item }) => {
+                return (
+                  <View style={styles.containerProdutor}>
+                    <View style={styles.row}>
+                      <Image style={styles.imgProdutor} source={require('../../assets/groceries.png')} />
+                      <Text style={styles.nomeProdutor}>{item.nome}</Text>
+                    </View>
+                    <View style={styles.rowFooter}>
+                      <Rating
+                        imageSize={20}
+                        readonly
+                        startingValue={item.avaliacao}
+                      />
+                      <TouchableOpacity style={styles.btnProdutor} onPress={() => this.navegaMercado(item.id)}>
+                        <Text style={styles.textBtn}>Ver</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                );
+              }}
+            />
+            <View style={{height: 200}}></View>
+          </View>
+        </ScrollView>
+      </ImageBackground>
+
     );
   }
 }
@@ -306,7 +305,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#fff',
     borderRadius: 5,
-    width: 175,
+    width: 160
   },
   containerProdutor: {
     margin: 10,

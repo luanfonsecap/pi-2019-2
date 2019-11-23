@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity, Alert, AsyncStorage, FlatList, Image, TextInput, ScrollView, Picker } from 'react-native';
+import { withNavigation } from 'react-navigation'
 
 import HeaderLogged from '../../Components/HeaderLogged';
 import ButtonGreen from '../../Components/ButtonGreen';
@@ -120,6 +121,10 @@ class GerenciaProduto extends Component {
         return require('../../assets/beans.png');
         break;
 
+      case 'repolho': 
+        return require('../../assets/cabbage.png');
+        break;
+
       default:
         return require('../../assets/no-image.png');
         break;
@@ -137,6 +142,7 @@ class GerenciaProduto extends Component {
       .then(res => {
         if (res[0].status) {
           Alert.alert('Sucesso', 'Produto removido.');
+          this.props.navigation.goBack();
         } else {
           Alert.alert('Erro', 'Produto não foi removido.');
         }
@@ -288,4 +294,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GerenciaProduto;
+export default withNavigation(GerenciaProduto);

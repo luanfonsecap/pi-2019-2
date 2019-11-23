@@ -51,6 +51,7 @@ function infoPedido(req, res) {
                 status: results[0].status,
                 id_produtor: results[0].id_produtor,
                 id_cliente: results[0].id_cliente,
+                id_pedido: results[0].id,
                 nome_cliente: results[0].nome_cliente,
                 bairro: results[0].bairro,
                 produtos: []
@@ -150,7 +151,7 @@ function infoPedCliente(req, res) {
 
 function infoHistoricoPed(req, res) {
     const { id, status } = req.body;
-    const sqlQry = `SELECT * FROM pedidos WHERE id_cliente='${id}' AND status='${status}'`;
+    const sqlQry = `SELECT P.*, C.urlImagem FROM pedidos AS P CROSS JOIN cadastro AS C WHERE P.id_cliente='${id}' AND P.status='${status}' AND C.id=P.id_produtor`;
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
             /* Lógica de tratamento da resposta */
@@ -174,10 +175,12 @@ function infoHistoricoPed(req, res) {
                     count++;
                 }
                 resultado.push({
+                    IdProdutor: results[contador].id_produtor,
                     IdCompra: results[contador].id,
                     Produtos: results[contador].nomes,
                     Data: results[contador].data,
                     Valor: total.toFixed(2),
+                    Url: results[contador].urlImagem
                 })
                 contador++;
             }
@@ -187,7 +190,7 @@ function infoHistoricoPed(req, res) {
 }
 
 function infoDestaque(req, res) {
-    const sqlQry = `SELECT id,nome,tipo,id_produtor FROM produtos  ORDER BY vendas DESC LIMIT 4 `;
+    const sqlQry = `SELECT id,nome,icon,id_produtor FROM produtos  ORDER BY vendas DESC LIMIT 4 `;
 
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
@@ -201,7 +204,7 @@ function infoDestaque(req, res) {
 
                 resultado.push({
                     nome: results[contador].nome,
-                    tipo: results[contador].tipo,
+                    icon: results[contador].icon,
                     id_produtor: results[contador].id_produtor,
                     id: results[contador].id
                 })
@@ -243,7 +246,7 @@ function infoMelhores(req, res) {
 
 function infoMercado(req, res) {
     const { id } = req.body;
-    const sqlQry = `SELECT nome,cidade,avaliacao_med,urlImagem FROM cadastro WHERE id = ${id}`;
+    const sqlQry = `SELECT nome,cidade,avaliacao_med,urlImagem,taxa FROM cadastro WHERE id = ${id}`;
     const sqlQry2 = `SELECT * FROM produtos WHERE id_produtor = ${id}`
     connection.query(sqlQry, function (error, results, fields) {
         if (error) {
@@ -255,6 +258,7 @@ function infoMercado(req, res) {
                 cidade: results[0].cidade,
                 avaliacao: results[0].avaliacao_med,
                 url: results[0].urlImagem,
+                taxa: results[0].taxa,
                 produtos: []
             }]
             connection.query(sqlQry2, function (error2, results2, fields2) {

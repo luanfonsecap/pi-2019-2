@@ -46,6 +46,10 @@ class PedidosRecebidos extends Component {
       isVisible: false,
       pedidos: null,
     }
+  }
+
+  componentDidMount() {
+
     this.buscaDados();
   }
 
@@ -90,9 +94,11 @@ class PedidosRecebidos extends Component {
         const produtos = res[0].produtos;
         const cliente = res[0].nome_cliente;
         const id = res[0].id_cliente;
+        const idPedido = res[0].id_pedido;
+        console.log(idPedido);
 
         this.props.navigation.navigate('GerenciaPedido',
-          { id, cliente, valorTotal, local, produtos });
+          { idPedido, id, cliente, valorTotal, local, produtos });
       })
 
   }

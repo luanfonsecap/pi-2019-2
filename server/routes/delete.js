@@ -66,7 +66,11 @@ function delPedido(req, res) {
         if (error) {
             /* Lógica de tratamento da resposta */
             res.json(error);
+            console.log(error);
         } else {
+            const results = { 
+                status: true
+            }
             res.json(results);
         }
     });

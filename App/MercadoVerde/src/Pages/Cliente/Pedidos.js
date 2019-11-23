@@ -17,7 +17,8 @@ class Pedidos extends Component {
       isVisible: false,
       nomeProdutor: null,
       pedidoSelecionado: null,
-      idProdutor: null
+      idProdutor: null,
+      url: null
     }
   }
 
@@ -30,7 +31,7 @@ class Pedidos extends Component {
       body: JSON.stringify({ id: this.state.id, status: 'Concluido' }),
       headers: { 'Content-type': 'application/json' }
     }).then(res => res.json())
-      .then(lista => this.setState({ lista }))
+      .then(lista => this.setState({ lista, url: lista[0].Url }))
       .catch(e => {
         console.log(e);
         Alert.alert('Erro', 'Erro ao conectar com servidor!');
@@ -61,7 +62,7 @@ class Pedidos extends Component {
         id_pedido: this.state.pedidoSelecionado,
         nome_produtor: this.state.nomeProdutor,
         id_produtor: this.state.idProdutor,
-        estrelas: parseInt(rating)
+        estrelas: parseInt(rating),
       }),
       headers: { 'Content-type': 'application/json' }
     })
@@ -110,7 +111,7 @@ class Pedidos extends Component {
             <View style={{ padding: 20 }}>
 
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image style={{ borderRadius: 50, width: 75, height: 75 }} source={require('../../img/demo.png')} />
+                <Image style={{ borderRadius: 50, width: 75, height: 75 }} source={{uri: this.state.url}} />
                 <Text style={{ fontSize: 20, fontWeight: 'bold', paddingHorizontal: 15 }}>{this.state.nomeProdutor}</Text>
               </View>
 

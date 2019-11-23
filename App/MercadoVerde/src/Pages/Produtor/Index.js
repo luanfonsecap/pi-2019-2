@@ -29,7 +29,6 @@ class Index extends Component {
         })
           .then(res => res.json())
           .then(res => {
-            console.log(res);
             res.length >= 1 ? this.setState({ nPedidos: res.length, status: 'error' }) : null;
           })
       })
