@@ -11,6 +11,8 @@ Estrutura do desenvolvimento:
       |- Components
       |- img
       |- Pages
+      |- assets
+      |- services
     |-App.js
   '- README.md
 ```
